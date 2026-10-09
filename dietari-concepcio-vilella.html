@@ -220,8 +220,8 @@ main {
   flex: 1;
   overflow-y: auto;
   padding: 1.5rem;
-  font-size: .95rem;
-  line-height: 1.8;
+  font-size: 1.1rem;
+  line-height: 1.9;
 }
 .tab-content.hidden { display: none; }
 
@@ -252,7 +252,7 @@ main {
 
 /* Resum: estil destacat */
 .resum-text {
-  font-size: 1rem;
+  font-size: 1.15rem;
   line-height: 1.9;
   color: var(--fg);
   font-style: italic;
@@ -263,7 +263,7 @@ main {
 
 /* Fidel: estil de manuscrit */
 .fidel-text {
-  font-size: .9rem;
+  font-size: 1.1rem;
   line-height: 1.9;
   color: var(--fg-muted);
   font-style: italic;
@@ -273,7 +273,7 @@ main {
 
 /* Traducció: idioma forani */
 .traduccio-text {
-  font-size: .93rem;
+  font-size: 1.1rem;
   line-height: 1.85;
   color: var(--fg);
   white-space: pre-wrap;
@@ -305,7 +305,7 @@ footer {
   font-family: 'Cormorant SC', serif;
   font-size: .85rem;
   letter-spacing: .05em;
-  padding: .4rem .9rem;
+  padding: .55rem 1.3rem;
   border: 1px solid var(--border);
   background: var(--bg-card);
   color: var(--fg-muted);
@@ -314,7 +314,8 @@ footer {
   transition: all .15s;
   display: flex;
   align-items: center;
-  gap: .4rem;
+  gap: .5rem;
+  font-size: .9rem;
 }
 .nav-btn:hover:not(:disabled) { color: var(--accent); border-color: var(--accent-lt); }
 .nav-btn:disabled { opacity: .3; cursor: default; }
@@ -338,27 +339,116 @@ footer {
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
   padding: .1rem 0;
-  max-width: 280px;
+  max-width: 360px;
   flex-shrink: 1;
 }
 .thumb-btn {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
+  min-width: 32px;
+  height: 28px;
+  border-radius: 3px;
   border: 1px solid var(--border);
   background: var(--bg-card);
   cursor: pointer;
   flex-shrink: 0;
   transition: all .15s;
-  font-size: .65rem;
+  font-size: .78rem;
   font-family: 'Cormorant SC', serif;
-  color: var(--fg-faint);
+  color: var(--fg-muted);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .thumb-btn:hover { border-color: var(--accent-lt); color: var(--accent); }
 .thumb-btn.current { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.94);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.lightbox.open { display: flex; }
+.lightbox-img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 92vw;
+  max-height: 90vh;
+  cursor: default;
+}
+.lightbox-img-wrap img {
+  max-width: 88vw;
+  max-height: 88vh;
+  object-fit: contain;
+  box-shadow: 0 8px 64px rgba(0,0,0,.8);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.lightbox-close {
+  position: absolute;
+  top: .8rem;
+  right: 1.2rem;
+  color: #fff;
+  font-size: 2.4rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  opacity: .55;
+  line-height: 1;
+  font-weight: 300;
+  z-index: 10;
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  padding: .75rem .85rem;
+  opacity: .65;
+  border-radius: 4px;
+  line-height: 1;
+  transition: all .15s;
+  z-index: 10;
+}
+.lightbox-nav:hover { opacity: 1; background: rgba(255,255,255,.2); }
+.lightbox-nav:disabled { opacity: .18; cursor: default; pointer-events: none; }
+.lightbox-prev { left: .8rem; }
+.lightbox-next { right: .8rem; }
+.lightbox-info {
+  position: absolute;
+  bottom: .9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,.5);
+  font-family: 'Cormorant SC', serif;
+  font-size: .82rem;
+  letter-spacing: .08em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.page-image { cursor: zoom-in; }
+/* Traducció: seccions EN / BG */
+.trad-section { margin-bottom: 1.5rem; }
+.trad-lang-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: .72rem;
+  letter-spacing: .1em;
+  color: var(--fg-faint);
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+  display: block;
+  border-bottom: 1px solid var(--border-lt);
+  padding-bottom: .3rem;
+}
 </style>
 
 <div class="app">
@@ -381,7 +471,7 @@ footer {
   <main>
     <!-- IMATGE -->
     <div class="image-panel">
-      <img class="page-image" id="page-img" src="" alt="Pàgina del dietari" onerror="this.style.display='none';document.getElementById('img-placeholder').style.display='flex'">
+      <img class="page-image" id="page-img" src="" alt="Pàgina del dietari" onclick="openLightbox()" onerror="this.style.display='none';document.getElementById('img-placeholder').style.display='flex'">
       <div class="img-placeholder" id="img-placeholder" style="display:none">
         <svg width="48" height="60" viewBox="0 0 48 60" fill="none">
           <rect x="4" y="4" width="40" height="52" rx="2" stroke="currentColor" stroke-width="1.5"/>
@@ -436,6 +526,18 @@ footer {
       <span id="next-label">Següent</span> →
     </button>
   </footer>
+
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)" title="Tancar (Esc)">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lb-prev" onclick="lightboxNav(-1,event)">&#8592;</button>
+  <div class="lightbox-img-wrap" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="Imatge ampliada del dietari">
+  </div>
+  <button class="lightbox-nav lightbox-next" id="lb-next" onclick="lightboxNav(1,event)">&#8594;</button>
+  <div class="lightbox-info" id="lb-info"></div>
+</div>
 
 </div>
 
@@ -947,14 +1049,14 @@ function render() {
   // ─ TAB: TRADUCCIÓ ─
   document.getElementById('label-traduccio').textContent = ui.traduccio_label;
   const tradWrap = document.getElementById('text-traduccio-wrap');
-  if (currentLang === 'ca' || currentLang === 'es') {
-    tradWrap.innerHTML = '<div class="traduccio-hidden">' + ui.traduccio_hidden + '</div>';
-  } else {
-    let tradText = '';
-    if (currentLang === 'en') tradText = p.traduccio_en;
-    else if (currentLang === 'bg') tradText = p.traduccio_bg;
-    tradWrap.innerHTML = '<div class="traduccio-text">' + escapeHtml(tradText) + '</div>';
+  let tradHtml = '';
+  if (p.traduccio_en) {
+    tradHtml += '<div class="trad-section"><span class="trad-lang-label">English</span><div class="traduccio-text">' + escapeHtml(p.traduccio_en) + '</div></div>';
   }
+  if (p.traduccio_bg) {
+    tradHtml += '<div class="trad-section"><span class="trad-lang-label">Български</span><div class="traduccio-text">' + escapeHtml(p.traduccio_bg) + '</div></div>';
+  }
+  tradWrap.innerHTML = tradHtml || '<div class="traduccio-hidden">Cap traducció disponible.</div>';
 
   // Thumb nav
   document.querySelectorAll('.thumb-btn').forEach((btn, i) => {
@@ -991,6 +1093,7 @@ function navigate(dir) {
     render();
     try { localStorage.setItem('dietari-page', currentPage); } catch(e) {}
     window.scrollTo(0, 0);
+    document.querySelectorAll('.tab-content').forEach(c => { c.scrollTop = 0; });
   }
 }
 
@@ -1000,10 +1103,47 @@ function goToPage(idx) {
   try { localStorage.setItem('dietari-page', currentPage); } catch(e) {}
 }
 
+// ── LIGHTBOX ──
+function openLightbox() {
+  const p = PAGES[currentPage];
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = p.img;
+  document.getElementById('lb-info').textContent = 'Pàgina ' + p.num + ' de 25  ·  Esc per tancar';
+  document.getElementById('lb-prev').disabled = currentPage === 0;
+  document.getElementById('lb-next').disabled = currentPage === PAGES.length - 1;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e) {
+  if (e && e.target && e.target.id === 'lightbox-img') return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lightboxNav(dir, e) {
+  e.stopPropagation();
+  const next = currentPage + dir;
+  if (next >= 0 && next < PAGES.length) {
+    navigate(dir);
+    const p = PAGES[currentPage];
+    document.getElementById('lightbox-img').src = p.img;
+    document.getElementById('lb-info').textContent = 'Pàgina ' + p.num + ' de 25  ·  Esc per tancar';
+    document.getElementById('lb-prev').disabled = currentPage === 0;
+    document.getElementById('lb-next').disabled = currentPage === PAGES.length - 1;
+  }
+}
+
 // ── NAVEGACIÓ PER TECLAT ──
 document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
-  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
+  const lbOpen = document.getElementById('lightbox').classList.contains('open');
+  if (e.key === 'Escape') { if (lbOpen) closeLightbox(null); return; }
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    if (lbOpen) lightboxNav(1, {stopPropagation:()=>{}});
+    else navigate(1);
+  }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    if (lbOpen) lightboxNav(-1, {stopPropagation:()=>{}});
+    else navigate(-1);
+  }
 });
 
 // ── CREAR THUMB NAV ──
