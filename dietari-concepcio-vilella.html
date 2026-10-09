@@ -1050,13 +1050,27 @@ function render() {
   document.getElementById('label-traduccio').textContent = ui.traduccio_label;
   const tradWrap = document.getElementById('text-traduccio-wrap');
   let tradHtml = '';
-  if (p.traduccio_en) {
-    tradHtml += '<div class="trad-section"><span class="trad-lang-label">English</span><div class="traduccio-text">' + escapeHtml(p.traduccio_en) + '</div></div>';
+  if (currentLang === 'en') {
+    // Mostra únicament la traducció anglesa
+    tradHtml = p.traduccio_en
+      ? '<div class="traduccio-text">' + escapeHtml(p.traduccio_en) + '</div>'
+      : '<div class="traduccio-hidden">No English translation available.</div>';
+  } else if (currentLang === 'bg') {
+    // Mostra únicament la traducció búlgara
+    tradHtml = p.traduccio_bg
+      ? '<div class="traduccio-text">' + escapeHtml(p.traduccio_bg) + '</div>'
+      : '<div class="traduccio-hidden">Няма налична Bulgarian превод.</div>';
+  } else {
+    // CA / ES: mostra les dues traduccions disponibles amb etiqueta
+    if (p.traduccio_en) {
+      tradHtml += '<div class="trad-section"><span class="trad-lang-label">English</span><div class="traduccio-text">' + escapeHtml(p.traduccio_en) + '</div></div>';
+    }
+    if (p.traduccio_bg) {
+      tradHtml += '<div class="trad-section"><span class="trad-lang-label">Български</span><div class="traduccio-text">' + escapeHtml(p.traduccio_bg) + '</div></div>';
+    }
+    if (!tradHtml) tradHtml = '<div class="traduccio-hidden">Cap traducció disponible.</div>';
   }
-  if (p.traduccio_bg) {
-    tradHtml += '<div class="trad-section"><span class="trad-lang-label">Български</span><div class="traduccio-text">' + escapeHtml(p.traduccio_bg) + '</div></div>';
-  }
-  tradWrap.innerHTML = tradHtml || '<div class="traduccio-hidden">Cap traducció disponible.</div>';
+  tradWrap.innerHTML = tradHtml;
 
   // Thumb nav
   document.querySelectorAll('.thumb-btn').forEach((btn, i) => {
