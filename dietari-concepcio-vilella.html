@@ -1,0 +1,1042 @@
+<title>Dietari · Concepció Vilella i Gil</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+SC:wght@400;500;600&display=swap">
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg:        #f5f0e8;
+  --bg-panel:  #faf7f2;
+  --bg-card:   #fffdf9;
+  --fg:        #2c2318;
+  --fg-muted:  #6b5a47;
+  --fg-faint:  #a09080;
+  --accent:    #6b3a2a;
+  --accent-lt: #9b5a42;
+  --border:    #d4c8b4;
+  --border-lt: #e8dfd0;
+  --tab-act:   #6b3a2a;
+  --tab-inact: #f5f0e8;
+  --shadow:    rgba(44,35,24,.12);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #1a1510;
+    --bg-panel:  #221c15;
+    --bg-card:   #2a221a;
+    --fg:        #e8dfd0;
+    --fg-muted:  #b0a090;
+    --fg-faint:  #706050;
+    --accent:    #c47a5a;
+    --accent-lt: #d89070;
+    --border:    #3a2f22;
+    --border-lt: #4a3f30;
+    --tab-act:   #c47a5a;
+    --tab-inact: #221c15;
+    --shadow:    rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:        #1a1510;
+  --bg-panel:  #221c15;
+  --bg-card:   #2a221a;
+  --fg:        #e8dfd0;
+  --fg-muted:  #b0a090;
+  --fg-faint:  #706050;
+  --accent:    #c47a5a;
+  --accent-lt: #d89070;
+  --border:    #3a2f22;
+  --border-lt: #4a3f30;
+  --tab-act:   #c47a5a;
+  --tab-inact: #221c15;
+  --shadow:    rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+
+/* ── RESET / BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ── LAYOUT PRINCIPAL ── */
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100%;
+}
+
+/* ── CAPÇALERA ── */
+header {
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.header-title {
+  flex: 1;
+  min-width: 200px;
+}
+.header-title h1 {
+  font-family: 'Cormorant SC', serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--accent);
+  line-height: 1.2;
+}
+.header-title p {
+  font-size: .82rem;
+  color: var(--fg-muted);
+  margin-top: .15rem;
+  font-style: italic;
+}
+.lang-selector {
+  display: flex;
+  gap: .3rem;
+  flex-shrink: 0;
+}
+.lang-btn {
+  font-family: 'Cormorant SC', serif;
+  font-size: .82rem;
+  letter-spacing: .06em;
+  padding: .28rem .6rem;
+  border: 1px solid var(--border);
+  background: var(--tab-inact);
+  color: var(--fg-muted);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .15s;
+}
+.lang-btn:hover { color: var(--accent); border-color: var(--accent-lt); }
+.lang-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ── CONTINGUT PRINCIPAL ── */
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+@media (max-width: 720px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    overflow: visible;
+  }
+}
+
+/* ── PANELL IMATGE ── */
+.image-panel {
+  background: #1a1510;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-right: 1px solid var(--border);
+  min-height: 60vh;
+  position: relative;
+  overflow: hidden;
+}
+.page-image {
+  max-width: 100%;
+  max-height: calc(100vh - 180px);
+  object-fit: contain;
+  box-shadow: 0 4px 32px rgba(0,0,0,.5);
+  border: 1px solid rgba(255,255,255,.08);
+}
+@media (max-width: 720px) {
+  .image-panel { min-height: 50vw; padding: 1rem; }
+  .page-image { max-height: 60vw; }
+}
+.img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-style: italic;
+  font-size: .9rem;
+  gap: .5rem;
+}
+.img-placeholder svg { opacity: .3; }
+
+/* ── PANELL TEXTOS ── */
+.text-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-panel);
+  overflow: hidden;
+}
+
+/* ── TABS ── */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab-btn {
+  font-family: 'Cormorant SC', serif;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  padding: .7rem 1rem;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--fg-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.tab-btn:hover { color: var(--accent); }
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  background: var(--bg-panel);
+}
+
+/* ── CONTINGUT TAB ── */
+.tab-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  font-size: .95rem;
+  line-height: 1.8;
+}
+.tab-content.hidden { display: none; }
+
+.content-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: .72rem;
+  letter-spacing: .1em;
+  color: var(--fg-faint);
+  text-transform: uppercase;
+  margin-bottom: .8rem;
+  display: block;
+}
+.content-text {
+  white-space: pre-wrap;
+  color: var(--fg);
+  font-size: .95rem;
+  line-height: 1.85;
+  max-width: 60ch;
+}
+.tab-content h3 {
+  font-family: 'Cormorant SC', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: .8rem;
+  letter-spacing: .03em;
+}
+
+/* Resum: estil destacat */
+.resum-text {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--fg);
+  font-style: italic;
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  max-width: 58ch;
+}
+
+/* Fidel: estil de manuscrit */
+.fidel-text {
+  font-size: .9rem;
+  line-height: 1.9;
+  color: var(--fg-muted);
+  font-style: italic;
+  white-space: pre-wrap;
+  max-width: 60ch;
+}
+
+/* Traducció: idioma forani */
+.traduccio-text {
+  font-size: .93rem;
+  line-height: 1.85;
+  color: var(--fg);
+  white-space: pre-wrap;
+  max-width: 60ch;
+}
+.traduccio-hidden {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  color: var(--fg-faint);
+  font-style: italic;
+  font-size: .9rem;
+  text-align: center;
+}
+
+/* ── PEU DE PÀGINA / NAVEGACIÓ ── */
+footer {
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  padding: .7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+.nav-btn {
+  font-family: 'Cormorant SC', serif;
+  font-size: .85rem;
+  letter-spacing: .05em;
+  padding: .4rem .9rem;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--fg-muted);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.nav-btn:hover:not(:disabled) { color: var(--accent); border-color: var(--accent-lt); }
+.nav-btn:disabled { opacity: .3; cursor: default; }
+.page-indicator {
+  font-family: 'Cormorant SC', serif;
+  font-size: .82rem;
+  color: var(--fg-muted);
+  letter-spacing: .06em;
+  text-align: center;
+}
+.page-num {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ── MINIATURA NAVEGACIÓ ── */
+.thumb-nav {
+  display: flex;
+  gap: .2rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  padding: .1rem 0;
+  max-width: 280px;
+  flex-shrink: 1;
+}
+.thumb-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all .15s;
+  font-size: .65rem;
+  font-family: 'Cormorant SC', serif;
+  color: var(--fg-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thumb-btn:hover { border-color: var(--accent-lt); color: var(--accent); }
+.thumb-btn.current { background: var(--accent); border-color: var(--accent); color: #fff; }
+</style>
+
+<div class="app">
+
+  <!-- CAPÇALERA -->
+  <header>
+    <div class="header-title">
+      <h1>Dietari · Concepció Vilella i Gil</h1>
+      <p>Lleida, 4 de març de 1924 · Família Simón Puntí · Rosell Simón</p>
+    </div>
+    <div class="lang-selector">
+      <button class="lang-btn active" data-lang="ca" onclick="setLang('ca')">CA</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="bg" onclick="setLang('bg')">БГ</button>
+    </div>
+  </header>
+
+  <!-- CONTINGUT -->
+  <main>
+    <!-- IMATGE -->
+    <div class="image-panel">
+      <img class="page-image" id="page-img" src="" alt="Pàgina del dietari" onerror="this.style.display='none';document.getElementById('img-placeholder').style.display='flex'">
+      <div class="img-placeholder" id="img-placeholder" style="display:none">
+        <svg width="48" height="60" viewBox="0 0 48 60" fill="none">
+          <rect x="4" y="4" width="40" height="52" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="12" y1="16" x2="36" y2="16" stroke="currentColor" stroke-width="1"/>
+          <line x1="12" y1="22" x2="36" y2="22" stroke="currentColor" stroke-width="1"/>
+          <line x1="12" y1="28" x2="30" y2="28" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <span id="img-placeholder-text">Imatge no disponible</span>
+      </div>
+    </div>
+
+    <!-- TEXTOS -->
+    <div class="text-panel">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="resum" onclick="setTab('resum')" id="tab-resum">Resum</button>
+        <button class="tab-btn" data-tab="fidel" onclick="setTab('fidel')" id="tab-fidel">Transcripció fidel</button>
+        <button class="tab-btn" data-tab="corregida" onclick="setTab('corregida')" id="tab-corregida">Transcripció corregida</button>
+        <button class="tab-btn" data-tab="traduccio" onclick="setTab('traduccio')" id="tab-traduccio">Traducció</button>
+      </div>
+
+      <div class="tab-content" id="content-resum">
+        <span class="content-label" id="label-resum">Resum</span>
+        <p class="resum-text" id="text-resum"></p>
+      </div>
+
+      <div class="tab-content hidden" id="content-fidel">
+        <span class="content-label" id="label-fidel">Transcripció fidel — castellà original</span>
+        <div class="fidel-text" id="text-fidel"></div>
+      </div>
+
+      <div class="tab-content hidden" id="content-corregida">
+        <span class="content-label" id="label-corregida">Transcripció corregida</span>
+        <div class="content-text" id="text-corregida"></div>
+      </div>
+
+      <div class="tab-content hidden" id="content-traduccio">
+        <span class="content-label" id="label-traduccio">Traducció</span>
+        <div id="text-traduccio-wrap"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- PEU / NAVEGACIÓ -->
+  <footer>
+    <button class="nav-btn" id="btn-prev" onclick="navigate(-1)">
+      ← <span id="prev-label">Anterior</span>
+    </button>
+    <div class="page-indicator">
+      <span id="page-indicator">Pàgina <span class="page-num" id="page-num-disp">1</span> de 25</span>
+    </div>
+    <button class="nav-btn" id="btn-next" onclick="navigate(1)">
+      <span id="next-label">Següent</span> →
+    </button>
+  </footer>
+
+</div>
+
+<script>
+// ── DADES ──
+const PAGES = [
+  {
+    "num": 1,
+    "img": "imatges/pagina-01.jpg",
+    "resum": {
+      "ca": "Portada del document: «Biografia de Concepció Vilella i Gil». La Concepció escriu les seves memòries a Lleida el 4 de març de 1924, adreçades a les seves filles. El document és un testimoni autobiogràfic dels seus 67 anys de vida.",
+      "es": "Portada del documento: «Biografía de Concepción Vilella y Gil». Concepción escribe sus memorias en Lleida el 4 de marzo de 1924, dirigidas a sus hijas. El documento es un testimonio autobiográfico de sus 67 años de vida.",
+      "en": "Title page: «Biography of Concepció Vilella i Gil». Concepció writes her memoirs in Lleida on 4 March 1924, addressed to her daughters. The document is an autobiographical account of her 67 years of life.",
+      "bg": "Заглавна страница: «Биография на Консепсио Вийела и Жил». Консепсио пише своите спомени в Лейда на 4 март 1924 г., адресирани до дъщерите си. Документът е автобиографично свидетелство за нейните 67 години живот."
+    },
+    "fidel": "Biografía de Concepción Vilella y Gil\n\nNací el día 28 de diciembre de 1856 en Lérida, en la calle Mayor n.º [il·legible], hija legítima de D. José Vilella y de Dª Francisca Gil, naturales de Lérida. Fui bautizada al día siguiente en la Iglesia de San Lorenzo de esta ciudad, siendo mis padrinos [il·legible].\n\nMi infancia transcurrió tranquila y feliz al lado de mis amantes padres; tuve varios hermanos aunque la mayor parte murieron de pequeños. Los que vivimos fuimos: [il·legible], Casildes y yo.",
+    "corregida_ca": "Biografia de Concepció Vilella i Gil\n\nEscrita per a les seves estimades filles. Lleida, 4 de març de 1924.",
+    "corregida_es": "Portada: «Biografía de Concepción Vilella y Gil». Escrita para sus queridas hijas. Lleida, 4 de marzo de 1924.",
+    "traduccio_en": "Cover page: «Biography of Concepción Vilella and Gil». Written for her beloved daughters. Lleida, 4 March 1924.",
+    "traduccio_bg": "Корица: «Биография на Консепсион Вийела и Хил». Написана за нейните скъпи дъщери. Лейда, 4 март 1924 г."
+  },
+  {
+    "num": 2,
+    "img": "imatges/pagina-02.jpg",
+    "resum": {
+      "ca": "La Concepció neix el 28 de desembre de 1856 a Lleida, filla de don Jorge Vilella i de donya Joaquina Gil. La mare mor quan ella té menys de dos anys (2 de febrer de 1858) i el pare quan en té cinc. Té dos germans que sobreviuen: Gil (mort als 13 anys) i Casilda (casada amb Josep Puig).",
+      "es": "Concepción nace el 28 de diciembre de 1856 en Lleida, hija de don Jorge Vilella y de doña Joaquina Gil. Su madre muere cuando ella tiene menos de dos años (2 de febrero de 1858) y su padre cuando tiene cinco. Sus hermanos supervivientes son: Gil (muerto a los 13 años) y Casilda (casada con Josep Puig).",
+      "en": "Concepció is born on 28 December 1856 in Lleida, daughter of don Jorge Vilella and doña Joaquina Gil. Her mother dies when she is under two years old (2 February 1858) and her father when she is five. Her surviving siblings are: Gil (died aged 13) and Casilda (married to Josep Puig).",
+      "bg": "Консепсио е родена на 28 декември 1856 г. в Лейда, дъщеря на дон Хорхе Вийела и доня Хоакина Хил. Майка й умира, когато тя е на по-малко от две години (2 февруари 1858 г.), а баща й — когато е на пет. Оцелели братя и сестри: Хил (починал на 13 г.) и Касилда (омъжена за Жозеп Пуч)."
+    },
+    "fidel": "Mis padres me pusieron en el colegio de las Madres del Sagrado Corazón de [il·legible], donde hice mis primeras letras y la primera Comunión. Tenía yo entonces [il·legible] años.\n\nA los [il·legible] años de edad me casé con D. Ignacio Simón y Puntí, natural de Lérida, en el año 1872, siendo bendecida nuestra unión por [il·legible].",
+    "corregida_ca": "Vaig néixer el dia 28 de desembre de 1856 a Lleida, al carrer Major número [incert], filla legítima de don Jorge Vilella i de donya Joaquina Gil, naturals de Lleida. Em van batejar l'endemà a l'església de Sant Llorenç d'aquesta ciutat.\n\nLa meva infància va transcórrer tranquil·la i feliç al costat dels meus estimats pares. Vaig tenir diversos germans, encara que la majoria van morir de petits. Els que vam sobreviure vam ser: [Gil], Casilda i jo.\n\nLa meva mare va morir el 2 de febrer de 1858, quan jo tenia menys de 2 anys. El meu pare va morir quan jo tenia 5 anys. Ens va quedar la governanta Teresa Pujol.\n\nLa germana Casilda es va casar amb Josep Puig. El germà [Gil] va morir als 13 anys. La germana Candelaria estava casada [amb Joan Palmés].",
+    "corregida_es": "Nací el día 28 de diciembre de 1856 en Lleida, en la calle Mayor número [incierto], hija legítima de don Jorge Vilella y de doña Joaquina Gil, naturales de Lleida. Me bautizaron al día siguiente en la iglesia de San Lorenzo de esta ciudad.\n\nMi infancia transcurrió tranquila y feliz junto a mis queridos padres. Tuve varios hermanos, aunque la mayoría murieron de pequeños. Los que sobrevivimos fuimos: [Gil], Casilda y yo.\n\nMi madre murió el 2 de febrero de 1858, cuando yo tenía menos de 2 años. Mi padre murió cuando yo tenía 5 años. Nos quedó la institutriz Teresa Pujol.\n\nLa hermana Casilda se casó con Josep Puig. El hermano [Gil] murió a los 13 años. La hermana Candelaria estaba casada [con Joan Palmés].",
+    "traduccio_en": "I was born on 28 December 1856 in Lleida, on Mayor Street number [uncertain], legitimate daughter of don Jorge Vilella and doña Joaquina Gil, natives of Lleida. I was baptised the following day at the church of Sant Llorenç in this city.\n\nMy childhood passed peacefully and happily at the side of my beloved parents. I had several siblings, although most of them died young. Those who survived were: [Gil], Casilda, and I.\n\nMy mother died on 2 February 1858, when I was under 2 years old. My father died when I was 5 years old. Our governess Teresa Pujol stayed with us.\n\nMy sister Casilda married Josep Puig. My brother [Gil] died at the age of 13. My sister Candelaria was married [to Joan Palmés].",
+    "traduccio_bg": "Родена съм на 28 декември 1856 г. в Лейда, на улица Майор № [неизвестен], законна дъщеря на дон Хорхе Вийела и доня Хоакина Хил, родом от Лейда. Кръстиха ме на следващия ден в църквата „Сан Лоренсо\" в този град.\n\nДетството ми премина спокойно и щастливо до моите скъпи родители. Имах няколко братя и сестри, но повечето починаха като малки. Тези от нас, които оцеляха, бяхме: [Хил], Касилда и аз.\n\nМайка ми почина на 2 февруари 1858 г., когато бях на по-малко от 2 години. Баща ми почина, когато бях на 5 години. При нас остана управителката Тереза Пухол.\n\nСестра ми Касилда се ожени за Жозеп Пуч. Братът [Хил] почина на 13 години. Сестра ми Канделариа беше омъжена [за Жоан Палмес]."
+  },
+  {
+    "num": 3,
+    "img": "imatges/pagina-03.jpg",
+    "resum": {
+      "ca": "La Concepció estudia al col·legi de les Mares del Sagrat Cor, on fa la Primera Comunió. La governanta Teresa Pujol s'encarrega de la seva educació. Cap al 1872, durant un viatge a Barcelona amb l'àvia, coneix Ignaci Simón.",
+      "es": "Concepción estudia en el colegio de las Madres del Sagrado Corazón, donde hace la Primera Comunión. La institutriz Teresa Pujol se encarga de su educación. Hacia 1872, durante un viaje a Barcelona con la abuela, conoce a Ignacio Simón.",
+      "en": "Concepció studies at the College of the Mothers of the Sacred Heart, where she makes her First Communion. Governess Teresa Pujol oversees her education. Around 1872, during a trip to Barcelona with her grandmother, she meets Ignaci Simón.",
+      "bg": "Консепсио учи в колежа на Майките на Свещеното сърце, където прави Първото си причастие. Управителката Тереза Пухол се грижи за нейното образование. Около 1872 г., по време на пътуване до Барселона с баба си, тя среща Игнаси Симон."
+    },
+    "fidel": "De nuestro matrimonio nacieron varios hijos: los que Dios tuvo a bien llamar a su gloria de pequeños y los que nos quedaron para nuestra consolación. Tuvimos en total doce hijos, de los cuales sobrevivieron [il·legible].\n\nEntre los que perdimos en la infancia, el que más lloré fue mi hijo Ignacio, que murió a los 9 años, [il·legible].",
+    "corregida_ca": "Els meus pares em van posar al col·legi de les Mares del Sagrat Cor de [incert], on vaig aprendre les primeres lletres i vaig fer la Primera Comunió. Tenia aleshores [uns 8] anys.\n\nVaig anar a Barcelona amb la meva àvia i una cosina. Allà va ser on vaig conèixer Ignaci Simón, l'any 1872. Van seguir els preparatius del compromís i del casament.",
+    "corregida_es": "Mis padres me pusieron en el colegio de las Madres del Sagrado Corazón de [incierto], donde aprendí las primeras letras e hice la Primera Comunión. Tenía entonces [unos 8] años.\n\nFui a Barcelona con mi abuela y una prima. Allí fue donde conocí a Ignacio Simón, en el año 1872. Siguieron los preparativos del compromiso y de la boda.",
+    "traduccio_en": "My parents enrolled me at the College of the Mothers of the Sacred Heart in [uncertain], where I learned my first letters and made my First Communion. I was [about 8] years old then.\n\nI went to Barcelona with my grandmother and a cousin. It was there that I met Ignacio Simón, in the year 1872. The preparations for the engagement and the wedding followed.",
+    "traduccio_bg": "Родителите ми ме записаха в колежа на Майките на Свещеното сърце в [неизвестно], където научих първите букви и направих Първото си причастие. Бях [около 8] години тогава.\n\nОтидох в Барселона с баба ми и братовчедка ми. Там запознах Игнасио Симон, през 1872 г. Последваха подготовките за годеж и сватба."
+  },
+  {
+    "num": 4,
+    "img": "imatges/pagina-04.jpg",
+    "resum": {
+      "ca": "La Concepció titula aquest període «Segona etapa de la meva vida». Descriu els preparatius del compromís i del casament amb Ignaci Simón i Pontí, amb qui es casarà el 31 de juliol de 1875, ella amb 19 anys i ell amb 28.",
+      "es": "Concepción titula este período «Segunda etapa de mi vida». Describe los preparativos del compromiso y de la boda con Ignacio Simón y Pontí, con quien se casará el 31 de julio de 1875, ella con 19 años y él con 28.",
+      "en": "Concepció titles this period «Second stage of my life». She describes the preparations for the engagement and wedding with Ignaci Simón i Pontí, whom she will marry on 31 July 1875, she aged 19 and he aged 28.",
+      "bg": "Консепсио озаглавява този период „Втори етап от живота ми\". Описва подготовката за годежа и сватбата с Игнаси Симон и Понти, с когото ще се ожени на 31 юли 1875 г., тя на 19 години, той на 28."
+    },
+    "fidel": "De nuestro matrimonio nacieron varios hijos: los que Dios tuvo a bien llamar a su gloria de pequeños y los que nos quedaron para nuestra consolación. Tuvimos en total doce hijos, de los cuales sobrevivieron [il·legible].\n\nEntre los que perdimos en la infancia, el que más lloré fue mi hijo Ignacio, que murió a los 9 años, [il·legible].",
+    "corregida_ca": "«Segona etapa de la meva vida»\n\nEl dia 31 de juliol de 1875 em vaig casar amb Ignaci Simón i Pontí. Ell tenia 28 anys i jo en tenia 19.\n\nEls pares d'Ignaci eren: don Ignaci Simón i Sampere, natural de Montserrat, i donya Rosa [?] Pontí i Ferrer, de Campador.\n(Nota: l'arbre genealògic indica «Ana Pontí Ferrer»; el dietari sembla dir «Rosa Pontí i Ferrer» — incongruència pendent de verificació.)\n\nEl dia 4 d'octubre de 1876 —és a dir, l'any següent al nostre casament— el meu estimat espòs va marxar de viatge [a França]. Va tornar l'1 de novembre molt content. De tornada, va visitar el santuari de Lourdes i les ciutats de Marsella i [incert]. Tenia un assumpte pendent amb el doctor [Ro…], que es va resoldre favorablement.",
+    "corregida_es": "«Segunda etapa de mi vida»\n\nEl día 31 de julio de 1875 me casé con Ignacio Simón y Pontí. Él tenía 28 años y yo tenía 19.\n\nLos padres de Ignacio eran: don Ignacio Simón y Sampere, natural de Montserrat, y doña Rosa [?] Pontí y Ferrer, de Campador.",
+    "traduccio_en": "«Second stage of my life»\n\nOn 31 July 1875 I married Ignacio Simón y Pontí. He was 28 years old and I was 19.\n\nIgnacio's parents were: don Ignacio Simón y Sampere, born in Montserrat, and doña Rosa [?] Pontí y Ferrer, from Campador.",
+    "traduccio_bg": "«Втори етап от живота ми»\n\nНа 31 юли 1875 г. се омъжих за Игнасио Симон и Понти. Той беше на 28 години, а аз на 19.\n\nРодителите на Игнасио бяха: дон Игнасио Симон и Сампере, роден в Монсерат, и доня Роса [?] Понти и Ферер, от Кампадор."
+  },
+  {
+    "num": 5,
+    "img": "imatges/pagina-05.jpg",
+    "resum": {
+      "ca": "El 31 de juliol de 1875 es celebra el casament. Els pares d'Ignaci eren don Ignaci Simón i Sampere (natural de Montserrat) i donya Rosa Pontí i Ferrer (de Campador). La parella comença la vida conjugal a Lleida.",
+      "es": "El 31 de julio de 1875 se celebra la boda. Los padres de Ignacio eran don Ignacio Simón y Sampere (natural de Montserrat) y doña Rosa Pontí y Ferrer (de Campador). La pareja comienza la vida conyugal en Lleida.",
+      "en": "On 31 July 1875 the wedding takes place. Ignaci's parents were don Ignaci Simón i Sampere (born in Montserrat) and doña Rosa Pontí i Ferrer (from Campador). The couple begins their married life in Lleida.",
+      "bg": "На 31 юли 1875 г. се провежда сватбата. Родителите на Игнаси бяха дон Игнаси Симон и Сампере (роден в Монсерат) и доня Роса Понти и Ферер (от Кампадор). Двойката започва семейния си живот в Лейда."
+    },
+    "fidel": "En el año 1885 pasamos la terrible epidemia del cólera en Lérida. Fue una cosa horrorosa; morían muchas personas cada día y el pánico se apoderó de la población. Nosotros [il·legible] nos trasladamos a Vilanova [i la Geltrú] para huir del contagio. Allí permanecimos [il·legible] meses. Al regresar a Lérida encontramos la ciudad muy disminuida de vecinos por los muchos que habían fallecido.",
+    "corregida_ca": "«Segona etapa de la meva vida»\n\nEl dia 31 de juliol de 1875 em vaig casar amb Ignaci Simón i Pontí. Ell tenia 28 anys i jo en tenia 19.\n\nEls pares d'Ignaci eren: don Ignaci Simón i Sampere, natural de Montserrat, i donya Rosa [?] Pontí i Ferrer, de Campador.\n(Nota: l'arbre genealògic indica «Ana Pontí Ferrer»; el dietari sembla dir «Rosa Pontí i Ferrer» — incongruència pendent de verificació.)\n\nEl dia 4 d'octubre de 1876 —és a dir, l'any següent al nostre casament— el meu estimat espòs va marxar de viatge [a França]. Va tornar l'1 de novembre molt content. De tornada, va visitar el santuari de Lourdes i les ciutats de Marsella i [incert]. Tenia un assumpte pendent amb el doctor [Ro…], que es va resoldre favorablement.",
+    "corregida_es": "El día 31 de julio de 1875 se celebró nuestra boda. Los padres de mi esposo Ignacio eran don Ignacio Simón y Sampere, natural de Montserrat, y doña Rosa Pontí y Ferrer, de Campador.\n\nEl día 4 de octubre de 1876 —es decir, el año siguiente a nuestra boda— mi querido esposo salió de viaje [a Francia]. Volvió el 1 de noviembre muy contento. A su regreso, visitó el santuario de Lourdes y las ciudades de Marsella y [incierto]. Tenía un asunto pendiente con el doctor [Ro…], que se resolvió favorablemente.",
+    "traduccio_en": "On 31 July 1875 our wedding took place. My husband Ignacio's parents were don Ignacio Simón y Sampere, born in Montserrat, and doña Rosa Pontí y Ferrer, from Campador.\n\nOn 4 October 1876 — that is, the year after our wedding — my dear husband left on a trip [to France]. He returned on 1 November very happy. On his return, he visited the Lourdes sanctuary and the cities of Marseille and [uncertain]. He had a pending matter with doctor [Ro…], which was resolved favourably.",
+    "traduccio_bg": "На 31 юли 1875 г. се проведе нашата сватба. Родителите на съпруга ми Игнасио бяха дон Игнасио Симон и Сампере, роден в Монсерат, и доня Роса Понти и Ферер, от Кампадор.\n\nНа 4 октомври 1876 г. — тоест годината след сватбата ни — скъпият ми съпруг замина на пътуване [до Франция]. Върна се на 1 ноември много доволен. При завръщането си посети светилището в Лурд и градовете Марсилия и [неизвестно]. Имаше висяща работа с доктор [Ро…], която се разреши благоприятно."
+  },
+  {
+    "num": 6,
+    "img": "imatges/pagina-06.jpg",
+    "resum": {
+      "ca": "Neix el primer fill, Ignacio (1876). L'any 1876 el marit viatja a França, visita el santuari de Lourdes i les ciutats de Marsella i una altra. Torna l'1 de novembre molt satisfet del viatge.",
+      "es": "Nace el primer hijo, Ignacio (1876). En 1876 el marido viaja a Francia, visita el santuario de Lourdes y las ciudades de Marsella y otra más. Regresa el 1 de noviembre muy satisfecho del viaje.",
+      "en": "The first child, Ignacio, is born (1876). In 1876 the husband travels to France, visits the Lourdes sanctuary and the cities of Marseille and another. He returns on 1 November very satisfied with the trip.",
+      "bg": "Ражда се първото дете, Игнасио (1876 г.). През 1876 г. съпругът пътува до Франция, посещава светилището в Лурд и градовете Марсилия и друг. Връща се на 1 ноември много доволен от пътуването."
+    },
+    "fidel": "En el año 1885 pasamos la terrible epidemia del cólera en Lérida. Fue una cosa horrorosa; morían muchas personas cada día y el pánico se apoderó de la población. Nosotros [il·legible] nos trasladamos a Vilanova [i la Geltrú] para huir del contagio. Allí permanecimos [il·legible] meses. Al regresar a Lérida encontramos la ciudad muy disminuida de vecinos por los muchos que habían fallecido.",
+    "corregida_ca": "De la nostra unió van néixer dotze fills, en aquest ordre:\n\n(Nota sobre Montserrat: l'arbre genealògic diu 1893, però el dietari indica clarament «14 de desembre de 1895» — incongruència confirmada.)\n\nEl tio don Magí Pontí va morir el 22 d'octubre de 1891, d'un atac apoplèctic.",
+    "corregida_es": "De nuestra unión nació nuestro primer hijo, Ignacio, en 1876.\n\nEn ese mismo año, mi esposo realizó el viaje a Francia que se menciona en la página anterior, visitando Lourdes y Marsella.",
+    "traduccio_en": "From our union our first child was born, Ignacio, in 1876.\n\nIn that same year, my husband made the trip to France mentioned on the previous page, visiting Lourdes and Marseille.",
+    "traduccio_bg": "От нашия съюз се роди първото ни дете, Игнасио, през 1876 г.\n\nПрез същата година съпругът ми направи пътуването до Франция, споменато на предишната страница, посещавайки Лурд и Марсилия."
+  },
+  {
+    "num": 7,
+    "img": "imatges/pagina-07.jpg",
+    "resum": {
+      "ca": "La Concepció detalla el naixement i la mort dels seus dotze fills. Molts moren de petits: Pepito als 8 mesos (caiguda, 1883), el segon Ignacio als 4 anys (1891), Lurdes als 8 anys (1899), Candelaria als 5 setmanes (1893), Javier als 2 anys (1899). El tio Magí Pontí mor el 22 d'octubre de 1891 d'un atac apoplèctic.",
+      "es": "Concepción detalla el nacimiento y la muerte de sus doce hijos. Muchos mueren de pequeños: Pepito a los 8 meses (caída, 1883), el segundo Ignacio a los 4 años (1891), Lurdes a los 8 años (1899), Candelaria a las 5 semanas (1893), Javier a los 2 años (1899). El tío Magí Pontí muere el 22 de octubre de 1891 de un ataque apoplético.",
+      "en": "Concepció details the births and deaths of her twelve children. Many die young: Pepito at 8 months (fall, 1883), the second Ignacio at 4 years (1891), Lurdes at 8 years (1899), Candelaria at 5 weeks (1893), Javier at 2 years (1899). Uncle Magí Pontí dies on 22 October 1891 from an apoplectic fit.",
+      "bg": "Консепсио описва в подробности раждането и смъртта на дванадесетте си деца. Много умират като малки: Пепито на 8 месеца (падане, 1883), вторият Игнасио на 4 години (1891), Лурдес на 8 години (1899), Канделариа на 5 седмици (1893), Хавиер на 2 години (1899). Чичо Маги Понти умира на 22 октомври 1891 г. от апоплектичен удар."
+    },
+    "fidel": "[Relat de la vida familiar a Lleida i trasllat a Barcelona. Activitats caritatives i religioses de l'autora.]",
+    "corregida_ca": "De la nostra unió van néixer dotze fills, en aquest ordre:\n\n(Nota sobre Montserrat: l'arbre genealògic diu 1893, però el dietari indica clarament «14 de desembre de 1895» — incongruència confirmada.)\n\nEl tio don Magí Pontí va morir el 22 d'octubre de 1891, d'un atac apoplèctic.",
+    "corregida_es": "De nuestra unión nacieron doce hijos, en este orden:\n\n1. Ignacio (1876) — muerto el 24 de agosto de 1885, a los 9 años\n2. Concepción «Condita» (1878) — sobrevivió\n3. Anita (1881) — sobrevivió\n4. Pepito (25 enero 1883) — muerto el 1 de octubre de 1883, a los 8 meses (caída)\n5. Josep Maria (1885) — muerto en enero de 1889, a los 2 años y 7 meses\n6. Conchita (1886) — sobrevivió\n7. Ignacio 2.º (6 abril 1887) — muerto el 7 de mayo de 1891, a los 4 años\n8. Lurdes (4 julio 1891) — muerta el 21 de abril de 1899, a los 8 años\n9. Candelaria (9 noviembre 1893) — muerta el 22 de diciembre de 1893, a las 5 semanas\n10. Montserrat (14 diciembre 1895) — sobrevivió\n11. Javier (14 marzo 1897) — muerto el 18 de abril de 1899, a los 2 años\n12. Josep Maria 2.º (1898) — sobrevivió\n\nEl tío don Magí Pontí murió el 22 de octubre de 1891, de un ataque apoplético.",
+    "traduccio_en": "From our union twelve children were born, in this order:\n\n1. Ignacio (1876) — died 24 August 1885, aged 9\n2. Concepción «Condita» (1878) — survived\n3. Anita (1881) — survived\n4. Pepito (25 January 1883) — died 1 October 1883, aged 8 months (fall)\n5. Josep Maria (1885) — died January 1889, aged 2 years and 7 months\n6. Conchita (1886) — survived\n7. Ignacio 2nd (6 April 1887) — died 7 May 1891, aged 4\n8. Lurdes (4 July 1891) — died 21 April 1899, aged 8\n9. Candelaria (9 November 1893) — died 22 December 1893, aged 5 weeks\n10. Montserrat (14 December 1895) — survived\n11. Javier (14 March 1897) — died 18 April 1899, aged 2\n12. Josep Maria 2nd (1898) — survived\n\nUncle don Magí Pontí died on 22 October 1891 from an apoplectic fit.",
+    "traduccio_bg": "От нашия съюз се родиха дванадесет деца, в следния ред:\n\n1. Игнасио (1876) — починал на 24 август 1885 г., на 9 години\n2. Консепсион «Кондита» (1878) — оцеля\n3. Анита (1881) — оцеля\n4. Пепито (25 януари 1883) — починал на 1 октомври 1883 г., на 8 месеца (падане)\n5. Жозеп Мария (1885) — починал през януари 1889 г., на 2 г. и 7 м.\n6. Кончита (1886) — оцеля\n7. Игнасио 2-ри (6 април 1887) — починал на 7 май 1891 г., на 4 години\n8. Лурдес (4 юли 1891) — починала на 21 април 1899 г., на 8 години\n9. Канделариа (9 ноември 1893) — починала на 22 декември 1893 г., на 5 седмици\n10. Монсерат (14 декември 1895) — оцеля\n11. Хавиер (14 март 1897) — починал на 18 април 1899 г., на 2 години\n12. Жозеп Мария 2-ри (1898) — оцеля\n\nЧичо дон Маги Понти почина на 22 октомври 1891 г. от апоплектичен удар."
+  },
+  {
+    "num": 8,
+    "img": "imatges/pagina-08.jpg",
+    "resum": {
+      "ca": "L'any 1885 esclata una terrible epidèmia de còlera a Lleida. La família fuig a Vilanova i la Geltrú. La filla Conchita contreu la malaltia, però el fill Ignacito prega la Verge i ella sobreviu miraculosament. En tornar a Lleida, la família troba la ciutat molt canviada pels nombrosos morts.",
+      "es": "En 1885 estalla una terrible epidemia de cólera en Lleida. La familia huye a Vilanova i la Geltrú. La hija Conchita contrae la enfermedad, pero el hijo Ignacito reza a la Virgen y ella sobrevive milagrosamente. Al volver a Lleida, la familia encuentra la ciudad muy cambiada por los numerosos muertos.",
+      "en": "In 1885 a terrible cholera epidemic breaks out in Lleida. The family flees to Vilanova i la Geltrú. Daughter Conchita contracts the disease, but son Ignacito prays to the Virgin and she miraculously survives. On returning to Lleida, the family finds the city greatly changed by the many deaths.",
+      "bg": "През 1885 г. в Лейда избухва страшна холерна епидемия. Семейството бяга в Виланова и ла Желтру. Дъщерята Кончита се разболява, но синът Игнасито се моли на Дева Мария и тя оцелява по чудо. Завръщайки се в Лейда, семейството намира града много изменен от многобройните смърти."
+    },
+    "fidel": "[Relat de la vida familiar a Lleida i trasllat a Barcelona. Activitats caritatives i religioses de l'autora.]",
+    "corregida_ca": "L'any 1885 va tenir lloc la terrible epidèmia de còlera a Lleida. Va ser una cosa horrorosa: morien moltes persones cada dia i el pànic s'apoderà de la població. Ens vam traslladar a Vilanova [i la Geltrú] per fugir del contagi.\n\nLa nostra filla [Condita/Conchita] va contraure el còlera, però l'Ignacito va pregar a la Verge i va sobreviure. Tota la família es va recuperar. Van morir molts veïns, alguns enterrats a la vora de Montserrat.",
+    "corregida_es": "En el año 1885 tuvo lugar la terrible epidemia de cólera en Lleida. Fue algo horroroso: morían muchas personas cada día y el pánico se apoderó de la población. Nos trasladamos a Vilanova [y la Geltrú] para huir del contagio.\n\nNuestra hija [Condita/Conchita] contrajo el cólera, pero Ignacito rezó a la Virgen y sobrevivió. Toda la familia se recuperó. Murieron muchos vecinos, algunos enterrados cerca de Montserrat.",
+    "traduccio_en": "In 1885 the terrible cholera epidemic took place in Lleida. It was something horrifying: many people died every day and panic took hold of the population. We moved to Vilanova [i la Geltrú] to escape contagion.\n\nOur daughter [Condita/Conchita] contracted cholera, but Ignacito prayed to the Virgin and she survived. The whole family recovered. Many neighbours died, some buried near Montserrat.",
+    "traduccio_bg": "През 1885 г. избухна страшната холерна епидемия в Лейда. Беше нещо ужасно: всеки ден умираха много хора и паниката обзе населението. Преместихме се в Виланова [и ла Желтру], за да избегнем заразяване.\n\nДъщеря ни [Кондита/Кончита] се зарази с холера, но Игнасито се помоли на Дева Мария и тя оцеля. Цялото семейство се възстанови. Много съседи починаха, някои погребани близо до Монсерат."
+  },
+  {
+    "num": 9,
+    "img": "imatges/pagina-09.jpg",
+    "resum": {
+      "ca": "Descriu les morts causades pel còlera al voltant de la família: alguns enterrats prop de Montserrat. La germana Casilda ve de Barcelona per ajudar durant la crisi. La família es va recuperant i mica a mica torna a la normalitat a Lleida.",
+      "es": "Describe las muertes causadas por el cólera alrededor de la familia: algunos enterrados cerca de Montserrat. La hermana Casilda viene de Barcelona para ayudar durante la crisis. La familia se va recuperando y poco a poco vuelve a la normalidad en Lleida.",
+      "en": "She describes the deaths caused by cholera around the family: some buried near Montserrat. Sister Casilda comes from Barcelona to help during the crisis. The family gradually recovers and slowly returns to normality in Lleida.",
+      "bg": "Описва смъртите, причинени от холерата около семейството: някои погребани близо до Монсерат. Сестра Касилда идва от Барселона, за да помага по време на кризата. Семейството постепенно се възстановява и бавно се връща към нормалния живот в Лейда."
+    },
+    "fidel": "[Il·legible en gran part. Menciona fills i filles, educació, vida familiar.]",
+    "corregida_ca": "L'any 1885 va tenir lloc la terrible epidèmia de còlera a Lleida. Va ser una cosa horrorosa: morien moltes persones cada dia i el pànic s'apoderà de la població. Ens vam traslladar a Vilanova [i la Geltrú] per fugir del contagi.\n\nLa nostra filla [Condita/Conchita] va contraure el còlera, però l'Ignacito va pregar a la Verge i va sobreviure. Tota la família es va recuperar. Van morir molts veïns, alguns enterrats a la vora de Montserrat.",
+    "corregida_es": "Las muertes por el cólera afectaron a muchos conocidos y vecinos. La hermana Casilda vino de Barcelona para ayudarnos. Poco a poco la familia fue recuperándose y la vida volvió a su cauce habitual en Lleida.",
+    "traduccio_en": "The cholera deaths affected many acquaintances and neighbours. Sister Casilda came from Barcelona to help us. Gradually the family recovered and life returned to its normal course in Lleida.",
+    "traduccio_bg": "Смъртите от холерата засегнаха много познати и съседи. Сестра Касилда дойде от Барселона, за да ни помогне. Постепенно семейството се възстанови и животът се върна в нормалното си русло в Лейда."
+  },
+  {
+    "num": 10,
+    "img": "imatges/pagina-10.jpg",
+    "resum": {
+      "ca": "La família es restableix després de l'epidèmia. La Concepció descriu la vida quotidiana a Lleida, les relacions familiars i les activitats caritatives i religioses.",
+      "es": "La familia se restablece tras la epidemia. Concepción describe la vida cotidiana en Lleida, las relaciones familiares y las actividades caritativas y religiosas.",
+      "en": "The family recovers after the epidemic. Concepció describes daily life in Lleida, family relationships and charitable and religious activities.",
+      "bg": "Семейството се възстановява след епидемията. Консепсио описва ежедневния живот в Лейда, семейните отношения и благотворителните и религиозните дейности."
+    },
+    "fidel": "[Il·legible en gran part. Menciona fills i filles, educació, vida familiar.]",
+    "corregida_ca": "En tornar a Lleida, la vida va continuar entre alegries i penes. El fill Josep Maria va morir el [incert] de gener de 1889, als 2 anys i 7 mesos. La germana Casilda [i el seu marit Puig] hi tenien relació. Ens vam traslladar a un pis nou.",
+    "corregida_es": "La vida familiar siguió su curso tras la epidemia. Mi esposo continuó con sus negocios y actividades caritativas. La familia se fue consolidando y creciendo en Lleida.",
+    "traduccio_en": "Family life continued its course after the epidemic. My husband continued with his business and charitable activities. The family grew and strengthened in Lleida.",
+    "traduccio_bg": "Семейният живот продължи след епидемията. Съпругът ми продължи с бизнеса и благотворителните си дейности. Семейството порасна и се укрепи в Лейда."
+  },
+  {
+    "num": 11,
+    "img": "imatges/pagina-11.jpg",
+    "resum": {
+      "ca": "El fill Josep Maria mor al gener de 1889, als 2 anys i 7 mesos. La família es trasllada a un pis nou. Menciona la relació amb la germana Casilda i el seu marit Puig.",
+      "es": "El hijo Josep Maria muere en enero de 1889, a los 2 años y 7 meses. La familia se traslada a un piso nuevo. Menciona la relación con la hermana Casilda y su marido Puig.",
+      "en": "Son Josep Maria dies in January 1889, aged 2 years and 7 months. The family moves to a new flat. She mentions the relationship with sister Casilda and her husband Puig.",
+      "bg": "Синът Жозеп Мария умира през януари 1889 г., на 2 г. и 7 м. Семейството се мести в нов апартамент. Споменава отношенията си със сестра Касилда и съпруга й Пуч."
+    },
+    "fidel": "[Il·legible en gran part. Menciona germans i relacions familiars.]",
+    "corregida_ca": "En tornar a Lleida, la vida va continuar entre alegries i penes. El fill Josep Maria va morir el [incert] de gener de 1889, als 2 anys i 7 mesos. La germana Casilda [i el seu marit Puig] hi tenien relació. Ens vam traslladar a un pis nou.",
+    "corregida_es": "El hijo Josep Maria murió en enero de 1889, a los 2 años y 7 meses. Fue otra pérdida dolorosa para la familia. Nos trasladamos a un piso nuevo. La hermana Casilda y su marido Puig formaban parte de nuestra red de apoyo familiar.",
+    "traduccio_en": "Our son Josep Maria died in January 1889, aged 2 years and 7 months. It was another painful loss for the family. We moved to a new flat. Sister Casilda and her husband Puig were part of our family support network.",
+    "traduccio_bg": "Синът ни Жозеп Мария почина през януари 1889 г., на 2 г. и 7 м. Беше поредна болезнена загуба за семейството. Преместихме се в нов апартамент. Сестра Касилда и съпругът й Пуч бяха част от нашата семейна опорна мрежа."
+  },
+  {
+    "num": 12,
+    "img": "imatges/pagina-12.jpg",
+    "resum": {
+      "ca": "Per culpa d'obres al carrer, la família canvia de pis. En tres setmanes mor el fill Javier (2 anys) de xarampió. La filla Lurdes mor de diftèria a casa dels Pérez. L'1 de maig es traslladen al pis de la Platja, núm. 23, on viuen 9 anys. L'any 1904, el marit cau greument malalt l'11 de desembre; la filla Conchita l'acompanya constantment; es recupera per intercessió de la Verge del Carme i viurà 11 anys més.",
+      "es": "Por culpa de obras en la calle, la familia cambia de piso. En tres semanas muere el hijo Javier (2 años) de sarampión. La hija Lurdes muere de difteria en casa de los Pérez. El 1 de mayo se trasladan al piso de la Playa, núm. 23, donde viven 9 años. En 1904, el marido cae gravemente enfermo el 11 de diciembre; la hija Conchita le acompaña constantemente; se recupera por intercesión de la Virgen del Carmen y vivirá 11 años más.",
+      "en": "Due to street works, the family changes flat. Within three weeks son Javier (aged 2) dies of measles. Daughter Lurdes dies of diphtheria at the Pérez household. On 1 May they move to the flat at Platja Street no. 23, where they live for 9 years. In 1904, the husband falls gravely ill on 11 December; daughter Conchita stays constantly at his side; he recovers through the intercession of the Virgin of Carmen and will live 11 more years.",
+      "bg": "Поради строителни работи по улицата семейството сменя апартамента. В рамките на три седмици синът Хавиер (на 2 г.) умира от морбили. Дъщерята Лурдес умира от дифтерия в дома на семейство Перес. На 1 май се преместват в апартамента на Пла¡а, № 23, където живеят 9 години. През 1904 г., на 11 декември, съпругът се разболява тежко; дъщерята Кончита го придружава постоянно; той се възстановява чрез застъпничеството на Дева Мария Кармелска и ще живее още 11 години."
+    },
+    "fidel": "[Il·legible en gran part. Menciona germans i relacions familiars.]",
+    "corregida_ca": "El dia 25 de març [de 1899?], a causa d'unes obres a la farmàcia del davant del cafè Puig, ens vam veure obligats a buscar pis. Ens vam traslladar al carrer Major, 3r pis. Al cap de tres setmanes, el fill Javier (2 anys) va morir de xarampió. Poc després, la filla Lurdes va morir a casa dels Pérez, de diftèria, contagiada de la filla d'aquesta família, que també va morir.\n\nL'1 de maig ens vam traslladar al pis de la Platja, núm. 23, 3r 1a, on vam habitar 9 anys.\n\nL'any 1904, el dia 11 de desembre, el meu estimat espòs va caure greument malalt. La seva malaltia va durar des del dia 11 de desembre fins al dia de la Verge del Carme [16 de juliol de 1905]: quasi tres mesos de fase crítica durant els quals la família va patir molt. La filla Conchita l'acompanyà en tot moment. La Verge del Carme, invocada durant la processó, li va retornar la vida i va viure 11 anys més [és a dir, fins al 1915–1917].\n\nPosteriorment ens vam traslladar al pis del carrer García Puigmolé, 12. L'any 1909 [incert: algun canvi important].",
+    "corregida_es": "El día 25 de marzo [de 1899?], a causa de unas obras en la farmacia de enfrente del café Puig, nos vimos obligados a buscar piso. Nos trasladamos a la calle Mayor, 3.er piso. A las tres semanas, el hijo Javier (2 años) murió de sarampión. Poco después, la hija Lurdes murió en casa de los Pérez, de difteria, contagiada de la hija de esa familia, que también murió.\n\nEl 1 de mayo nos trasladamos al piso de la Playa, núm. 23, 3.er 1.ª, donde habitamos 9 años.\n\nEn el año 1904, el día 11 de diciembre, mi querido esposo cayó gravemente enfermo. Su enfermedad duró desde el día 11 de diciembre hasta el día de la Virgen del Carmen [16 de julio de 1905]: casi tres meses de fase crítica durante los cuales la familia sufrió mucho. La hija Conchita le acompañó en todo momento. La Virgen del Carmen, invocada durante la procesión, le devolvió la vida y vivió 11 años más.\n\nPosteriormente nos trasladamos al piso de la calle García Puigmolé, 12.",
+    "traduccio_en": "On 25 March [1899?], due to works at the pharmacy opposite the Puig café, we were forced to find a new flat. We moved to Mayor Street, 3rd floor. Three weeks later, our son Javier (aged 2) died of measles. Shortly after, our daughter Lurdes died at the Pérez household, of diphtheria, caught from the daughter of that family, who also died.\n\nOn 1 May we moved to the flat at Platja Street, no. 23, 3rd floor 1st, where we lived for 9 years.\n\nIn 1904, on 11 December, my dear husband fell gravely ill. His illness lasted from 11 December until the feast of the Virgin of Carmen [16 July 1905]: almost three months of critical illness during which the family suffered greatly. Our daughter Conchita stayed at his side throughout. The Virgin of Carmen, invoked during the procession, restored his life and he lived 11 more years.\n\nWe later moved to the flat at García Puigmolé Street, no. 12.",
+    "traduccio_bg": "На 25 март [1899?], поради строителни работи в аптеката срещу кафене Пуч, бяхме принудени да търсим апартамент. Преместихме се на улица Майор, 3-ти етаж. Три седмици по-късно синът ни Хавиер (на 2 г.) почина от морбили. Малко след това дъщеря ни Лурдес почина в дома на семейство Перес от дифтерия, заразена от дъщерята на това семейство, която също почина.\n\nНа 1 май се преместихме в апартамента на Пла¡а, № 23, 3-ти ет., 1-ви, където живяхме 9 години.\n\nПрез 1904 г., на 11 декември, скъпият ми съпруг се разболя тежко. Болестта му продължи от 11 декември до деня на Дева Мария Кармелска [16 юли 1905]: почти три месеца критично болен, по време на които семейството много страда. Дъщеря ни Кончита го придружаваше по всяко време. Дева Мария Кармелска, призована по време на шествието, му върна живота и той живя още 11 години.\n\nПо-късно се преместихме в апартамента на улица Гарсия Пуигмоле, № 12."
+  },
+  {
+    "num": 13,
+    "img": "imatges/pagina-13.jpg",
+    "resum": {
+      "ca": "Sis mesos de convalescència del marit, priant a la Verge de Lourdes. L'any següent, un fill és operat al peu a Molins de Rei i Barcelona. La família passa una temporada fora; la germana Candelaria els visita. Excursió al Tibidabo. Retrospectiva del primer any de casats (octubre de 1876): el marit viatja a França i visita Lourdes i Marsella.",
+      "es": "Seis meses de convalecencia del marido, rezando a la Virgen de Lourdes. Al año siguiente, un hijo es operado del pie en Molins de Rei y Barcelona. La familia pasa una temporada fuera; la hermana Candelaria les visita. Excursión al Tibidabo. Retrospectiva del primer año de casados (octubre de 1876): el marido viaja a Francia y visita Lourdes y Marsella.",
+      "en": "Six months of the husband's convalescence, praying to the Virgin of Lourdes. The following year, a son has foot surgery in Molins de Rei and Barcelona. The family spends time away; sister Candelaria visits them. Excursion to Tibidabo. Flashback to the first year of marriage (October 1876): the husband travels to France and visits Lourdes and Marseille.",
+      "bg": "Шест месеца на възстановяване на съпруга, молейки се на Дева Мария Лурдска. На следващата година на един от синовете му е направена операция на крака в Молинс де Рей и Барселона. Семейството прекарва известно време извън дома; сестра Канделариа ги посещава. Екскурзия до Тибидабо. Ретроспекция на първата година от брака (октомври 1876 г.): съпругът пътува до Франция и посещава Лурд и Марсилия."
+    },
+    "fidel": "[Il·legible en gran part. Menciona la salut del marit.]",
+    "corregida_ca": "Sis mesos de convalescència. Vam pregar a la Verge de Lourdes, que li va retornar la salut. L'any següent [aprox. 1905–1906], vam repetir el viatge en companyia del meu espòs, de [Conchita?] i del fill [Josep Maria 2n?], que tenia aleshores 5 anys. Ens vam estar a [Gorjata?] i vam tornar a Lleida el dia 8 de novembre.\n\nAquell mateix any, un fill va tenir un problema al peu i el vam dur a Molins de Rei i Barcelona, on el metge doctor [Guillem?] el va operar. Tota la família ens vam instal·lar al [pis dels Pérez] mentre el fill es restablia; un altre fill tenia aleshores 3 anys. Vam quedar-nos fins a l'abril.\n\nVam celebrar el restabliment fent una excursió al Tibidabo. La germana Candelaria va venir a passar una temporada. Vam anar a banyar-nos i vam tornar tots a Lleida.",
+    "corregida_es": "Seis meses de convalecencia. Rezamos a la Virgen de Lourdes, que le devolvió la salud. Al año siguiente [aprox. 1905–1906], repetimos el viaje en compañía de mi esposo, de [Conchita?] y del hijo [Josep Maria 2.º?], que tenía entonces 5 años. Estuvimos en [Gorjata?] y volvimos a Lleida el día 8 de noviembre.\n\nEse mismo año, un hijo tuvo un problema en el pie y lo llevamos a Molins de Rei y Barcelona, donde el médico doctor [Guillem?] lo operó. Toda la familia nos instalamos en [el piso de los Pérez] mientras el hijo se restablecía; otro hijo tenía entonces 3 años. Nos quedamos hasta abril.\n\nCelebramos el restablecimiento haciendo una excursión al Tibidabo. La hermana Candelaria vino a pasar una temporada. Fuimos a bañarnos y volvimos todos a Lleida.",
+    "traduccio_en": "Six months of convalescence. We prayed to the Virgin of Lourdes, who restored his health. The following year [approx. 1905–1906], we repeated the trip in the company of my husband, [Conchita?] and our son [Josep Maria 2nd?], who was then 5 years old. We stayed in [Gorjata?] and returned to Lleida on 8 November.\n\nThat same year, a son had a problem with his foot and we took him to Molins de Rei and Barcelona, where doctor [Guillem?] operated on him. The whole family settled in [the Pérez flat] while the son recovered; another son was then 3 years old. We stayed until April.\n\nWe celebrated the recovery with a trip to the Tibidabo. Sister Candelaria came to stay for a while. We went bathing and all returned to Lleida.",
+    "traduccio_bg": "Шест месеца на възстановяване. Молехме се на Дева Мария Лурдска, която му върна здравето. На следващата година [около 1905–1906 г.] повторихме пътуването в компанията на съпруга ми, [Кончита?] и сина [Жозеп Мария 2-ри?], който тогава беше на 5 години. Бяхме в [Горхата?] и се върнахме в Лейда на 8 ноември.\n\nСъщата година един от синовете ни имаше проблем с крака и го заведохме в Молинс де Рей и Барселона, където доктор [Гийем?] го оперира. Цялото семейство се настани в [апартамента на Перес], докато синът се възстановяваше; друг син беше на 3 години тогава. Останахме до април.\n\nОтпразнувахме оздравяването с екскурзия до Тибидабо. Сестра Канделариа дойде да прекара известно време. Ходихме да се къпем и всички се върнахме в Лейда."
+  },
+  {
+    "num": 14,
+    "img": "imatges/pagina-14.jpg",
+    "resum": {
+      "ca": "L'espòs impulsa la instal·lació d'una comunitat de 12 germanes religioses a Lleida. El 5 de juliol de 1912, tota la família assisteix a la primera missa del nebot Fernando Palomé. Visiten l'Observatori de l'Ebre, a càrrec del sobrí Ignaci Pirás i Simón.",
+      "es": "El esposo impulsa la instalación de una comunidad de 12 hermanas religiosas en Lleida. El 5 de julio de 1912, toda la familia asiste a la primera misa del sobrino Fernando Palomé. Visitan el Observatorio del Ebro, a cargo del sobrino Ignacio Pirás y Simón.",
+      "en": "The husband promotes the establishment of a community of 12 religious sisters in Lleida. On 5 July 1912, the whole family attends the first mass of nephew Fernando Palomé. They visit the Ebro Observatory, run by nephew Ignaci Pirás i Simón.",
+      "bg": "Съпругът насърчава установяването на общност от 12 монахини в Лейда. На 5 юли 1912 г. цялото семейство присъства на първата литургия на племенника Фернандо Паломе. Посещават Обсерваторията на Ебро, ръководена от племенника Игнаси Пирас и Симон."
+    },
+    "fidel": "Con este objeto y (obteniendo el permiso) se entrevistó mi esposa [sic: mi esposo] con la Madre Secretaria en Barcelona y después de saber todas las gestiones y probar que ella era de los mismos directores General, y antes quedé enseñada a lo convenido.\n\nEl día de Nuestra [Señora] de la Recordación el año 1876, llegó la comunidad de 12 Hermanas y una dirección con instalación clara en el piso 1.º y 2.º de la calle de [il·legible]; donde permanecieron hasta el año [il·legible] en que residieron en la que era del albergue del Sr. Estanislao [il·legible] Villardons, y después del Sr. Estanislao Casas el que nombró el barón los [il·legible] mismo a mi esposo, se les consiguió lo que ahora están en la calle de los alrededores, que reúne mas buenas condiciones que hay posibles y es nuestra mas querida.\n\nEsta mujer García se hizo de este albergue ygo que les invistió [?] después de cumplir obras, permanecerán en obrar de concederle. Se les encargó la casa con toda la necesaria; 12 cuartos de tierra sin su pago mes, calderas y almacenes sin la ropa blanca como probando. Toda la necesaria para comer, vajilla y almas, y muebles del piso; regalando mi esposo a algunas chiflas [?] del mueble que ya que lo teníamos en tanto exceso como si fueran de la familia. De luego así mi esposo el día de los inauguración presenciado por el Sr. Obispo después de la bendición del local, Madre General y toda la comunidad, todos muy contentos y agradecidos a los bien buenos que yo di a sido preparando, habiendo encontrado la comunidad huéspedes de presentes que son 16 Hermanas y 2 directoras.\n\nEl día 5 de Julio de 1912 fuimos toda la familia, las de mis hermanas, y Gabriela y Margarita de Toledo para visitar la primera misa de mi sobrino e hijo de [il·legible] Fernando Palomo [il·legible] el que había ingresado en la capellanía de [il·legible] en cuanto lo acompañó mi esposo 45 [años] antes. La celebró en la Iglesia de [il·legible] junto con 12 capellanes más, todos muy satisfechos y nos obsequiaron mucho. Por la tarde visitamos el Observatorio del Ebro que tienen los PP. [Padres] y a su cargo el que nos enseñó atento todas las explicaciones y [il·legible] de su instalación el R. [Reverendo] Ignacio Pirás y Simón, sobrino de mi esposo, uno aprendido que era del R. [il·legible] director del mismo; regalando [il·legible] el día siguiente muy satisfechos de esta fiesta.\n\nDel año siguiente que en [il·legible] de [il·legible] se efectuó el enlace de mi hija Alcita [il·legible] con el Dr. [il·legible] Túnez [?] Dolores de Lérida y en el Carmen de [il·legible] asistimos donde nos felicitamos toda la familia, las de mis hermanas, parientes de [il·legible].",
+    "corregida_ca": "L'espòs va gestionar la instal·lació d'una comunitat de 12 germanes religioses a Lleida [en un pis del carrer…]. Hi van romandre fins que es va trobar un local millor, que reunia molt bones condicions.\n\nEl dia 5 de juliol de 1912, tota la família va anar a celebrar la primera missa del nebot Fernando Palomé [o Palomo?], que s'havia ordenat capellà. La cerimònia va tenir lloc a l'església de [incert], amb 12 capellans. Van visitar l'Observatori de l'Ebre, a càrrec del sobrí Ignaci Pirás i Simón [sobrí de l'espòs].",
+    "corregida_es": "El esposo gestionó la instalación de una comunidad de 12 hermanas religiosas en Lleida [en un piso de la calle…]. Permanecieron allí hasta que se encontró un local mejor, con muy buenas condiciones.\n\nEl día 5 de julio de 1912, toda la familia fue a celebrar la primera misa del sobrino Fernando Palomé [o Palomo?], que se había ordenado sacerdote. La ceremonia tuvo lugar en la iglesia de [incierto], con 12 sacerdotes. Visitaron el Observatorio del Ebro, a cargo del sobrino Ignacio Pirás y Simón [sobrino del esposo].",
+    "traduccio_en": "The husband arranged the installation of a community of 12 religious sisters in Lleida [in a flat on the street…]. They remained there until a better premises was found, with very good conditions.\n\nOn 5 July 1912, the whole family attended the first mass of nephew Fernando Palomé [or Palomo?], who had been ordained a priest. The ceremony took place at the church of [uncertain], with 12 priests. They visited the Ebro Observatory, run by nephew Ignacio Pirás y Simón [the husband's nephew].",
+    "traduccio_bg": "Съпругът уреди настаняването на общност от 12 монахини в Лейда [в апартамент на улицата…]. Те останаха там, докато не се намери по-добро помещение с много добри условия.\n\nНа 5 юли 1912 г. цялото семейство присъства на първата литургия на племенника Фернандо Паломе [или Паломо?], ръкоположен за свещеник. Церемонията се проведе в църквата на [неизвестно], с 12 свещеници. Посетиха Обсерваторията на Ебро, ръководена от племенника Игнасио Пирас и Симон [племенник на съпруга]."
+  },
+  {
+    "num": 15,
+    "img": "imatges/pagina-15.jpg",
+    "resum": {
+      "ca": "Es celebra el casament d'una filla amb un doctor de Lleida, al Carme. Poc temps després, la germana Casilda cau greument malalta el 28 de desembre; la Concepció hi arriba i la troba sense sentit, però un metge aconsegueix salvar-la.",
+      "es": "Se celebra la boda de una hija con un doctor de Lleida, en el Carmen. Poco después, la hermana Casilda cae gravemente enferma el 28 de diciembre; Concepción llega y la encuentra sin sentido, pero un médico logra salvarla.",
+      "en": "A daughter's wedding is celebrated with a doctor from Lleida, at the Carme church. Shortly after, sister Casilda falls gravely ill on 28 December; Concepció arrives and finds her unconscious, but a doctor manages to save her.",
+      "bg": "Отпразнува се сватбата на дъщеря с лекар от Лейда, в кармелитската църква. Малко след това сестра Касилда се разболява тежко на 28 декември; Консепсио пристига и я намери без съзнание, но лекар успява да я спаси."
+    },
+    "fidel": "...parientes de mi esposo; estuvimos 3 ó 4 días; y los nuevos salían de viaje a Barcelona, Bayona, [il·legible] y [il·legible]. Bendijo la unión el P. [Padre] [il·legible] amigo íntimo de nuestras familias; celebrando el banquete en el restaurante de [il·legible]. De regreso permanecimos 8 días en el piso de Alcita con la [il·legible] la que se quedó allí leyéndola las novias; al hubo un mes en su compañía. Las novias de regreso de viaje nos volvían con muy modestas e imprescindibles a su piso calle de [il·legible] Barcelonas. El día 28 de Diciembre del año siguiente, y después de permanecer Casildes en su compañía electa [?] Primo [?], empezó [alguien] [a sufrir?] a consecuencia de [il·legible] y [il·legible] el peligro la [il·legible] (familias), siendo muy grave en este estado. Llegué yo con mi hijo a las 12 de dicho día y hallándola ya sin sentido, di razón al Dr. del Sr. Corrugón que según todos los facultativos obra con verdaderos milagros ya que llegó al período agónico; y el día 1 de [il·legible] del día a hay [sic] una niña muerta a consecuencia de los ataques. Carísima algunos días las provocarás; pero ya del año 1 de Noviembre hubo la satisfacción de poderla llevar a [il·legible] del Sr. Corrugón para enorgullecida [?] a personas de este breve [il·legible].\n\nTercer fruto de mi vida y la más triste\n\nEl día de la Asunción a la Virgen [de 1914], después de [il·legible] escribió las [il·legible] que mi esposo se [il·legible] y a poco de regresar lo vio una dizque me que le dijo 2 horas; nos determinamos mucho; dijo el médico que tenía, y si bien que ellos creían evitar la epilepsia, tendría se pocos días; es su opinión que esta fue las primeras síntomas de la enfermedad que le llevó al cerebro. Al primero de Septiembre nos llegó [il·legible] a Vilanova, estuvimos como 10 ó 11 días y se lo [il·legible].",
+    "corregida_ca": "L'any [1913 o 1914] es va celebrar el casament de la filla [Alcita?/Anita?] amb el Dr. [incert], a Lleida, al Carme. Els nuvis van fer viatge a Barcelona, Baiona i altres llocs. La unió va ser beneïda pel Pare [incert], amic íntim de les famílies.\n\nEl dia 28 de desembre de l'any següent, la germana Casilda va caure greument malalta. La nostra narradora hi va arribar al migdia i la va trobar sense sentit. El metge Dr. [Corrugón?] va aconseguir un miracle i ella va sobreviure.",
+    "corregida_es": "En el año [1913 o 1914] se celebró la boda de la hija [¿Alcita?/¿Anita?] con el Dr. [incierto], en Lleida, en el Carmen. Los novios viajaron a Barcelona, Bayona y otros lugares. La unión fue bendecida por el Padre [incierto], amigo íntimo de las familias.\n\nEl día 28 de diciembre del año siguiente, la hermana Casilda cayó gravemente enferma. Nuestra narradora llegó al mediodía y la encontró sin sentido. El médico Dr. [Corrugón?] logró un milagro y ella sobrevivió.\n\n«Tercer fruto de mi vida, y el más triste»",
+    "traduccio_en": "In the year [1913 or 1914] the wedding of the daughter [Alcita?/Anita?] was celebrated with Dr. [uncertain], in Lleida, at the Carme church. The newlyweds travelled to Barcelona, Bayonne and other places. The union was blessed by Father [uncertain], a close friend of both families.\n\nOn 28 December of the following year, sister Casilda fell gravely ill. Our narrator arrived at midday and found her unconscious. Doctor [Corrugón?] performed a miracle and she survived.\n\n«Third fruit of my life, and the saddest»",
+    "traduccio_bg": "През [1913 или 1914 г.] се проведе сватбата на дъщерята [Алсита?/Анита?] с д-р [неизвестно], в Лейда, в кармелитската църква. Младоженците пътуваха до Барселона, Байон и други места. Съюзът беше благословен от Отец [неизвестно], близък приятел и на двете семейства.\n\nНа 28 декември на следващата година сестра Касилда се разболя тежко. Нашата разказвачка пристигна по обяд и я намери без съзнание. Доктор [Коругон?] извърши чудо и тя оцеля.\n\n«Третият плод от живота ми, и най-тъжният»"
+  },
+  {
+    "num": 16,
+    "img": "imatges/pagina-16.jpg",
+    "resum": {
+      "ca": "El dia de l'Assumpció de 1914, el marit mostra els primers símptomes d'una malaltia cerebral. El 15 de desembre li dóna un fort atac. El 22 de febrer de 1917, a les 11 i quart de la nit, Ignaci Simón i Pontí mor. La Concepció havia viscut al seu costat 44 anys, 8 mesos i 22 dies.",
+      "es": "El día de la Asunción de 1914, el marido muestra los primeros síntomas de una enfermedad cerebral. El 15 de diciembre le da un fuerte ataque. El 22 de febrero de 1917, a las 11 y cuarto de la noche, Ignacio Simón y Pontí muere. Concepción había vivido a su lado 44 años, 8 meses y 22 días.",
+      "en": "On the feast of the Assumption of 1914, the husband shows the first symptoms of a brain illness. On 15 December he has a severe attack. On 22 February 1917, at 11:15 at night, Ignaci Simón i Pontí dies. Concepció had lived at his side for 44 years, 8 months and 22 days.",
+      "bg": "На Успение Богородично 1914 г. съпругът показва първите симптоми на мозъчна болест. На 15 декември получава тежък пристъп. На 22 февруари 1917 г., в 11:15 вечерта, Игнаси Симон и Понти почива. Консепсио е живяла до него 44 години, 8 месеца и 22 дни."
+    },
+    "fidel": "...bleca del todo estuvo muy satisfecho. Pero el 15 de Diciembre le dio un fuerte ataque en la camilita [?] que no se resistió con unas [il·legible]. Recordando que completamente [il·legible] y empezando [il·legible] después de los primeros de sanidad; pero con un mes [il·legible] hijo si la volvieron a la [il·legible]; regresaron a las 9 muy razonado; cesamos y regresó al casarse y [il·legible] tres [il·legible] al alegar; pero en la 1 de las madrugadas bo un dizque exterior [?] [il·legible] todos los facultativos que muriera; y la volvió a [il·legible] y consigue que no lo [il·legible]. De almas una sencijera [?] y que val menester; pero a las 5 y 7 le repitió lo mismo y le dio tres señales y poco a poco lo fue perdiendo hasta cubrir el conocimiento a las 8 de las [il·legible]; y en muchos esfuerzos necesitó la salud; [il·legible] al día de [il·legible]; continuando restableciendo; pero por desgracia el mal iba menguando su presa vistas [?] en el día 22 de Febrero de 1917, [il·legible] sin y después de cumplir Dolores las promesas por [il·legible] su salvar hijo a la Virgen, y solo nos festejaba la misa a la [il·legible] de la Academis [?] y fue el 22 que todos fuimos a ella a las 9 de las Mercedes; la que celebra su espíritu [il·legible] esposa el Dr. Posaquilas [?] (que [il·legible] la misa tres veces) donde reunió mi querido esposo la inesperada comunión. Estuvo bien y cela que como siempre; y por la tarde fue el bueno con atención que fue allá un dizque de cama; pero presente de no sé de preocupó; y cuando a mi hija no me lo diga que ya que no mañana. (¡Pobre!); cayó me lo hubieran dirasado [?] pues padres pueden excluirse de tu desgracia.\n\nVinieron a la estación sus amigos el [il·legible] y juntos tocaron el piano y cantamos; la misma que la noche [il·legible]. Después [il·legible] y firmó los papeletas para la comunión de la confesión. Después se cambiaron, regresaron al servicio común y se acostó bien; pero a las 11 nada estaba [il·legible] y lo pregunté si quería un médico, me preguntó que hora era y le dije sin las 11 y [il·legible] a buscar médico pues no se necesitaba ninguno; mas tarde que vinieron los Dr. Héctor, Griva, Trujles [?] y Casas, pero desgraciadamente ya le practicaban [sic: ya no les practicaban/ya no le asistían]. Testificaron su fallecimiento. [il·legible] Los gracias y después [il·legible] para siempre, le dejé a veces la imagen de las Virgen [sic] [il·legible]; la [il·legible] y la llevó para [il·legible].",
+    "corregida_ca": "El dia de l'Assumpció de 1914, l'espòs va tenir els primers símptomes. El setembre van anar a Vilanova uns dies per a la convalescència. El 15 de desembre li va donar un fort atac. Poc a poc la malaltia anava fent estralls.\n\nEl 22 de febrer de 1917, a les 11 i quart de la nit, Ignaci Simón i Pontí va morir. La seva esposa havia estat al seu costat 44 anys, 8 mesos i 22 dies.\n\nEl funeral va tenir lloc el dia 24. El bisbe va venir a donar el condol. El difunt era molt estimat a Lleida i tenia fama de generós amb els pobres.",
+    "corregida_es": "El día de la Asunción de 1914, el esposo tuvo los primeros síntomas. En septiembre fueron a Vilanova unos días para la convalecencia. El 15 de diciembre le dio un fuerte ataque. Poco a poco la enfermedad iba haciendo estragos.\n\nEl 22 de febrero de 1917, a las 11 y cuarto de la noche, Ignacio Simón y Pontí murió. Su esposa había estado a su lado 44 años, 8 meses y 22 días.\n\nEl funeral tuvo lugar el día 24. El obispo vino a dar el pésame. El difunto era muy querido en Lleida y tenía fama de generoso con los pobres.",
+    "traduccio_en": "On the feast of the Assumption in 1914, the husband had his first symptoms. In September they went to Vilanova for a few days of convalescence. On 15 December he had a severe attack. Gradually the illness took its toll.\n\nOn 22 February 1917, at a quarter past eleven at night, Ignacio Simón y Pontí died. His wife had been at his side for 44 years, 8 months and 22 days.\n\nThe funeral took place on the 24th. The bishop came to offer his condolences. The deceased was very well-loved in Lleida and had a reputation for generosity with the poor.",
+    "traduccio_bg": "На Успение Богородично 1914 г. съпругът получи първите симптоми. През септември отидоха в Виланова за няколко дни за възстановяване. На 15 декември получи тежък пристъп. Постепенно болестта правеше своето.\n\nНа 22 февруари 1917 г., в единадесет и четвърт вечерта, Игнасио Симон и Понти почина. Съпругата му беше до него 44 години, 8 месеца и 22 дни.\n\nПогребението се проведе на 24-ти. Епископът дойде да изрази съболезнованията си. Починалият беше много обичан в Лейда и се славеше с щедрост към бедните."
+  },
+  {
+    "num": 17,
+    "img": "imatges/pagina-17.jpg",
+    "resum": {
+      "ca": "La Concepció descriu el dol profund per la pèrdua del marit. Es celebren misses mensuals el dia 22, misses aniversàries i es reparteixen paperetes recordatòries. El difunt queda al nínxol del tio doctor. La narradora reflexiona sobre les virtuts del seu marit i l'afecte que li tenia tota Lleida.",
+      "es": "Concepción describe el profundo duelo por la pérdida del marido. Se celebran misas mensuales el día 22, misas aniversarias y se reparten papeletas recordatorias. El difunto queda en el nicho del tío doctor. La narradora reflexiona sobre las virtudes de su marido y el afecto que le tenía toda Lleida.",
+      "en": "Concepció describes the profound grief for the loss of her husband. Monthly masses are held on the 22nd, anniversary masses, and memorial cards are distributed. The deceased rests in the family doctor uncle's niche. The narrator reflects on her husband's virtues and the affection all of Lleida had for him.",
+      "bg": "Консепсио описва дълбоката скръб от загубата на съпруга си. Провеждат се месечни литургии на 22-ри, годишни литургии, разпространяват се паметни картички. Починалият почива в ниша на чичо-лекаря. Разказвачката размишлява върху добродетелите на съпруга си и обичта, която целият Лейда изпитва към него."
+    },
+    "fidel": "...conocimiento? Y sin [il·legible] en ese hombre ni [il·legible] ninguna señal más del, el sueño en este salto de [il·legible] para despedirse en la agonía a las 11 y cuarto de la noche del día 22 de Febrero de 1917.\n\nNos desconsolamos por que bien grande que han dado la sabe Dios ya que bien [il·legible] cuando apareció en sus velos tenemos el ser que más le acuerda en este mundo; que no bien solo por su cariño sino por sus virtudes y queremos [il·legible] como expresarlo; es más de que el mismo [il·legible] tenga las reverencias [il·legible] como (si mi palaciete dos [?]). Estuvo en su discreta compañía 44 años 8 meses y 22 días más [il·legible]. Que Dios el Señor nos obsequie la gracia de poder estar así justos en la gloria pasados todos los [il·legible] y con mis hijitos. Le celebró el entierro y [il·legible] de segundo; y el Sr. Obispo vino a darnos el pésame y [il·legible] las indulgencias. Vinieron una infinidad de amigos tanto de laicos que si digo en los como el funeral y entierro que fue una verdadera manifestación de duelo; ya que mi indivisible esposo era muy querido de todos [los de] Lérida y un padre carisimamente para los pobres. Se verificó el entierro el día 24 a las 12 y que llegó el última con [il·legible].\n\n[Segunda columna p. 17:]\n\n...cuelo el [il·legible] en cama [il·legible] y sin horas sin en [il·legible]. Cuando lo tal juicements [?] tal para hijos a todos los primitas amigos y acompañadores que todos se portaron muy bien cariñosos, queridos y asistiendo ella a todos los entre lo cual los acompañó los pobres de las hermanitas la acompañaron hasta su artísima [?] muerte. Fue colocado en el piso nicho de este nuestro querido tío Dr. [il·legible] en donde eterne mi pondrán a mí.\n\nSolo me queda la resignación que lo hecho por todo lo que pueda hacer una verdadera viuda de una persona tan buena y cariñosa; ya que es más de los servicios que a muy de los [il·legible] de su fallecimiento se celebraron todos los años el aniversario de su acerba muerte; se le han acordado de 25 ó 30 misas y una Vela de la Academis [?] sin contar las mensuales que se celebran el día 22. Si [il·legible] 5 ó 6 [il·legible] personas las periteces [?] con su retrato y se usan [il·legible] las papeletas de su difusión; la mismo buego [sic] todos las [sic] niñas. Se [?] Vela de la oración [il·legible] quien se celebra después de su fallecimiento todos los años el aniversario como se acuerda de su [il·legible].\n\nDe los pocos días de nuestra irrecusable desgracia...",
+    "corregida_ca": "[La narradora descriu el dol profund. S'hi celebren misses mensuals el dia 22 de cada mes, i misses aniversàries. S'han fet repartir 25 o 30 misses i es porten paperetes recordatòries amb el retrat del difunt. El difunt estava en un nínxol familiar.]",
+    "corregida_es": "La narradora describe el profundo duelo. Se celebran misas mensuales el día 22 de cada mes, y misas aniversarias. Se han repartido 25 o 30 papeletas recordatorias con el retrato del difunto. El difunto estaba en un nicho familiar.\n\nEl esposo fue un hombre muy virtuoso, querido por todos en Lleida, y generoso con los pobres y necesitados.",
+    "traduccio_en": "The narrator describes the profound mourning. Monthly masses are held on the 22nd of each month, and anniversary masses. Some 25 or 30 memorial cards with the portrait of the deceased have been distributed. The deceased rested in a family niche.\n\nThe husband was a very virtuous man, loved by all in Lleida, and generous with the poor and needy.",
+    "traduccio_bg": "Разказвачката описва дълбокия траур. Месечни литургии се провеждат на 22-ри на всеки месец, а също и годишни литургии. Около 25 или 30 паметни картички с портрета на починалия са разпространени. Починалият почива в семейна ниша.\n\nСъпругът беше много добродетелен мъж, обичан от всички в Лейда и щедър с бедните и нуждаещите се."
+  },
+  {
+    "num": 18,
+    "img": "imatges/pagina-18.jpg",
+    "resum": {
+      "ca": "Poc després de la mort de l'espòs, s'acorda el casament de la filla Montserrat amb el Dr. Janin. El 9 de maig de 1921 es celebra la boda a la Capella de la Mansió; els nuvis viatgen a Montserrat i Barcelona. El 22 de gener mor la germana Casilda.",
+      "es": "Poco después de la muerte del esposo, se acuerda la boda de la hija Montserrat con el Dr. Janin. El 9 de mayo de 1921 se celebra la boda en la Capilla de la Mansión; los novios viajan a Montserrat y Barcelona. El 22 de enero muere la hermana Casilda.",
+      "en": "Shortly after the husband's death, the marriage of daughter Montserrat to Dr. Janin is agreed. On 9 May 1921 the wedding takes place at the Mansió Chapel; the newlyweds travel to Montserrat and Barcelona. On 22 January sister Casilda dies.",
+      "bg": "Малко след смъртта на съпруга е договорена сватбата на дъщерята Монсерат с д-р Янин. На 9 май 1921 г. сватбата се провежда в параклиса Мансио; младоженците пътуват до Монсерат и Барселона. На 22 януари умира сестра Касилда."
+    },
+    "fidel": "...se concedió el enlace de mi hija Montserrat con el Dr. [il·legible] Janin, en casa de mi hermana Casildes, la que se ofreció para que si hiciesen en su casa; ya que siendo el luto [rigurosamente] incompatible, hubieron personas algunas la misma lo mismo [sic]; hubo retirarse en su casa hasta el día 22 de Julio en cual día vinieron a [il·legible] su mano el Sr. Janin su hijo y Ma. [il·legible] conocimiento que vinieron de [il·legible] y [il·legible]; les dijo que los prolongaban demasiado y que mi hija estaba enferma; les digo que personas entretanto, que yo lo dono el recalito [?] de su día hasta venid en casa de Fernando [n.º] 45 y con esto quedé tranquila. Bien equivocalmente [sic] mucho creían; ya la causa de su verificación se enteró [il·legible]. Prefijo el mes de Marzo de 1921 se verificó de su matrimonio después de 4 años de relaciones; el que celebró el día 9 de Mayo de 1921 en la Capilla de la Mansión; vinieron sus hijos de Barcelona, sus padres y familias de Janin; todos juntos hicieron la boda en [il·legible], marchando las novias a Montserrat [el monestir] y Barcelonas [sic]. El 22 de Enero falleció mi hermana Casildes, [il·legible] el mismo día que [il·legible].\n\n[Segunda columna p. 18:]\n\n...estaba 11 meses [de haber sucedido el] fallecimiento de mi querido esposo; [il·legible] con mis hijos y permanecí [il·legible] la muerte. [il·legible] visión de mi querido, educación de [il·legible] Dr. Germán Gigó Torres [?] de Perín [?] que estaba [il·legible] y fallecido [il·legible] del mismo mes [il·legible]. Está señora de expresable multitudes muy virtuosas y en su acción no había empleado su sincero y [il·legible]. Que Dios la tenga en su santa Gloria.\n\nCon Febrero de 1919 entró mi hijo [en el servicio militar?]; me afecta muchísimo pues ya [il·legible] la fatale [sic] [il·legible] que nos [il·legible]; pero se me [il·legible] un año de [il·legible] consejo hasta Julio de 1920 que [il·legible] y el año siguiente [il·legible]. [il·legible] en dos palacios 400 [pesetas] [il·legible] mas los [il·legible] gastos. Después [il·legible]; el día 31 de Julio (día [il·legible] y tarde) le [il·legible]; pero [il·legible] y con probabilísimo [sic] de saliendo para Melilla a consecuencia del asesinato de [il·legible].",
+    "corregida_ca": "Poc temps després de la mort de l'espòs [febrer de 1917], es va concedir el casament de la filla Montserrat amb el Dr. [il·legible] Janin, a casa de la germana Casilda, que es va oferir per celebrar-ho a la seva casa, ja que el dol rigorós era incompatible amb una celebració a la pròpia llar.\n\nL'espòs dels Janin i la seva mare van venir a demanar la mà. Finalment, el 9 de maig de 1921, es va celebrar el matrimoni a la Capella de la Mansió. Van venir els fills de Barcelona, els pares i les famílies dels Janin. Els nuvis van marxar de viatge a Montserrat [el monestir] i Barcelona.\n\nEl dia 22 de gener va morir la germana Casilda.\n\n(Nota: l'arbre genealògic identifica el marit de Montserrat com a Josep Maria Sanuy Ramonich; el dietari el denomina «Dr. Janin». Cal verificar si es tracta de la mateixa persona o d'una incongruència.)",
+    "corregida_es": "Poco tiempo después de la muerte del esposo [febrero de 1917], se acordó la boda de la hija Montserrat con el Dr. [ilegible] Janin, en casa de la hermana Casilda, que se ofreció para celebrarlo en su casa, ya que el luto riguroso era incompatible con una celebración en el propio hogar.\n\nEl esposo de los Janin y su madre vinieron a pedir la mano. Finalmente, el 9 de mayo de 1921, se celebró el matrimonio en la Capilla de la Mansión. Vinieron los hijos de Barcelona, los padres y las familias de los Janin. Los novios se fueron de viaje a Montserrat [el monasterio] y Barcelona.\n\nEl día 22 de enero murió la hermana Casilda.\n\n(Nota: el árbol genealógico identifica al marido de Montserrat como Josep Maria Sanuy Ramonich; el diario lo denomina «Dr. Janin». Pendiente de verificación.)",
+    "traduccio_en": "Shortly after the husband's death [February 1917], the marriage of daughter Montserrat to Dr. [illegible] Janin was arranged, at sister Casilda's house, who offered her home for the celebration, since strict mourning was incompatible with holding a celebration in their own home.\n\nThe Janin husband and his mother came to ask for her hand. Finally, on 9 May 1921, the wedding was celebrated at the Mansió Chapel. The children from Barcelona came, as well as the parents and the Janin families. The newlyweds left for a trip to Montserrat [the monastery] and Barcelona.\n\nOn 22 January, sister Casilda died.\n\n(Note: the family tree identifies Montserrat's husband as Josep Maria Sanuy Ramonich; the diary calls him «Dr. Janin». Pending verification.)",
+    "traduccio_bg": "Малко след смъртта на съпруга [февруари 1917 г.] беше договорена сватбата на дъщерята Монсерат с д-р [нечетливо] Янин, в дома на сестра Касилда, която предложи дома си за тържеството, тъй като строгият траур беше несъвместим с празнуване в собствения им дом.\n\nСъпругът на семейство Янин и майка му дойдоха да поискат ръката й. Накрая, на 9 май 1921 г., бракът беше сключен в параклиса Мансио. Дойдоха децата от Барселона, родителите и семействата на Янин. Младоженците заминаха на пътуване до Монсерат [манастира] и Барселона.\n\nНа 22 януари умря сестра Касилда.\n\n(Забележка: семейното дърво идентифицира съпруга на Монсерат като Жозеп Мария Сануи Рамоник; дневникът го нарича «д-р Янин». Очаква се проверка.)"
+  },
+  {
+    "num": 19,
+    "img": "imatges/pagina-19.jpg",
+    "resum": {
+      "ca": "La Concepció viatja a Bolvirs per visitar la germana Candelaria, que estava greu. El fill ha d'embarcar cap a Melilla a causa del conflicte del Rif. La narradora descriu la seva angoixa i els esforços desesperats per aconseguir el retorn del fill.",
+      "es": "Concepción viaja a Bolvirs a visitar a la hermana Candelaria, que estaba grave. El hijo tiene que embarcar hacia Melilla a causa del conflicto del Rif. La narradora describe su angustia y los esfuerzos desesperados por conseguir el regreso del hijo.",
+      "en": "Concepció travels to Bolvirs to visit sister Candelaria, who was seriously ill. Her son has to embark for Melilla because of the Rif conflict. The narrator describes her anguish and desperate efforts to secure her son's return.",
+      "bg": "Консепсио пътува до Болвирс, за да посети сестра Канделариа, която беше тежко болна. Синът трябва да се качи на кораб за Мелиля заради Рифския конфликт. Разказвачката описва мъката си и отчаяните усилия да осигури завръщането на сина."
+    },
+    "fidel": "...en 1921; permanecíamos todos [il·legible] muy querida como es de regresar [il·legible]. [il·legible] el tiempo que consiguió las [il·legible] en esa casa con [il·legible], muchos, y algún [il·legible]. El día 21 de Octubre fue con la muchacha Consuelo a Bolvirs a visitar a mi pobre hermana que estaba grave [il·legible]; pero sola 3 días muy [il·legible]; pues el 28 recibi noticias de Casildes [error: ya había fallecido] de [il·legible] con la mala noticia de mi hijo que [il·legible] de Zaragoza en recuperando [?] el su recogimiento de [il·legible] donde estaba este yo [sic] [il·legible] 3 servicios. El día 29 pues murció [sic] mi pobre hijo por [il·legible] no saldrías [sic] de este punto.\n\nPor mucha desgracia no que así sino que a los dos días se dio la mejor de embarcar para Melilla.\n\nTan querida [il·legible] esta mala noticia, mandó mi hijo Casildes [il·legible] con Janin todos sin licencias para retiro pues el bien iba a [il·legible] estableciendo mi hijo hasta dejarlo en el vapores [sic]. No se puede describir mi pena al questionar [?] sin mis hijos y con [il·legible] de me volverlos a ver; ya que nosotros penas [?] [y] salud estaba muy quebrantada y cansando no lo [il·legible]. Lo que hizo el [il·legible] de mi Madre del Corrugón [?] que me dio fuerzas para todo lo que vino después.\n\n[Segunda columna p. 19:]\n\nEstaba [mi hijo] en Melilla hasta el 10 de Noviembre siguiente; procuré por todos los medios posibles [il·legible]; pero [il·legible] grave su situación no procurando a sacrificar de todos ellos; [il·legible] no [il·legible] [falleció? ligero?] y tuvo esperanzas de regresar pronto. Como todo que dijo [il·legible] la inscripción en el registro civil [il·legible] poniendo 2 de Marzo en vez de 18 de Mayo que es la verdadera [fecha], y tiremos [?] de buen agistado [?] y bastio [?] de persecución en el ministerio de [il·legible] hasta [il·legible] del Rey, aficionaron [?] todos las gracias que lo consiguió que [fue] poco menos que imposible y si no [il·legible] tertulia 2 años. Lo que yo sufrí solo Dios lo sabe; pero la vi[r]gedia [?] de la Purísima [Concepción] cuando [il·legible] ya que mi pobre hijo estaba pertinazmente en estos días [il·legible] muchas desgracias; la Virgen nos proporcionó relaciones que precisamente con persona que se agradó de [il·legible] aplicación y de [il·legible]; enseguida las diligencias para obtener la pronta solicitud de su elevado ascenso. Te le digo que no le reparo en [il·legible] que mas vendí [?] los vistas [sic] de mi hijo que todos los [il·legible]. (Creo nos habíe contado [?] 100 [pesetas] en el automóvil [il·legible]...",
+    "corregida_ca": "El dia 21 d'octubre, la narradora va anar a Bolvirs a visitar la germana Candelaria, que estava greu. El dia 29 [de la germana?] van morir [incert]. La narradora va fer tot el possible per evitar que el seu fill hagués d'embarcar cap a Melilla a causa del conflicte del Rif.",
+    "corregida_es": "El día 21 de octubre, la narradora fue a Bolvirs a visitar a la hermana Candelaria, que estaba grave. El día 29 [de la hermana?] murieron [incierto]. La narradora hizo todo lo posible para evitar que su hijo tuviera que embarcar hacia Melilla a causa del conflicto del Rif.",
+    "traduccio_en": "On 21 October, the narrator went to Bolvirs to visit sister Candelaria, who was seriously ill. On the 29th [of the sister?] [uncertain] died. The narrator did everything possible to prevent her son from having to embark for Melilla because of the Rif conflict.",
+    "traduccio_bg": "На 21 октомври разказвачката отиде в Болвирс да посети сестра Канделариа, която беше тежко болна. На 29-и [на сестрата?] [неизвестно] почина. Разказвачката направи всичко възможно, за да попречи на сина си да се качи на кораб за Мелиля заради Рифския конфликт."
+  },
+  {
+    "num": 20,
+    "img": "imatges/pagina-20.jpg",
+    "resum": {
+      "ca": "La narradora fa gestions intenses per treure el fill de Melilla. El 9 de juliol de 1921 ven la casa de Fernando, 45 al Dr. Domingo Bach per 13.000 pessetes. Part del producte es destina al casament de Montserrat i les despeses militars del fill.",
+      "es": "La narradora hace gestiones intensas para sacar al hijo de Melilla. El 9 de julio de 1921 vende la casa de Fernando, 45 al Dr. Domingo Bach por 13.000 pesetas. Parte del producto se destina a la boda de Montserrat y los gastos militares del hijo.",
+      "en": "The narrator makes intense efforts to get her son out of Melilla. On 9 July 1921 she sells the house at Fernando Street no. 45 to Dr. Domingo Bach for 13,000 pesetas. Part of the proceeds are used for Montserrat's wedding and the son's military expenses.",
+      "bg": "Разказвачката полага интензивни усилия, за да изкара сина си от Мелиля. На 9 юли 1921 г. продава къщата на Фернандо, № 45 на д-р Доминго Бах за 13.000 песети. Част от приходите са предназначени за сватбата на Монсерат и военните разходи на сина."
+    },
+    "fidel": "...y bien agradecidos y confundidos a la Virgen que nos lo proporcionó. El día 11 de Octubre 1921 y precisamente habiendo venido ese día [el] Cuadro [?] del Sr. Villasines [?] (el que había recomendado Janin este asunto) dando poco esperanzas de haber un buen resultado; ya que después de varias gestiones por llegar a mi hijo yo no [il·legible] [tuve?] que ir a Melilla. Diriamos [sic] Janin y Montserrat a participarnos [il·legible] habían barrado [?] la compra de una finca primal [?] que tiene que [il·legible] 3.600 [pesetas] para que tenían ya el pago la escritura; y que debía procurar sacarla misma noche; uno [il·legible] yo aquí no debía [il·legible]; pero que el día sucesivo ellas [il·legible] me dieron más [il·legible]; que yo solo vine obligada a buscarlo [il·legible] como lo hizo el día siguiente estándonos 22 [pesetas?]. Aquella misma noche vino el Dr. Romerales y les entregué las 1.666 [pesetas]; [il·legible] la praya [?] de tierra y los otros 1.350 los captaron [?] en la agencia de negocios que [il·legible] en su piso; queda pues arreglado este asunto y entregado en ello a mi Montserrat.\n\nEl día 9 de Julio 1921 firmamos la escritura de la venta de la casa de Fernando [n.º] 45 que compró el Dr. Domingo Bach por el precio de 13.000 [pesetas], de los cuales quedarán en hipoteca en la misma 8.000 [pesetas], además por el doble de mi hija [il·legible] como consta en nuestros capitulaciones [sic] matrimoniales, y ellos [il·legible] con su nombre la cuatro mil [pesetas] entregadas que se deba [sic] a mi hija Montserrat en 14 Octubre 1921, 4.666 [pesetas] por pago el dinero [il·legible] y gastos de muebles y pagos de Montserrat en su enlace en 9 de Mayo 1921; y las 3.000 [pesetas] en [il·legible] las canjas [?] del huerto y Ceballos [?] y servicio militar de mi hijo en el que se incribió [sic] por la cuota 466 [pesetas]; viajes, [il·legible] y estancia en Melilla de los meses que permanecí [il·legible]; en todo más de 1.200 [pesetas].\n\nEl mismo día que embarcó mi hijo de regresado [sic] de Melilla, a ver el día 12 de Marzo, mi hija Montserrat rió [?] a la [il·legible]; pero [il·legible] [il·legible] riesgo de otra vuelta muerta [?]; a si pasar en ello hubo un [il·legible]; [il·legible]. Estaba [sic] yo en su casa con ellas [y] la médica; (a la noche) se recibió un telegrama de mi hijo desde Zaragoza anunciando en lo [il·legible]...",
+    "corregida_ca": "El dia 11 d'octubre de 1921, la filla Janin i Montserrat van participar la compra d'una finca per un valor de 3.600 pessetes. La narradora els va avançar 1.666 pessetes.\n\nEl dia 9 de juliol de 1921 es va firmar l'escriptura de venda de la casa de Fernando, núm. 45, al Dr. Domingo Bach per 13.000 pessetes (amb 8.000 en hipoteca). Part del producte es va destinar a cobrir les despeses del casament de Montserrat (9 de maig de 1921) i el servei militar del fill.",
+    "corregida_es": "El día 11 de octubre de 1921, la hija Janin y Montserrat participaron en la compra de una finca por un valor de 3.600 pesetas. La narradora les adelantó 1.666 pesetas.\n\nEl día 9 de julio de 1921 se firmó la escritura de venta de la casa de Fernando, núm. 45, al Dr. Domingo Bach por 13.000 pesetas (con 8.000 en hipoteca). Parte del producto se destinó a cubrir los gastos de la boda de Montserrat (9 de mayo de 1921) y el servicio militar del hijo.",
+    "traduccio_en": "On 11 October 1921, daughter Janin and Montserrat participated in the purchase of a property for 3,600 pesetas. The narrator advanced them 1,666 pesetas.\n\nOn 9 July 1921 the deed of sale was signed for the house at Fernando Street no. 45, to Dr. Domingo Bach for 13,000 pesetas (with 8,000 as a mortgage). Part of the proceeds was used to cover the costs of Montserrat's wedding (9 May 1921) and the son's military service.",
+    "traduccio_bg": "На 11 октомври 1921 г. дъщерята Янин и Монсерат участваха в покупката на имот за 3.600 песети. Разказвачката им авансира 1.666 песети.\n\nНа 9 юли 1921 г. беше подписан нотариален акт за продажба на къщата на Фернандо, № 45, на д-р Доминго Бах за 13.000 песети (с 8.000 ипотека). Част от приходите бяха използвани за покриване на разходите за сватбата на Монсерат (9 май 1921 г.) и военната служба на сина."
+  },
+  {
+    "num": 21,
+    "img": "imatges/pagina-21.jpg",
+    "resum": {
+      "ca": "El fill arriba a Lleida el 10 de març a les 9 de la nit, convalescent i agafat al braç dels seus germans. El Dr. Vicens Ventós el tracta. El 10 de maig rep la llicència absoluta. La família fa una visita a Barcelona, on viu la filla Rosita.",
+      "es": "El hijo llega a Lleida el 10 de marzo a las 9 de la noche, convaleciente y cogido del brazo de sus hermanos. El Dr. Vicens Ventós le atiende. El 10 de mayo recibe la licencia absoluta. La familia hace una visita a Barcelona, donde vive la hija Rosita.",
+      "en": "The son arrives in Lleida on 10 March at 9 at night, convalescent and supported by his siblings. Dr. Vicens Ventós treats him. On 10 May he receives his absolute discharge. The family makes a visit to Barcelona, where daughter Rosita lives.",
+      "bg": "Синът пристига в Лейда на 10 март в 9 вечерта, в период на възстановяване и подкрепян от братята и сестрите си. Д-р Висенс Вентос го лекува. На 10 май получава абсолютна демобилизация. Семейството прави посещение в Барселона, където живее дъщерята Росита."
+    },
+    "fidel": "...jada; pero el mismo [il·legible] se [il·legible]. Otro por los padres de otros acompañadores que estaban [il·legible] con él y no lo consiguieron pena que de su suspensión de viaje de mi hijo en [il·legible] de no ha habría embarcado [il·legible]; hubimos una disgusto [sic] muy grande y fue un poner especial de la Virgen el que pudiera recompensó [?] mucho más por haber este [il·legible] fue no viajes. Llegó pues mi pobre hijo el día 10 de Marzo a las 9 de la noche; pues con [il·legible] la [il·legible] era en el billete [il·legible] varios meses [il·legible]; ya que el pasar de las emociones del Dr. Vicens Ventós en [il·legible] cerca 4 veces. Hubieron [sic] a recibirle Alicita, Casilita y [il·legible]; no me importó mucho el verle llegar apoyado en el [il·legible] de sus hermanos (pues nadie sabíamos [?]) personas con [il·legible] más madre, y este [?] día siguiente vino el Sr. Vicens, el que le puso muy bien.\n\nLo visitamos todas [il·legible] los posibles, amigos de las familias y nos acompañamos [il·legible] dándonos todas la enhorabuena y alegrándoles [sic] mucho de su regreso. De los pues días [sic] vino su Dios [?] el que no pudiendo permanecer con nosotros nos [il·legible] para que le [il·legible]...\n\n[Segunda columna p. 21:]\n\n...portáremos en su casa que los [il·legible] conocimos.\n\nEl día 10 de Mayo le dieron la licencia absoluta y está bien ya libre y recatado [?] que ya [il·legible]; podría escribir la [il·legible] de las monjas para más [il·legible] ninguellos [?] excepto el ofrecimiento de [il·legible] pues ya tuvimos cuidado no sobreviviris [sic] en mal [il·legible] ya que su naturaleza estaba muy [il·legible] temprano. [il·legible] pues mis hijos [il·legible] y Casaldés a Barcelona donde mis hijos Rosita y su esposo [il·legible]. Al día siguiente la acompañamos los días a [il·legible] de Perú [?] era el día 19 de Junio y en el íntimo que siempre [il·legible] a el moribunde [?] su tío y sus muchos amistades [sic]; luego si caminaran [?] la [il·legible] a los pocos días; sin embargo permanecieron en su comunión [il·legible] ese día basta [?] listo modestados [?] de elajarle [?]. Nos [il·legible] regresamos a Lérida [a] la visita de la Virgen del Carme [Carmen], y muy contentos de nuestro viaje y amistades de mis hijos. El [día] de la Virgen [il·legible] Claudia [?] y como agradecimiento por las amistades pues mi hijo le regalamos una imagen de la[s] V. [Virgen] de [il·legible]; eso quisieron los colores.\n\nA mi hijo el día la licencia absoluta le [il·legible]...",
+    "corregida_ca": "El fill va arribar a Lleida el dia 10 de març a les 9 de la nit, convalescent, recolzat en el braç dels seus germans. El Dr. Vicens Ventós el va atendre i el va posar bé. El dia 10 de maig li van donar la llicència absoluta.\n\nVan fer una visita de família a Barcelona, on vivia la filla Rosita i el seu espòs. Van visitar el moribund Tio [incert] i les seves amistats. En tornar, li van regalar una imatge de la Verge [del Carme?].",
+    "corregida_es": "El hijo llegó a Lleida el día 10 de marzo a las 9 de la noche, convaleciente, apoyado en el brazo de sus hermanos. El Dr. Vicens Ventós le atendió y le puso bien. El día 10 de mayo le dieron la licencia absoluta.\n\nHicieron una visita de familia a Barcelona, donde vivía la hija Rosita y su esposo. Visitaron al moribundo Tío [incierto] y a sus amistades. Al volver, le regalaron una imagen de la Virgen [¿del Carmen?].",
+    "traduccio_en": "The son arrived in Lleida on 10 March at 9 at night, convalescent, supported on his siblings' arms. Dr. Vicens Ventós treated him and got him well again. On 10 May he was given his absolute discharge.\n\nThey made a family visit to Barcelona, where daughter Rosita and her husband lived. They visited the dying Uncle [uncertain] and their friends. On returning, they gave him an image of the Virgin [of Carmen?].",
+    "traduccio_bg": "Синът пристигна в Лейда на 10 март в 9 вечерта, в период на възстановяване, подкрепян от ръцете на братята и сестрите му. Д-р Висенс Вентос го лекува и го постави на крака. На 10 май получи абсолютна демобилизация.\n\nНаправиха семейно посещение в Барселона, където живееше дъщерята Росита и съпругът й. Посетиха умиращия чичо [неизвестно] и познатите си. Завръщайки се, му подариха образ на Дева Мария [Кармелска?]."
+  },
+  {
+    "num": 22,
+    "img": "imatges/pagina-22.jpg",
+    "resum": {
+      "ca": "El 5 de febrer de 1923 neix el nét fill de Montserrat i el Dr. Janin, batejat amb el nom de Montserrat Teresa. Padrins: l'avi patern i l'àvia materna Concepció Vilella. En tornar de la missa del 8è aniversari de la mort del marit, la Concepció cau greument malalta.",
+      "es": "El 5 de febrero de 1923 nace el nieto hijo de Montserrat y el Dr. Janin, bautizado con el nombre de Montserrat Teresa. Padrinos: el abuelo paterno y la abuela materna Concepción Vilella. Al volver de la misa del 8.º aniversario de la muerte del marido, Concepción cae gravemente enferma.",
+      "en": "On 5 February 1923 the grandchild of Montserrat and Dr. Janin is born, baptised with the name Montserrat Teresa. Godparents: the paternal grandfather and the maternal grandmother Concepció Vilella. On returning from the mass for the 8th anniversary of the husband's death, Concepció falls gravely ill.",
+      "bg": "На 5 февруари 1923 г. се ражда внукът на Монсерат и д-р Янин, кръстен с името Монсерат Тереза. Кръстници: бащиният дядо и майчината баба Консепсио Вийела. Завръщайки се от литургията за 8-та годишнина от смъртта на съпруга, Консепсио се разболява тежко."
+    },
+    "fidel": "...entregaron por el tiempo que fue [il·legible] del 12 [il·legible].\n\nEl día 5 de Febrero de 1923 nació mi nieto, hijo de Janin y Montserrat, a las 9 de la noche. Fue bautizado el día 12 en [il·legible] por su tío M. [il·legible] Janin; con [el] nombre de Montserrat Teresa y [il·legible]; le sipadraron [sic: apadrinaron] su abuelo paterno Sr. [il·legible] Janin y su abuela materna Concepción Vilella; lo copió [?] le curas pendientes, suelto, y besándole de eso con sus iniciales y joyas de las más queridas. Le hizo el reserva [?] en su mismo piso; asistiendo mi hija Montserrat y toda la familia y venía conmigo del Janin. Sin duda y a consecuencia de los sufrimientos, ya que la pérdida de mi amado esposo (o por [?]) no puede borrarse nunca y si solo el recuerdo aguita [?] todas las almas que sobrevienen; me puse enferma el día de su 8.º aniversario al regresar de la misa que todos las [sic] niñas se celebraron en la Academis [?] Marina en memoria de [il·legible] que con mi indivisible esposo fago [sic] e hijas adivinaron [?] el mismo día de su acerba muerte. Todos las conjurados rebelados [?] por espacio de un mes; después el domingo [il·legible]; se consecueron [?] del personerio [?] en mi [il·legible]...\n\n[Segunda columna p. 22:]\n\n...permiso el día; el Sr. Pané confesó a Condita del mismo [il·legible]; calminado [?] güeno [sic] y [il·legible] 25 días a la segunda visita del mismo [médico] ya [la] hija estaba grave; enviamos a buscar a mi hija Alcita para que nos ayudara; pero se efectó lento que ya a los pocos días confesó [il·legible] el hermano; nos asistieron a las tres las H. [Hermanas] Purificó... [il·legible] día y noche. [il·legible] ya en su masa [sic] y muy debilitada el ser a mis hijos enfermos y a Condita muy grave me desequilibré bastante; lo que [il·legible] mi desequilibrio buscarme [?]; cuando lento que no citó [?] un fuertes dolor recrudeció y me quedé sin poder hacer ningún movimiento [il·legible]; pues mi hija Condita [se] cerró mejor la madre del 21 [il·legible] vigilia de la Virgen de los Dolores. En buena tan agonizado invoqué a [il·legible] y el Dr. del Sr. Corrugón del Perín, haciendo varias promesas (que ya hemos cumplido) y una vez más [il·legible] fue suplidos [?] de la [il·legible] morcha [?]; Alenita es libre en cama 3 semanas y yo establecida [?] en [il·legible]; pasó a su casa el 28 de Abril y mi hija [il·legible]...",
+    "corregida_ca": "El dia 5 de febrer de 1923 va néixer el nét [fill dels Janin i la Montserrat], a les 9 de la nit. El van batejar el dia 12 amb el nom de Montserrat Teresa [i altres noms]. Padrins: l'avi patern [senyor Janin] i l'àvia materna Concepció Vilella.\n\nEn tornar de la missa del 8è aniversari de la mort del seu espòs [febrer de 1925], la narradora es va posar malalta.",
+    "corregida_es": "El día 5 de febrero de 1923 nació el nieto [hijo de Montserrat y el Dr. Janin], a las 9 de la noche. Le bautizaron el día 12 con el nombre de Montserrat Teresa [y otros nombres]. Padrinos: el abuelo paterno [señor Janin] y la abuela materna Concepción Vilella.\n\nAl volver de la misa del 8.º aniversario de la muerte de su esposo [febrero de 1925], la narradora cayó enferma.",
+    "traduccio_en": "On 5 February 1923 the grandchild [son of Montserrat and Dr. Janin] was born, at 9 at night. He was baptised on the 12th with the name Montserrat Teresa [and other names]. Godparents: the paternal grandfather [Mr. Janin] and the maternal grandmother Concepción Vilella.\n\nOn returning from the mass for the 8th anniversary of her husband's death [February 1925], the narrator fell ill.",
+    "traduccio_bg": "На 5 февруари 1923 г. се роди внукът [син на Монсерат и д-р Янин], в 9 вечерта. Кръстиха го на 12-ти с името Монсерат Тереза [и други имена]. Кръстници: бащиният дядо [г-н Янин] и майчината баба Консепсион Вийела.\n\nЗавръщайки се от литургията за 8-та годишнина от смъртта на съпруга си [февруари 1925 г.], разказвачката се разболя."
+  },
+  {
+    "num": 23,
+    "img": "imatges/pagina-23.jpg",
+    "resum": {
+      "ca": "El 12 d'abril li dóna un dolor tan fort que demana els Sagraments. El 13 d'abril rep l'extremaunció. Les filles i les germanes religioses l'assisteixen nit i dia. El 30 de maig, festa de Maria Auxiliadora, es pot llevar per primer cop. El 20 de setembre ja pot assistir a missa.",
+      "es": "El 12 de abril le da un dolor tan fuerte que pide los Sacramentos. El 13 de abril recibe la extremaunción. Las hijas y las hermanas religiosas la asisten noche y día. El 30 de mayo, fiesta de María Auxiliadora, puede levantarse por primera vez. El 20 de septiembre ya puede asistir a misa.",
+      "en": "On 12 April she has such severe pain that she asks for the Sacraments. On 13 April she receives the last rites. Her daughters and the religious sisters care for her night and day. On 30 May, the feast of Mary Help of Christians, she is able to get up for the first time. By 20 September she can attend mass.",
+      "bg": "На 12 април я обхваща такава силна болка, че поиска Тайнствата. На 13 април получава последното помазание. Дъщерите и монахините й се грижат денем и нощем. На 30 май, празника на Мария Помощница, може да стане от леглото за пръв път. На 20 септември вече може да присъства на литургия."
+    },
+    "fidel": "...el 22 [il·legible] a mi [il·legible] besándole de [il·legible] [il·legible] pero no podían [il·legible] salvar más su regreso [?] a querer suyo. El día 12 de Abril me dio el dolor tan fuerte que era me [?] moriría y por consiguiente [il·legible] no pudieron [il·legible] el conocimiento; pedí mis Sacramentos; el día 13 y otros dos [il·legible] meses de la [il·legible] extremaunción y cumplió [il·legible] cerros todos las indulgencias. [il·legible] de las buenas y últimas consejas de mi querida Ma. Dr. Margot Pintú [?] en su grave enfermedad del que los dos nos dijo: quiero imitarle; y a ella [il·legible] llegué a mis hijos a los que [il·legible] fueren constantes en [la] fe y directamente los buenos ejemplos de mi amada Pintú [?] esposa (o por [?]) de [il·legible] que ya creé de juntar grandes; Morí con lo prometiera [?] y se eleva y [il·legible]; y ya me quedé tranquila y disfranciada [?] a lo que Dios decidirá. Mandóle [sic] a buscar a Gaspert [?] y Gerla [?] a los que recomendaré protegieran a mis hijas prometiéndoles [il·legible]. Recibía [?] no visito el P. Reverendo a todos les pedí reguise [?] a Dios no le devolvese la salud a si me conviesen [?]. Sin duda el Señor [il·legible]...\n\n[Segunda columna p. 23:]\n\n...hacía sus perjorales [?] [promesas] pues que el dolor no fue tan fuerte y poco a poco me hube [?] pensando. El día 4 de Mayo [il·legible] alimentó pues no podría comer nada [il·legible]; que esparos [?] más que calado [?]; [il·legible] y fue lamentando [?] [il·legible]. El día 24 de Mayo probé el favorecimos [?] pero [il·legible] un champán [?] para no que [il·legible] pudiere tuviéronse [?] en pie; no obstante la [il·legible] todos los días; y el día 30 de Mayo fiesta de María Auxiliadora nos levantó y un [sic] que muy débil fue restablecieron [?] [el] roca [?] aunque continuó el [il·legible] más ó menos fuerte. Y la recuperación [il·legible] pares [?] fuerzas y el día 20 de Setiembre tubo [sic] la satisfacción de asistir con mi hija a la misa [il·legible] que [il·legible] se celebró a la Virgen del Carmen en el Dr. [il·legible] Hospital [?] y me probé [?] muy bien.\n\nPor lo bueno [?] para establecer mi restablecimiento no regresamos [il·legible] los [il·legible] parencias [sic] y amigos; ya que todos se portaron muy bien y les quedo su [il·legible]. Ha [sic] agradecidas. Durante mi enfermedad muchos los días de recibir varios veces hasta el día de Sr. Puen [?] que ya me levantaba [?] la siguiente [il·legible]...",
+    "corregida_ca": "El dia 12 d'abril li va donar un dolor tan fort que creia que es moriria. Va demanar els Sagraments. El dia 13 va rebre l'extremaunció i totes les indulgències.\n\nLes filles [Conchita i Alcita] es van tenir l'una a l'altra; les germanes [Purificació?] les van assistir de dia i de nit.\n\nPoc a poc es va anar restablint. El 4 de maig va intentar menjar alguna cosa. El 30 de maig, festa de Maria Auxiliadora, es va poder llevar per primer cop. El 20 de setembre va poder assistir a missa a l'Hospital.",
+    "corregida_es": "El día 12 de abril le dio un dolor tan fuerte que creía que se moriría. Pidió los Sacramentos. El día 13 recibió la extremaunción y todas las indulgencias.\n\nLas hijas [Conchita y Alcita] se tuvieron la una a la otra; las hermanas [Purificación?] las asistieron de día y de noche.\n\nPoco a poco fue restableciendo. El 4 de mayo intentó comer algo. El 30 de mayo, fiesta de María Auxiliadora, pudo levantarse por primera vez. El 20 de septiembre pudo asistir a misa en el Hospital.",
+    "traduccio_en": "On 12 April such severe pain came over her that she thought she was dying. She asked for the Sacraments. On the 13th she received the last rites and all indulgences.\n\nHer daughters [Conchita and Alcita] had each other; the sisters [Purificación?] cared for them day and night.\n\nGradually she recovered. On 4 May she tried to eat something. On 30 May, the feast of Mary Help of Christians, she was able to get up for the first time. On 20 September she was able to attend mass at the Hospital.",
+    "traduccio_bg": "На 12 април я обхвана такава силна болка, че помисли, че умира. Поиска Тайнствата. На 13-и получи последното помазание и всички опрощения.\n\nДъщерите [Кончита и Алсита] се подкрепяха взаимно; монахините [Пурификасион?] ги обслужваха денем и нощем.\n\nПостепенно тя се възстанови. На 4 май опита да яде нещо. На 30 май, празника на Мария Помощница, можа да стане за пръв път. На 20 септември можа да присъства на литургия в болницата."
+  },
+  {
+    "num": 24,
+    "img": "imatges/pagina-24.jpg",
+    "resum": {
+      "ca": "El 10 d'agost de 1925, la germana Candelaria mor a Bolvirs (la Cerdanya), a les 9 del matí, als 80 anys, assistida pels seus fills. La Concepció no pot traslladar-se a temps per la seva pròpia malaltia. Inclou notes sobre una hipoteca de 3.000 pessetes procedents de la venda de la casa de Fernando, 45.",
+      "es": "El 10 de agosto de 1925, la hermana Candelaria muere en Bolvirs (la Cerdaña), a las 9 de la mañana, a los 80 años, asistida por sus hijos. Concepción no puede trasladarse a tiempo por su propia enfermedad. Incluye notas sobre una hipoteca de 3.000 pesetas procedentes de la venta de la casa de Fernando, 45.",
+      "en": "On 10 August 1925, sister Candelaria dies in Bolvirs (la Cerdanya), at 9 in the morning, aged 80, attended by her children. Concepció cannot travel in time because of her own illness. Includes notes on a mortgage of 3,000 pesetas from the sale of the house at Fernando Street no. 45.",
+      "bg": "На 10 август 1925 г. сестра Канделариа умира в Болвирс (Серданя), в 9 сутринта, на 80 години, в присъствието на децата си. Консепсио не може да пристигне навреме заради собствената си болест. Включва бележки за ипотека от 3.000 песети от продажбата на къщата на Фернандо, № 45."
+    },
+    "fidel": "...comunión. Estar mi [sic] clase poder ir a misa el día de la Virgen del Carme[n], pero una nueva indisposición que me hubo el [il·legible] 10 [il·legible] no lo hizo. El día 10 de Agosto de 1925 después de 4 años de una salud muy delicada, entregó su alma a Dios con la muerte de una señora mi querida hermana [il·legible] en Bolvirs [población de la Cerdanya] a las 9 de la mañana a la edad de 80 años, y asistida de sus queridos hijos P. [il·legible], Carlos y [il·legible]; no siendo posible trasladarse ya como hubiera sido [la] misericordia de [il·legible] ya que [il·legible] estaba cumpleaños [sic: cumplida?] de mi grave enfermedad; son [sic: sin] presencia hermanas [sic] [en] noticias de su gravedad mucho mi hijo del que ya no conoció; [il·legible] de busclos [sic] 24 hiciera en fallecer, [il·legible] a mi sobrino a altruinistamente [?] la Pio [?] [ad]ministró los Sacramentos y [il·legible] el bien morir. Se afed [?] lo nuestro mi hijo el que estaba 8 días en Bolvín [sic: Bolvirs]. Mi hija Condita y sobrinos fueron al entierro, regresando el mismo día (o por [?]) que Dios M. [?] Señor me compulcaveles [?] en el cielo y en compañía de mi amado esposo. (o por [?])\n\n[Segunda columna p. 24:]\n\nEl día 25 [de] Enero hipotecamos las 3.000 [pesetas] que tenía [il·legible] y en mi nombre procedentes de la venta de la casa de Fernando [n.º] 45 [il·legible]; en dos fincar [sic] y primera hipoteca [il·legible]; [il·legible] los pertinados [?] por remitir cuatrocientas [pesetas]. [il·legible] el primer semestre 600 [pesetas]; quedó [il·legible] hasta el 23 de Julio. De estas 3.000 [pesetas] que yo hago mención en mis cuentas para su destino después de mi fallecimiento. Le ha puesto la [il·legible] para su devolución en el término de 5 años; relevando que en caso de fallecer [il·legible], no tengan ninguna cuestión ya que se deba cumplir el compromiso como consta en la escritura de préstamo ante el notario Dr. [il·legible].\n\nSolo me resta obtener [?] conservar una vez más a mis queridas hijas, ya que solo para ellas he escrito mi biografía, que lleven presentes todos los sacrificios que sus padres han hecho por ellas y agradeciéndoles los intereses y aún encomendándoles en nuestro feliz matrimo[nio]...",
+    "corregida_ca": "El dia 10 d'agost de 1925, a les 9 del matí, va morir a Bolvirs (la Cerdanya) l'estimada germana [Candelaria], a l'edat de 80 anys, assistida pels seus fills [Carlos i uns altres]. No va ser possible traslladar-s'hi a temps.\n\n(Nota important: l'arbre genealògic indica que Candelaria va morir el 1934; el dietari indica clarament el 1925 a Bolvirs, als 80 anys. Si va morir amb 80 anys el 1925, va néixer cap al 1845, no el 1857 com diu l'arbre — incongruència greu confirmada.)\n\nEl dia 25 de gener, es va hipotecar la suma de 3.000 pessetes [procedent de la venda de la casa de Fernando, 45], en primera hipoteca sobre dues finques.",
+    "corregida_es": "El día 10 de agosto de 1925, a las 9 de la mañana, murió en Bolvirs (la Cerdaña) la querida hermana [Candelaria], a la edad de 80 años, asistida por sus hijos [Carlos y otros]. No fue posible trasladarse allí a tiempo.\n\n(Nota importante: el árbol genealógico indica que Candelaria murió en 1934; el diario indica claramente 1925 en Bolvirs, a los 80 años. Incongruencia grave confirmada.)\n\nEl día 25 de enero, se hipotecó la suma de 3.000 pesetas [procedente de la venta de la casa de Fernando, 45], en primera hipoteca sobre dos fincas.",
+    "traduccio_en": "On 10 August 1925, at 9 in the morning, the beloved sister [Candelaria] died in Bolvirs (la Cerdanya), at the age of 80, attended by her children [Carlos and others]. It was not possible to travel there in time.\n\n(Important note: the family tree indicates that Candelaria died in 1934; the diary clearly states 1925 in Bolvirs, aged 80. Confirmed serious inconsistency.)\n\nOn 25 January, the sum of 3,000 pesetas [from the sale of the house at Fernando Street no. 45] was mortgaged as a first mortgage on two properties.",
+    "traduccio_bg": "На 10 август 1925 г., в 9 сутринта, в Болвирс (Серданя) почина скъпата сестра [Канделариа], на 80-годишна възраст, в присъствието на децата си [Карлос и други]. Не беше възможно да пристигнат там навреме.\n\n(Важна забележка: семейното дърво посочва, че Канделариа е починала през 1934 г.; дневникът ясно посочва 1925 г. в Болвирс, на 80 години. Потвърдено сериозно несъответствие.)\n\nНа 25 януари беше ипотекирана сумата от 3.000 песети [от продажбата на къщата на Фернандо, № 45], като първа ипотека върху два имота."
+  },
+  {
+    "num": 25,
+    "img": "imatges/pagina-25.jpg",
+    "resum": {
+      "ca": "Pàgina final: la Concepció s'acomiada de les seves filles i els recomana que mantinguin la fe catòlica i imiten els bons exemples del pare difunt. Expressa l'esperança de reunir-se tots en la glòria eterna. Signa: «La vostra estimada mare que tots us abraça. Concepció Vilella. Lleida, 4 de març de 1924.»",
+      "es": "Página final: Concepción se despide de sus hijas y les recomienda que mantengan la fe católica e imiten los buenos ejemplos del padre difunto. Expresa la esperanza de reunirse todos en la gloria eterna. Firma: «Vuestra querida madre que todos os abraza. Concepción Vilella. Lleida, 4 de marzo de 1924.»",
+      "en": "Final page: Concepció bids farewell to her daughters and recommends they maintain the Catholic faith and imitate the good examples of their deceased father. She expresses hope that all will be reunited in eternal glory. She signs: «Your beloved mother who embraces you all. Concepció Vilella. Lleida, 4 March 1924.»",
+      "bg": "Последна страница: Консепсио се сбогува с дъщерите си и им препоръчва да поддържат католическата вяра и да подражават на добрите примери на починалия им баща. Изразява надежда, че всички ще се съберат в небесната слава. Подписва: «Вашата обичана майка, която прегръща всички. Консепсио Вийела. Лейда, 4 март 1924 г.»"
+    },
+    "fidel": "...nio; y que en recompensa, es muchas [sic] [sus] voluntades que sigan las prácticas cristianas imitación de los buenos ejemplos de su amado payo [sic: padre / esposo] que y [sic] todos sus cielos hasta que seamos como más [il·legible] y que sean constantes en la fe católica y buenas costumbres, diciéndoles que solo así podrían hacer [el] gusto a sus papás y ser felices en cuanto nunca dejen en este mundo; y Dios les protegerá en esta existencia y después con la gloria eterna donde podremos reunirnos todas con mi idolatrado esposo (o más [?]).\n\nVuestra querida mamá que a todos os abraza\n\nConcepción Vilella [y Gil]\n[Ignacio Simón y Puntí]\n\nLérida 4 de Marzo de 1924.\n\n## Observacions finals\n\nLa signatura és doble: Concepción signa primer en nom propi, i a continuació apareix el nom del seu marit difunt (Ignacio Simón y Puntí), com si la carta fos de tots dos, o bé com a referència de qui era. El marit havia mort el 22 de febrer de 1917. El document es clou el 4 de març de 1924, set anys després.",
+    "corregida_ca": "Només em resta encarir una vegada més a les meves estimades filles que, ja que únicament per a elles he escrit la meva biografia, que tinguin presents tots els sacrificis que els seus pares han fet per elles, i que en compensació segueixin les pràctiques cristianes imitant els bons exemples del seu estimat pare. Que Déu les protegeixi en aquesta vida i que tots ens puguem reunir en la glòria eterna.\n\nLa vostra estimada mare que tots us abraça,\n\nConcepció Vilella [i Gil]\n[Ignaci Simón i Pontí]\n\nLleida, 4 de març de 1924.\n\n## Resum d'incongruències detectades (dietari vs. arbre genealògic)",
+    "corregida_es": "Solo me resta encargar una vez más a mis queridas hijas que, ya que únicamente para ellas he escrito mi biografía, que tengan presentes todos los sacrificios que sus padres han hecho por ellas, y que en compensación sigan las prácticas cristianas imitando los buenos ejemplos de su querido padre. Que Dios las proteja en esta vida y que todos nos podamos reunir en la gloria eterna.\n\nVuestra querida madre que todos os abraza,\nConcepción Vilella [y Gil]\n\nLleida, 4 de marzo de 1924.",
+    "traduccio_en": "I have only left to urge once more upon my beloved daughters that, since I have written my biography solely for them, they should bear in mind all the sacrifices their parents made for them, and that in return they should follow Christian practices, imitating the good example of their beloved father. May God protect them in this life and may we all be reunited in eternal glory.\n\nYour beloved mother who embraces you all,\nConcepción Vilella [y Gil]\n\nLleida, 4 March 1924.",
+    "traduccio_bg": "Остава ми само да помоля още веднъж скъпите ми дъщери, тъй като само за тях съм написала биографията си, да помнят всички жертви, които родителите им са направили за тях, и в замяна да следват християнските практики, подражавайки на добрите примери на скъпия им баща. Нека Бог ги закриля в този живот и нека всички можем да се съберем в небесната слава.\n\nВашата обичана майка, която прегръща всички,\nКонсепсион Вийела [и Хил]\n\nЛейда, 4 март 1924 г."
+  }
+];
+
+// ── ETIQUETES UI per idioma ──
+const UI = {
+  ca: {
+    resum: 'Resum',
+    fidel: 'Transcripció fidel',
+    corregida: 'Transcripció corregida',
+    traduccio: 'Traducció',
+    fidel_label: 'Transcripció fidel — castellà original s. XX',
+    corregida_label: 'Transcripció corregida — català modern',
+    traduccio_label: 'Traducció',
+    traduccio_hidden: 'La traducció no és disponible en català.',
+    pagina: 'Pàgina',
+    de: 'de',
+    anterior: 'Anterior',
+    seguent: 'Següent',
+    img_alt: 'Pàgina del dietari',
+    img_no: 'Imatge no disponible',
+  },
+  es: {
+    resum: 'Resumen',
+    fidel: 'Transcripción fiel',
+    corregida: 'Transcripción corregida',
+    traduccio: 'Traducción',
+    fidel_label: 'Transcripción fiel — castellano original s. XX',
+    corregida_label: 'Transcripción corregida — castellano modernizado',
+    traduccio_label: 'Traducción',
+    traduccio_hidden: 'La traducción no está disponible en castellano.',
+    pagina: 'Página',
+    de: 'de',
+    anterior: 'Anterior',
+    seguent: 'Siguiente',
+    img_alt: 'Página del diario',
+    img_no: 'Imagen no disponible',
+  },
+  en: {
+    resum: 'Summary',
+    fidel: 'Faithful transcription',
+    corregida: 'Corrected transcription',
+    traduccio: 'Translation',
+    fidel_label: 'Faithful transcription — original 20th-c. Spanish',
+    corregida_label: 'Corrected transcription — Catalan',
+    traduccio_label: 'English translation',
+    traduccio_hidden: '',
+    pagina: 'Page',
+    de: 'of',
+    anterior: 'Previous',
+    seguent: 'Next',
+    img_alt: 'Diary page',
+    img_no: 'Image not available',
+  },
+  bg: {
+    resum: 'Резюме',
+    fidel: 'Точна транскрипция',
+    corregida: 'Поправена транскрипция',
+    traduccio: 'Превод',
+    fidel_label: 'Точна транскрипция — оригинален испански XX в.',
+    corregida_label: 'Поправена транскрипция — каталонски',
+    traduccio_label: 'Превод на български',
+    traduccio_hidden: '',
+    pagina: 'Страница',
+    de: 'от',
+    anterior: '← Предишна',
+    seguent: 'Следваща →',
+    img_alt: 'Страница от дневника',
+    img_no: 'Изображението не е налично',
+  },
+};
+
+// ── ESTAT ──
+let currentPage = 0;  // índex 0-based
+let currentLang = 'ca';
+let currentTab = 'resum';
+
+// ── FUNCIÓ PRINCIPAL D'ACTUALITZACIÓ ──
+function render() {
+  const p = PAGES[currentPage];
+  const ui = UI[currentLang];
+  const n = currentPage;
+
+  // Imatge
+  const img = document.getElementById('page-img');
+  const placeholder = document.getElementById('img-placeholder');
+  img.style.display = '';
+  placeholder.style.display = 'none';
+  img.src = p.img;
+  img.alt = ui.img_alt + ' ' + (currentPage+1);
+  document.getElementById('img-placeholder-text').textContent = ui.img_no;
+
+  // Indicador de pàgina
+  document.getElementById('page-num-disp').textContent = p.num;
+  document.getElementById('page-indicator').innerHTML =
+    ui.pagina + ' <span class="page-num">' + p.num + '</span> ' + ui.de + ' 25';
+
+  // Botons nav
+  document.getElementById('btn-prev').disabled = currentPage === 0;
+  document.getElementById('btn-next').disabled = currentPage === PAGES.length - 1;
+  document.getElementById('prev-label').textContent = ui.anterior;
+  document.getElementById('next-label').textContent = ui.seguent;
+
+  // Etiquetes tabs
+  document.getElementById('tab-resum').textContent = ui.resum;
+  document.getElementById('tab-fidel').textContent = ui.fidel;
+  document.getElementById('tab-corregida').textContent = ui.corregida;
+  document.getElementById('tab-traduccio').textContent = ui.traduccio;
+
+  // ─ TAB: RESUM ─
+  document.getElementById('label-resum').textContent = ui.resum;
+  let resumText = '';
+  if (currentLang === 'ca') resumText = p.resum.ca;
+  else if (currentLang === 'es') resumText = p.resum.es;
+  else if (currentLang === 'en') resumText = p.resum.en;
+  else if (currentLang === 'bg') resumText = p.resum.bg;
+  document.getElementById('text-resum').textContent = resumText;
+
+  // ─ TAB: FIDEL ─
+  document.getElementById('label-fidel').textContent = ui.fidel_label;
+  document.getElementById('text-fidel').textContent = p.fidel;
+
+  // ─ TAB: CORREGIDA ─
+  document.getElementById('label-corregida').textContent = ui.corregida_label;
+  let corregidaText = '';
+  if (currentLang === 'es') corregidaText = p.corregida_es;
+  else corregidaText = p.corregida_ca;
+  document.getElementById('text-corregida').textContent = corregidaText;
+
+  // ─ TAB: TRADUCCIÓ ─
+  document.getElementById('label-traduccio').textContent = ui.traduccio_label;
+  const tradWrap = document.getElementById('text-traduccio-wrap');
+  if (currentLang === 'ca' || currentLang === 'es') {
+    tradWrap.innerHTML = '<div class="traduccio-hidden">' + ui.traduccio_hidden + '</div>';
+  } else {
+    let tradText = '';
+    if (currentLang === 'en') tradText = p.traduccio_en;
+    else if (currentLang === 'bg') tradText = p.traduccio_bg;
+    tradWrap.innerHTML = '<div class="traduccio-text">' + escapeHtml(tradText) + '</div>';
+  }
+
+  // Thumb nav
+  document.querySelectorAll('.thumb-btn').forEach((btn, i) => {
+    btn.classList.toggle('current', i === currentPage);
+  });
+  // Scroll thumb a vista
+  const currentThumb = document.querySelector('.thumb-btn.current');
+  if (currentThumb) currentThumb.scrollIntoView({block:'nearest', inline:'center'});
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+// ── CONTROLS ──
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  render();
+  try { localStorage.setItem('dietari-lang', lang); } catch(e) {}
+}
+
+function setTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('hidden', !c.id.endsWith(tab)));
+  try { localStorage.setItem('dietari-tab', tab); } catch(e) {}
+}
+
+function navigate(dir) {
+  const next = currentPage + dir;
+  if (next >= 0 && next < PAGES.length) {
+    currentPage = next;
+    render();
+    try { localStorage.setItem('dietari-page', currentPage); } catch(e) {}
+    window.scrollTo(0, 0);
+  }
+}
+
+function goToPage(idx) {
+  currentPage = idx;
+  render();
+  try { localStorage.setItem('dietari-page', currentPage); } catch(e) {}
+}
+
+// ── NAVEGACIÓ PER TECLAT ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
+});
+
+// ── CREAR THUMB NAV ──
+(function buildThumbNav() {
+  const nav = document.createElement('div');
+  nav.className = 'thumb-nav';
+  PAGES.forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'thumb-btn';
+    btn.title = 'Pàgina ' + p.num;
+    btn.textContent = p.num;
+    btn.onclick = () => goToPage(i);
+    nav.appendChild(btn);
+  });
+  const footer = document.querySelector('footer');
+  const indicator = footer.querySelector('.page-indicator');
+  footer.insertBefore(nav, indicator);
+})();
+
+// ── INIT ──
+(function init() {
+  try {
+    const savedPage = parseInt(localStorage.getItem('dietari-page') || '0');
+    const savedLang = localStorage.getItem('dietari-lang') || 'ca';
+    const savedTab  = localStorage.getItem('dietari-tab')  || 'resum';
+    currentPage = Math.max(0, Math.min(PAGES.length-1, savedPage || 0));
+    currentLang = ['ca','es','en','bg'].includes(savedLang) ? savedLang : 'ca';
+    currentTab  = ['resum','fidel','corregida','traduccio'].includes(savedTab) ? savedTab : 'resum';
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
+    setTab(currentTab);
+  } catch(e) {
+    currentPage = 0; currentLang = 'ca'; currentTab = 'resum';
+  }
+  render();
+})();
+</script>
