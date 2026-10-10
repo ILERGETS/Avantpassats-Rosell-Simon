@@ -1,4 +1,4 @@
-# El dietari de Concepció Vilella
+# El quadern de la Concepció Vilella Gil
 
 Llibre familiar a partir del **quadern manuscrit** de Concepció Vilella y Gil (Lleida, 1853–1924), escrit per a les filles.
 
