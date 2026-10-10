@@ -68,6 +68,20 @@ html.js [data-page].on { display: block; }
 .pagina { max-width: 1100px; margin: 0 auto; }
 .pagina h1 { font-size: 1.6rem; }
 .pagina .prosa p { margin: 0.7em 0; }
+table.linia {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 1rem 0;
+}
+table.linia th, table.linia td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.4rem 0.55rem;
+  text-align: left;
+  vertical-align: top;
+}
+table.linia th { color: var(--muted); font-weight: normal; }
+table.linia a { color: var(--accent); }
 .facsimil {
   margin: 1.4rem auto 0.35rem;
   max-width: 38rem;
