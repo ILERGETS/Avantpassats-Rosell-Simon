@@ -35,7 +35,14 @@
       "grup_final": "Final",
       "left": "esquerra",
       "right": "dreta",
-      "sheet": "Full"
+      "sheet": "Full",
+      "imp_h": "Impressió i descàrrega",
+      "imp_p": "Tria primer la llengua. Després pots descarregar l’arbre genealògic sencer, l’arbre partit per imprimir en DIN A3, o el llibre complet (el navegador obre «Imprimir»: tria Desa com a PDF). L’arbre és el mateix en tots els idiomes.",
+      "imp_lang": "Llengua de descàrrega",
+      "imp_lang_ph": "Tria la llengua…",
+      "imp_arbre": "PDF de l’arbre genealògic sencer",
+      "imp_a3": "PDF de l’arbre genealògic partit per imprimir en DIN A3",
+      "imp_llibre": "PDF del llibre complet"
     },
     "es": {
       "search": "Busca en el cuaderno…",
@@ -68,7 +75,14 @@
       "grup_final": "Final",
       "left": "izquierda",
       "right": "derecha",
-      "sheet": "Hoja"
+      "sheet": "Hoja",
+      "imp_h": "Impresión y descarga",
+      "imp_p": "Elige primero la lengua. Después puedes descargar el árbol genealógico entero, el árbol partido para imprimir en DIN A3, o el libro completo (el navegador abre «Imprimir»: elige Guardar como PDF). El árbol es el mismo en todos los idiomas.",
+      "imp_lang": "Lengua de descarga",
+      "imp_lang_ph": "Elige la lengua…",
+      "imp_arbre": "PDF del árbol genealógico entero",
+      "imp_a3": "PDF del árbol genealógico partido para imprimir en DIN A3",
+      "imp_llibre": "PDF del libro completo"
     },
     "en": {
       "search": "Search the notebook…",
@@ -101,7 +115,14 @@
       "grup_final": "Close",
       "left": "left",
       "right": "right",
-      "sheet": "Sheet"
+      "sheet": "Sheet",
+      "imp_h": "Print and download",
+      "imp_p": "Choose the language first. Then you can download the full family tree, the tree split for DIN A3 printing, or the complete book (the browser opens Print: choose Save as PDF). The tree is the same in every language.",
+      "imp_lang": "Download language",
+      "imp_lang_ph": "Choose a language…",
+      "imp_arbre": "PDF of the full family tree",
+      "imp_a3": "PDF of the family tree split for DIN A3 printing",
+      "imp_llibre": "PDF of the complete book"
     },
     "bg": {
       "search": "Търсене в тетрадката…",
@@ -134,7 +155,14 @@
       "grup_final": "Край",
       "left": "лява",
       "right": "дясна",
-      "sheet": "Лист"
+      "sheet": "Лист",
+      "imp_h": "Печат и изтегляне",
+      "imp_p": "Първо избери езика. После можеш да изтеглиш цялото родословно дърво, дървото разделено за печат на DIN A3, или цялата книга (браузърът отваря «Печат»: избери Запиши като PDF). Дървото е едно и също на всички езици.",
+      "imp_lang": "Език за изтегляне",
+      "imp_lang_ph": "Избери език…",
+      "imp_arbre": "PDF на цялото родословно дърво",
+      "imp_a3": "PDF на родословното дърво, разделено за печат на DIN A3",
+      "imp_llibre": "PDF на цялата книга"
     }
   },
   "nav": {
@@ -143,6 +171,7 @@
     "proleg": {"ca": "Pròleg", "es": "Prólogo", "en": "Foreword", "bg": "Предговор"},
     "agraiments": {"ca": "Agraïments", "es": "Agradecimientos", "en": "Acknowledgements", "bg": "Благодарности"},
     "fet": {"ca": "Com està fet", "es": "Cómo está hecho", "en": "How this book is made", "bg": "Как е направена книгата"},
+    "impressio": {"ca": "Impressió", "es": "Impresión", "en": "Print", "bg": "Печат"},
     "context": {"ca": "Lleida i el món del quadern", "es": "Lleida y el mundo del cuaderno", "en": "Lleida and the world of the notebook", "bg": "Лерида и светът на тетрадката"},
     "magi": {"ca": "Magí Pontí i Ferrer", "es": "Magí Pontí i Ferrer", "en": "Magí Pontí i Ferrer", "bg": "Маги Понти и Ферер"},
     "qui": {"ca": "Qui és qui", "es": "Quién es quién", "en": "Who’s who", "bg": "Кой кой е"},

@@ -92,11 +92,15 @@
     if (next) next.textContent = U().next || next.textContent;
     var np = $("nav-peu");
     if (np && U().nav_pages) np.setAttribute("aria-label", U().nav_pages);
+    var imp0 = $("imp-lang");
+    if (imp0 && imp0.options[0] && !imp0.options[0].value) {
+      imp0.options[0].textContent = U().imp_lang_ph || "";
+    }
     applyLlista();
     updateMapLang();
   }
   var ORDRE_FRONT = [
-    "portada", "sobre", "proleg", "agraiments", "fet",
+    "portada", "sobre", "proleg", "agraiments", "fet", "impressio",
     "context", "magi", "qui", "arbre", "temps", "notes", "mapa",
     "resum-quadern", "index-quadern"
   ];
@@ -214,7 +218,16 @@
       var cur = document.documentElement.getAttribute("data-theme") === "dark" ? "" : "dark";
       document.documentElement.setAttribute("data-theme", cur);
     }
-    if (e.target.id === "btn-print") { window.print(); }
+    if (e.target.id === "btn-print") {
+      location.hash = "impressio";
+    }
+    if (e.target.closest("#btn-pdf-llibre")) {
+      var lgImp = $("imp-lang") && $("imp-lang").value;
+      if (!lgImp) return;
+      setLang(lgImp);
+      document.documentElement.classList.add("print-llibre");
+      setTimeout(function () { window.print(); }, 80);
+    }
     if (e.target.id === "langbtn" || e.target.closest("#langbtn")) {
       e.preventDefault();
       var lm = $("langmenu");
@@ -266,6 +279,15 @@
   if ($("cerca")) {
     $("cerca").addEventListener("input", function () { applyLlista(); });
   }
+  if ($("imp-lang")) {
+    $("imp-lang").addEventListener("change", function () {
+      var box = $("imp-opcions");
+      if (box) box.hidden = !$("imp-lang").value;
+    });
+  }
+  window.addEventListener("afterprint", function () {
+    document.documentElement.classList.remove("print-llibre");
+  });
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   window.addEventListener("hashchange", function () { show(); });
   window.addEventListener("resize", function () {

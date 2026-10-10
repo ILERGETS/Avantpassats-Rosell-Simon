@@ -281,13 +281,32 @@ table.linia a { color: var(--accent); }
   align-items: stretch;
   margin: 1rem 0;
 }
-.accions-arbre a {
+.accions-arbre a,
+.accions-arbre button {
   font: inherit; font-size: 0.92rem;
   background: var(--bar); color: var(--ink);
   border: 1px solid var(--line); padding: 0.45rem 0.7rem;
   cursor: pointer; border-radius: 6px; text-decoration: none;
   display: flex; align-items: center; justify-content: center;
   text-align: center; box-sizing: border-box; width: 100%;
+}
+.accions-impr { grid-template-columns: 1fr 1fr 1fr; }
+#imp-opcions[hidden] { display: none !important; }
+#imp-lang {
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bar);
+  color: var(--ink);
+  display: block;
+  min-width: min(100%, 18rem);
+  margin: 0.2rem 0 1rem;
+}
+.imp-lab { margin-bottom: 0.15rem; }
+@media (max-width: 720px) {
+  .accions-impr { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
   .accions-arbre { grid-template-columns: 1fr; }
@@ -352,11 +371,15 @@ table.linia a { color: var(--accent); }
 }
 @media print {
   html, body, #app, main, #vista { height: auto !important; overflow: visible !important; }
-  aside, header.top, .modes, .navc, .filtres, .chips, .accions-arbre, .burger, .scrim, .langsel { display: none !important; }
+  aside, header.top, .modes, .navc, .filtres, .chips, .accions-arbre, .burger, .scrim, .langsel, #imp-lang, .imp-lab { display: none !important; }
   #app { display: block; }
   .encarada { grid-template-columns: 1fr 1fr; break-inside: avoid; page-break-after: always; }
   [data-mode] { display: none !important; }
   [data-mode="resum"] { display: block !important; }
+  html.print-llibre.js [data-page] { display: block !important; }
+  html.print-llibre [data-page="impressio"] { display: none !important; }
+  html.print-llibre #map-dietari { display: none !important; }
+  html.print-llibre .arbre-print { max-height: none; overflow: visible; }
   @page { size: A4 landscape; margin: 12mm; }
 }
 noscript #app { display: none; }
