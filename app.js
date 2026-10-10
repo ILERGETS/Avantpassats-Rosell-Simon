@@ -24,6 +24,51 @@
     var c = $("count");
     if (c && tot) c.textContent = n + " de " + tot + " cares";
   }
+  var ORDRE_FRONT = [
+    "portada", "sobre", "proleg", "agraiments", "fet",
+    "context", "magi", "qui", "arbre", "temps", "notes", "mapa",
+    "index-quadern"
+  ];
+  function pageIds() {
+    var cares = [];
+    document.querySelectorAll("[data-page]").forEach(function (el) {
+      var pid = el.getAttribute("data-page") || "";
+      if (/^\d{2}-(esquerra|dreta)$/.test(pid) && pid !== "31-dreta") cares.push(pid);
+    });
+    return ORDRE_FRONT.concat(cares, ["comiat"]);
+  }
+  function goTop() {
+    var z = function () {
+      var vista = $("vista");
+      if (vista) vista.scrollTop = 0;
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+    z();
+    requestAnimationFrame(function () { requestAnimationFrame(z); });
+  }
+  function updatePeu(id) {
+    var ids = pageIds();
+    var i = ids.indexOf(id);
+    var prev = $("nav-prev");
+    var next = $("nav-next");
+    if (!prev || !next) return;
+    if (i > 0) {
+      prev.href = "#" + ids[i - 1];
+      prev.classList.remove("is-off");
+    } else {
+      prev.removeAttribute("href");
+      prev.classList.add("is-off");
+    }
+    if (i >= 0 && i < ids.length - 1) {
+      next.href = "#" + ids[i + 1];
+      next.classList.remove("is-off");
+    } else {
+      next.removeAttribute("href");
+      next.classList.add("is-off");
+    }
+  }
   function show(hash) {
     var id = (hash || location.hash || "#portada").replace(/^#/, "") || "portada";
     var pages = document.querySelectorAll("[data-page]");
@@ -44,8 +89,8 @@
     document.querySelectorAll("aside details.nav-grup").forEach(function (d) {
       if (d.querySelector("a.act")) d.open = true;
     });
-    var vista = $("vista");
-    if (vista) vista.scrollTop = 0;
+    updatePeu(id);
+    goTop();
     if (id === "mapa") initMap();
     setNav(false);
   }
@@ -128,6 +173,7 @@
   if ($("cerca")) {
     $("cerca").addEventListener("input", function () { applyLlista(); });
   }
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   window.addEventListener("hashchange", function () { show(); });
   window.addEventListener("resize", function () {
     if (window.innerWidth > 1024) setNav(false);
