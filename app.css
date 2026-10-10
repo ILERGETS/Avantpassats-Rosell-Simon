@@ -111,6 +111,38 @@ header.top button {
   font: inherit; background: var(--paper); color: var(--ink);
   border: 1px solid var(--line); padding: 0.25rem 0.5rem; cursor: pointer;
 }
+.langsel { position: relative; flex: 0 0 auto; }
+.langbtn {
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.langbtn img, .langmenu img {
+  width: 18px; height: 12px;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 2px;
+  display: block;
+}
+.langmenu {
+  position: absolute; right: 0; top: 110%;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 5px;
+  min-width: 138px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  display: none;
+  z-index: 80;
+}
+.langmenu.on { display: block; }
+.langmenu button {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  border: 0; background: none;
+  padding: 8px 10px; border-radius: 7px;
+  cursor: pointer; color: var(--ink);
+  font: inherit; font-size: 0.9rem;
+  text-align: left;
+}
+.langmenu button:hover { background: var(--line); }
+.langmenu button.on { background: var(--accent); color: #fff; }
 html.js [data-page] { display: none; }
 html.js [data-page].on { display: block; }
 #vista { flex: 1; min-height: 0; overflow: auto; padding: 1rem 1.2rem 1.2rem; }
@@ -283,6 +315,8 @@ table.linia a { color: var(--accent); }
     font-size: 0.88rem;
     white-space: nowrap;
   }
+  #lang-lab { display: none; }
+  .langmenu button { flex: none; font-size: 0.9rem; padding: 8px 10px; }
   .burger {
     display: inline-flex;
     align-items: center;
@@ -308,7 +342,7 @@ table.linia a { color: var(--accent); }
 }
 @media print {
   html, body, #app, main, #vista { height: auto !important; overflow: visible !important; }
-  aside, header.top, .modes, .navc, .filtres, .chips, .accions-arbre, .burger, .scrim { display: none !important; }
+  aside, header.top, .modes, .navc, .filtres, .chips, .accions-arbre, .burger, .scrim, .langsel { display: none !important; }
   #app { display: block; }
   .encarada { grid-template-columns: 1fr 1fr; break-inside: avoid; page-break-after: always; }
   [data-mode] { display: none !important; }

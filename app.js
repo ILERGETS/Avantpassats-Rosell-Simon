@@ -2,6 +2,19 @@
   document.documentElement.classList.add("js");
   var fs = 18;
   function $(id) { return document.getElementById(id); }
+  var I18N = {};
+  try {
+    I18N = JSON.parse(($("i18n-data") && $("i18n-data").textContent) || "{}");
+  } catch (e) { I18N = {}; }
+  var LANGS = I18N.langs || ["ca"];
+  var lang = "ca";
+  try {
+    var saved = localStorage.getItem("qv_lang");
+    if (saved && LANGS.indexOf(saved) !== -1) lang = saved;
+  } catch (e2) {}
+  function U() {
+    return (I18N.ui && (I18N.ui[lang] || I18N.ui.ca)) || {};
+  }
   function filtreActiu() {
     var on = document.querySelector(".chip.on, [data-filtre].on, [data-filtre].act");
     return on ? (on.getAttribute("data-filtre") || "") : "";
@@ -22,7 +35,65 @@
       location.hash = "index-quadern";
     }
     var c = $("count");
-    if (c && tot) c.textContent = n + " de " + tot + " cares";
+    if (c && tot) {
+      var fmt = U().count || "{n} de {tot} cares";
+      c.textContent = fmt.replace("{n}", String(n)).replace("{tot}", String(tot));
+    }
+  }
+  function applyI18n() {
+    document.querySelectorAll(".i18n").forEach(function (el) {
+      el.hidden = el.getAttribute("data-l") !== lang;
+    });
+  }
+  function updateMapLang() {
+    var el = document.getElementById("map-dietari");
+    if (!el || !el._pts || !el._marks) return;
+    el._pts.forEach(function (p, i) {
+      var q = (p.que_i18n && p.que_i18n[lang]) || p.que;
+      if (el._marks[i]) {
+        el._marks[i].bindPopup("<strong>" + p.nom + "</strong><br>" + q);
+      }
+    });
+  }
+  function setLang(lg) {
+    if (LANGS.indexOf(lg) === -1) lg = "ca";
+    lang = lg;
+    try { localStorage.setItem("qv_lang", lang); } catch (e3) {}
+    document.documentElement.lang = (I18N.html && I18N.html[lang]) || lang;
+    applyI18n();
+    var cerca = $("cerca");
+    if (cerca) {
+      cerca.placeholder = U().search || "";
+      cerca.setAttribute("aria-label", U().search || "");
+    }
+    var tmap = { "btn-menys": "font_minus", "btn-mes": "font_plus", "btn-tema": "dark", "btn-print": "print", "btn-menu": "menu" };
+    Object.keys(tmap).forEach(function (id) {
+      var el = $(id);
+      if (el && U()[tmap[id]]) el.title = U()[tmap[id]];
+      if (id === "btn-menu" && el && U().menu) el.setAttribute("aria-label", U().menu);
+    });
+    var lab = $("lang-lab");
+    if (lab) lab.textContent = (I18N.label && I18N.label[lang]) || lang;
+    var lbtn = $("langbtn");
+    var srcImg = document.querySelector('#langmenu button[data-l="' + lang + '"] img');
+    if (lbtn && srcImg) {
+      var img = lbtn.querySelector("img");
+      if (img) img.src = srcImg.getAttribute("src");
+      lbtn.setAttribute("aria-expanded", "false");
+    }
+    document.querySelectorAll("#langmenu button").forEach(function (b) {
+      b.classList.toggle("on", b.getAttribute("data-l") === lang);
+    });
+    var menu = $("langmenu");
+    if (menu) menu.classList.remove("on");
+    var prev = $("nav-prev");
+    if (prev) prev.textContent = U().prev || prev.textContent;
+    var next = $("nav-next");
+    if (next) next.textContent = U().next || next.textContent;
+    var np = $("nav-peu");
+    if (np && U().nav_pages) np.setAttribute("aria-label", U().nav_pages);
+    applyLlista();
+    updateMapLang();
   }
   var ORDRE_FRONT = [
     "portada", "sobre", "proleg", "agraiments", "fet",
@@ -112,8 +183,9 @@
         attribution: "&copy; OpenStreetMap"
       }).addTo(mapObj);
       el._marks = pts.map(function (p) {
+        var q0 = (p.que_i18n && p.que_i18n[lang]) || p.que;
         return L.marker([p.lat, p.lon]).addTo(mapObj).bindPopup(
-          "<strong>" + p.nom + "</strong><br>" + p.que
+          "<strong>" + p.nom + "</strong><br>" + q0
         );
       });
       el._pts = pts;
@@ -131,6 +203,7 @@
         b.classList.toggle("act", b.getAttribute("data-setmode") === mode);
       });
     });
+    applyI18n();
   }
   document.addEventListener("click", function (e) {
     var b = e.target.closest("[data-setmode]");
@@ -142,6 +215,26 @@
       document.documentElement.setAttribute("data-theme", cur);
     }
     if (e.target.id === "btn-print") { window.print(); }
+    if (e.target.id === "langbtn" || e.target.closest("#langbtn")) {
+      e.preventDefault();
+      var lm = $("langmenu");
+      if (lm) {
+        lm.classList.toggle("on");
+        var lb0 = $("langbtn");
+        if (lb0) lb0.setAttribute("aria-expanded", lm.classList.contains("on") ? "true" : "false");
+      }
+    }
+    var lp = e.target.closest("#langmenu button[data-l]");
+    if (lp) {
+      e.preventDefault();
+      setLang(lp.getAttribute("data-l"));
+    }
+    if (!e.target.closest(".langsel")) {
+      var lm2 = $("langmenu");
+      if (lm2) lm2.classList.remove("on");
+      var lb1 = $("langbtn");
+      if (lb1) lb1.setAttribute("aria-expanded", "false");
+    }
     if (e.target.id === "btn-menu" || e.target.closest("#btn-menu")) {
       e.preventDefault();
       setNav(!document.documentElement.classList.contains("nav-open"));
@@ -179,6 +272,6 @@
     if (window.innerWidth > 1024) setNav(false);
   });
   setMode("resum");
-  applyLlista();
+  setLang(lang);
   show();
 })();
