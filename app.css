@@ -78,7 +78,9 @@ html.js [data-page].on { display: block; }
 #vista { flex: 1; overflow: auto; padding: 1rem 1.2rem 2.5rem; }
 .pagina { max-width: 1100px; margin: 0 auto; }
 .pagina h1 { font-size: 1.6rem; }
-.pagina .prosa p { margin: 0.7em 0; }
+.pagina.prosa p { margin: 0.7em 0; }
+.pagina.prosa strong { font-weight: 700; }
+.pagina.prosa em { font-style: italic; color: var(--ink); }
 table.linia {
   width: 100%;
   border-collapse: collapse;
