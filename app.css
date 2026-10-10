@@ -274,13 +274,23 @@ table.linia a { color: var(--accent); }
 .lc .n { display: block; font-weight: 700; color: var(--accent); font-size: 0.78rem; }
 .lc .t { display: block; font-size: 0.85rem; line-height: 1.25; margin: 2px 0 3px; }
 .lc .m { display: block; font-size: 0.73rem; color: var(--muted); }
-.accions-arbre { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1rem 0; }
+.accions-arbre {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  align-items: stretch;
+  margin: 1rem 0;
+}
 .accions-arbre a {
   font: inherit; font-size: 0.92rem;
   background: var(--bar); color: var(--ink);
-  border: 1px solid var(--line); padding: 0.35rem 0.7rem;
+  border: 1px solid var(--line); padding: 0.45rem 0.7rem;
   cursor: pointer; border-radius: 6px; text-decoration: none;
-  display: inline-block;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; box-sizing: border-box; width: 100%;
+}
+@media (max-width: 520px) {
+  .accions-arbre { grid-template-columns: 1fr; }
 }
 .arbre-print {
   margin: 1rem 0 2rem;
