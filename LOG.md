@@ -8,3 +8,4 @@
 - Menú 🖨: escollir llengua i després arbre sencer / A3 / llibre complet.
 - Impressió del llibre: es mostren totes les pàgines (`html.js [data-page]`).
 - Afegits `print-menu.js` i tests a `tests/print-menu.test.js`.
+- Menú 🖨 en dos passos: llengua primer, després les tres opcions PDF.
