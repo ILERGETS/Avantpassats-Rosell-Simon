@@ -21,6 +21,30 @@
     });
     var vista = $("vista");
     if (vista) vista.scrollTop = 0;
+    if (id === "mapa") initMap();
+  }
+  var mapObj = null;
+  function initMap() {
+    var el = document.getElementById("map-dietari");
+    var raw = document.getElementById("punts-mapa");
+    if (!el || !raw || typeof L === "undefined") return;
+    var pts = JSON.parse(raw.textContent || "[]");
+    if (!pts.length) return;
+    if (!mapObj) {
+      mapObj = L.map(el);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap"
+      }).addTo(mapObj);
+      el._marks = pts.map(function (p) {
+        return L.marker([p.lat, p.lon]).addTo(mapObj).bindPopup(
+          "<strong>" + p.nom + "</strong><br>" + p.que
+        );
+      });
+      el._pts = pts;
+    }
+    var b = L.latLngBounds(pts.map(function (p) { return [p.lat, p.lon]; }));
+    mapObj.fitBounds(b, { padding: [28, 28], maxZoom: 8 });
+    setTimeout(function () { mapObj.invalidateSize(); }, 250);
   }
   function setMode(mode) {
     document.querySelectorAll(".encarada").forEach(function (box) {
@@ -42,6 +66,16 @@
       document.documentElement.setAttribute("data-theme", cur);
     }
     if (e.target.id === "btn-print") { window.print(); }
+    var pm = e.target.closest(".punt-mapa");
+    if (pm && mapObj) {
+      var i = parseInt(pm.getAttribute("data-i"), 10);
+      var el = document.getElementById("map-dietari");
+      var pts = el && el._pts;
+      if (pts && pts[i]) {
+        mapObj.setView([pts[i].lat, pts[i].lon], 12);
+        if (el._marks && el._marks[i]) el._marks[i].openPopup();
+      }
+    }
     var f = e.target.closest("[data-filtre]");
     if (f) {
       var cap = f.getAttribute("data-filtre");

@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>El dietari de Concepció Vilella</title>
 <link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
 <noscript>
@@ -18,7 +19,7 @@
   <h2>El llibre</h2>
   <a href="#portada">Portada</a><a href="#sobre">Sobre aquest recull</a><a href="#proleg">Pròleg</a><a href="#agraiments">Agraïments</a><a href="#fet">Com està fet</a>
   <h2>Context</h2>
-  <a href="#context">Lleida i el món del quadern</a><a href="#magi">Magí Pontí i Ferrer</a><a href="#qui">Qui és qui</a><a href="#temps">Línia de temps</a><a href="#notes">Notes de lectura</a><a href="#arbre">Arbre resum</a><a href="#mapa">Mapa</a>
+  <a href="#context">Lleida i el món del quadern</a><a href="#magi">Magí Pontí i Ferrer</a><a href="#qui">Qui és qui</a><a href="#arbre">Arbre resum</a><a href="#temps">Línia de temps</a><a href="#notes">Notes de lectura</a><a href="#mapa">Mapa</a>
   <h2>El quadern</h2>
   <div class="filtres"><button type="button" data-filtre="" class="act">Totes</button><button type="button" data-filtre="infancia-orfenesa">Infància i orfenesa</button><button type="button" data-filtre="noces">Noces</button><button type="button" data-filtre="fills-magin">Fills i Magí Pontí</button><button type="button" data-filtre="colera">Còlera a Montserrat</button><button type="button" data-filtre="cases-malaltia">Cases, malaltia, Paüls</button><button type="button" data-filtre="mort-ignacio">Mort d’Ignacio</button><button type="button" data-filtre="viduitat-melilla">Viduïtat, Melilla</button><button type="button" data-filtre="1923-1924">1923–1924</button></div>
   <a href="#index-quadern">Índex de cares</a><a href="#02-dreta" data-cap="infancia-orfenesa" data-search="full 2 · dreta títol: biografia de concepció vilella y gil i d’ignacio simón y ponti. neix el 28 de desembre de 1853 al carrer mayor 13-2n de lleida. família al pis de joan cunillé (800 rs) amb l’àvia pilar soler. pares jorge vilella i inés (almenar); avis manuel vilella (seira) i francisca gil; avis materns mariano gil i francisca lemuñiz (text tallat a *puente*). comença la biografia: naixement a lleida i llinatge dels vilella-gil. 1ª
@@ -240,7 +241,7 @@ lérida 4 de marzo 1924.">Full 25 · esquerra</a>
 <h2>Dades i privadesa</h2>
 <p>El quadern (1853–1924) recull persones del relat. Als <strong>agraïments</strong> hi ha la cadena de custòdia que s’ha autoritzat (noms, sense fotos ni adreces). Publicació amb <strong>Pages</strong> i <strong>noindex</strong>. Vegeu 07-privadesa.</p>
 <h2>Tècnica</h2>
-<p>Web estàtica a [ILERGETS/Avantpassats-Rosell-Simon](https://github.com/ILERGETS/Avantpassats-Rosell-Simon). Regenerar: `python Llibre/codi/gen_html.py` → `Llibre/web/`. PDF = imprimir (A4 apaïsat).</p></section><section class="pagina prosa" data-page="context"><h1>Lleida i el món del quadern (1853–1924)</h1>
+<p>Web estàtica a <a href="https://github.com/ILERGETS/Avantpassats-Rosell-Simon">ILERGETS/Avantpassats-Rosell-Simon</a>. Regenerar: `python Llibre/codi/gen_html.py` → `Llibre/web/`. PDF = imprimir (A4 apaïsat).</p></section><section class="pagina prosa" data-page="context"><h1>Lleida i el món del quadern (1853–1924)</h1>
 <p>Assaig de marc. Distingim <strong>el que diu el paper</strong> i <strong>el que és història general</strong>. El to vol ser el d’un pròleg de llibre de família, no d’un manual.</p>
 <h2>Una ciutat de cap i de bisbe</h2>
 <p>Lleida de mitjan segle XIX és capital de província, seu episcopal i mercat de l’horta. El Carrer Mayor on neix Concepció és eix burgès. Les <strong>Escolàpies</strong> i el Seminari (bisbe <strong>Puigllat</strong>, Dr. <strong>Casals</strong>) marquen una infància d’òrfena internada: educació femenina confessant, no escola laica.</p>
@@ -288,7 +289,11 @@ lérida 4 de marzo 1924.">Full 25 · esquerra</a>
 <p>El paper parla de <strong>setze</strong> naixements a casa Klein i n’enumera <strong>dotze</strong>. No es força l’encaix. Conchita (filla viva) (part 1914) <strong>no</strong> s’unifica amb la 6ª.</p>
 <h2>Parentela i casa</h2>
 <p>Estevan Pontí · Moisès Pontí · Beatriz · Inés (mare) · Concepció (germana de Bellvís) · Gil Vilella y Gil · Enriqueta Vilella · Cecilio · Ignacio Simón y Sanpere · Rosa Bofill y Ferrer · Montserrat Cecilia Sagrario (néta, 1923) · Joseph Janer · Pius IX · Bisbe Puigllat · José Casals.</p>
-<p>L’arbre no es copia aquí. Annex PDF: fase 6.</p></section><section class="pagina prosa" data-page="temps"><h1>Línia de temps</h1>
+<p>L’arbre no es copia aquí. Annex PDF (còpia v62, branca Rosell): vegeu 11-arbre.</p></section><section class="pagina prosa" data-page="arbre"><h1>Arbre resum</h1>
+<p>Les dates i els noms <strong>del llibre</strong> són els del quadern. L’arbre familiar és un vault a part (`H:\11`, versió vigent <strong>v62</strong> el 2026-10-10). Aquí només n’hi ha una <strong>còpia</strong> de la branca <strong>Rosell</strong> (Simon–Vilella, la de la dona). No s’han fusionat els dos grafs. No s’ha escrit a l’arbre.</p>
+<p>On xoca el paper amb l’arbre (naixement 1853/1856, mare Inés/Joaquina, Janer/Sanuy, llista de fills…), <strong>mana el paper</strong>. Vegeu 06-qui-es-qui i 08-notes.</p>
+<p>PDF de l’annex (còpia, Famílies partides Rosell v62):</p>
+<p><a href="annex/arbre-rosell-v62.pdf">Descarregar l’arbre Rosell (PDF)</a></p></section><section class="pagina prosa" data-page="temps"><h1>Línia de temps</h1>
 <p>Anys de `Dates/`. Enllaç al <strong>full</strong> (cara). Pàgina de resum del vault = número del PDF.</p>
 <p class='taula'>| Any | Fet (segons el paper) | Cares |</p>
 <p class='taula'>|-----|------------------------|--------|</p>
@@ -352,7 +357,9 @@ lérida 4 de marzo 1924.">Full 25 · esquerra</a>
 <li><strong>Mort de Concepció:</strong> no és al quadern (firma viva el 1924). L’arbre diu 1934; no s’afirma al llibre fins a tenir document.</li>
 </ul>
 <h2>To</h2>
-<p>No es «corregeix» la mare. Es llegeix, s’anota el dubte, es passa pàgina.</p></section><section class="pagina prosa" data-page="comiat"><h1>A tall de comiat</h1>
+<p>No es «corregeix» la mare. Es llegeix, s’anota el dubte, es passa pàgina.</p></section><section class="pagina prosa" data-page="mapa"><h1>Mapa</h1>
+<p>Llocs que <strong>nomena el quadern</strong>. Els punts són el municipi (o el carrer, a Lleida), no la porta de casa. <strong>Caldes</strong> (banys després de Molins de Rei) no té punt: el paper no diu quina Caldes.</p>
+<p>Cliqueu un nom de la llista per centrar el mapa. Sense internet, la llista es queda; el plànol OpenStreetMap cal xarxa.</p><div id="map-dietari" class="map-dietari" role="img" aria-label="Mapa dels llocs del quadern"></div><script type="application/json" id="punts-mapa">[{"nom": "Lleida", "lat": 41.6176, "lon": 0.62, "grup": "eix", "que": "Naixement, casament, viduïtat, tancament del quadern (1924)."}, {"nom": "Carrer Mayor", "lat": 41.6165, "lon": 0.6265, "grup": "lleida", "que": "Núm. 13, 2n: naixement. Un altre 2n del mateix carrer (Javier)."}, {"nom": "Carrer dels Cavallers", "lat": 41.6168, "lon": 0.6242, "grup": "lleida", "que": "Papereria Urrea, núm. 14 (tapes del quadern)."}, {"nom": "Catedral de Lleida", "lat": 41.6179, "lon": 0.6264, "grup": "lleida", "que": "Batejos; orgue de Magí Pontí."}, {"nom": "Vilanova del Segrià", "lat": 41.6537, "lon": 0.5097, "grup": "ponent", "que": "Estius, casa, velacions; no és el P. Villanueva."}, {"nom": "Almenar del Segre", "lat": 41.796, "lon": 0.546, "grup": "ponent", "que": "Mare Inés, àvia paterna."}, {"nom": "Almacelles", "lat": 41.733, "lon": 0.437, "grup": "ponent", "que": "Rosa Bofill y Ferrer, sogra."}, {"nom": "Mequinensa", "lat": 41.374, "lon": 0.302, "grup": "ponent", "que": "Origen d’Ignacio; viatge de nuvis."}, {"nom": "Bellvís", "lat": 41.673, "lon": 0.852, "grup": "ponent", "que": "Germana Concepció; 1921 i 1923."}, {"nom": "Montserrat", "lat": 41.593, "lon": 1.837, "grup": "catalunya", "que": "Còlera, 1885/86; noces dels fills."}, {"nom": "Manresa", "lat": 41.729, "lon": 1.823, "grup": "catalunya", "que": "Naixement de Magí; Paüls; metge Alijo."}, {"nom": "Barcelona", "lat": 41.3874, "lon": 2.1686, "grup": "catalunya", "que": "Enriqueta; Fernando 45; estudis."}, {"nom": "Molins de Rei", "lat": 41.413, "lon": 2.016, "grup": "catalunya", "que": "Operació del peu (Dr. Soldevila)."}, {"nom": "Mataró", "lat": 41.54, "lon": 2.445, "grup": "catalunya", "que": "Fill després de Melilla (por a la tisi)."}, {"nom": "Palamós", "lat": 41.848, "lon": 3.128, "grup": "catalunya", "que": "Ignacio, desembre de 1916."}, {"nom": "Tortosa", "lat": 40.8125, "lon": 0.5211, "grup": "ebre", "que": "Primera missa de Fernando Palmés, 1912."}, {"nom": "Observatori de l'Ebre", "lat": 40.8206, "lon": 0.4914, "grup": "ebre", "que": "Visita amb Palmés (P. Cirera)."}, {"nom": "Saragossa", "lat": 41.6488, "lon": -0.8891, "grup": "fora", "que": "Artilleria del fill, 1921; El Pilar."}, {"nom": "Melilla", "lat": 35.292, "lon": -2.938, "grup": "fora", "que": "Quinta / Annual, 1921."}, {"nom": "Lourdes", "lat": 43.096, "lon": -0.046, "grup": "fora", "que": "Promesa i vot; aigua a la mort d’Ignacio."}, {"nom": "Roma", "lat": 41.9028, "lon": 12.4964, "grup": "fora", "que": "Peregrinació d’Ignacio, 1876; Pius IX."}]</script><div class="llista-mapa"><p><button type='button' class='punt-mapa' data-i='0'>Lleida</button> — Naixement, casament, viduïtat, tancament del quadern (1924).</p><p><button type='button' class='punt-mapa' data-i='1'>Carrer Mayor</button> — Núm. 13, 2n: naixement. Un altre 2n del mateix carrer (Javier).</p><p><button type='button' class='punt-mapa' data-i='2'>Carrer dels Cavallers</button> — Papereria Urrea, núm. 14 (tapes del quadern).</p><p><button type='button' class='punt-mapa' data-i='3'>Catedral de Lleida</button> — Batejos; orgue de Magí Pontí.</p><p><button type='button' class='punt-mapa' data-i='4'>Vilanova del Segrià</button> — Estius, casa, velacions; no és el P. Villanueva.</p><p><button type='button' class='punt-mapa' data-i='5'>Almenar del Segre</button> — Mare Inés, àvia paterna.</p><p><button type='button' class='punt-mapa' data-i='6'>Almacelles</button> — Rosa Bofill y Ferrer, sogra.</p><p><button type='button' class='punt-mapa' data-i='7'>Mequinensa</button> — Origen d’Ignacio; viatge de nuvis.</p><p><button type='button' class='punt-mapa' data-i='8'>Bellvís</button> — Germana Concepció; 1921 i 1923.</p><p><button type='button' class='punt-mapa' data-i='9'>Montserrat</button> — Còlera, 1885/86; noces dels fills.</p><p><button type='button' class='punt-mapa' data-i='10'>Manresa</button> — Naixement de Magí; Paüls; metge Alijo.</p><p><button type='button' class='punt-mapa' data-i='11'>Barcelona</button> — Enriqueta; Fernando 45; estudis.</p><p><button type='button' class='punt-mapa' data-i='12'>Molins de Rei</button> — Operació del peu (Dr. Soldevila).</p><p><button type='button' class='punt-mapa' data-i='13'>Mataró</button> — Fill després de Melilla (por a la tisi).</p><p><button type='button' class='punt-mapa' data-i='14'>Palamós</button> — Ignacio, desembre de 1916.</p><p><button type='button' class='punt-mapa' data-i='15'>Tortosa</button> — Primera missa de Fernando Palmés, 1912.</p><p><button type='button' class='punt-mapa' data-i='16'>Observatori de l&#x27;Ebre</button> — Visita amb Palmés (P. Cirera).</p><p><button type='button' class='punt-mapa' data-i='17'>Saragossa</button> — Artilleria del fill, 1921; El Pilar.</p><p><button type='button' class='punt-mapa' data-i='18'>Melilla</button> — Quinta / Annual, 1921.</p><p><button type='button' class='punt-mapa' data-i='19'>Lourdes</button> — Promesa i vot; aigua a la mort d’Ignacio.</p><p><button type='button' class='punt-mapa' data-i='20'>Roma</button> — Peregrinació d’Ignacio, 1876; Pius IX.</p></div></section><section class="pagina prosa" data-page="comiat"><h1>A tall de comiat</h1>
 <p>Ella acaba així: que les filles conservin la fe i l’exemple del pare. Nosaltres no hi afegim cap lliçó nova.</p>
 <p>El quadern era per a <strong>elles</strong>. Un segle després el tornem a obrir perquè la lletra no es perdi i perquè qui vingui darrere sàpiga d’on surt la casa.</p>
 <p>Així signa, a Lleida, el 4 de març de 1924:</p>
@@ -361,15 +368,6 @@ lérida 4 de marzo 1924.">Full 25 · esquerra</a>
 <p>I el títol que ella posa al capdavant del dietari:</p>
 <figure class="facsimil"><img src="img/comiat-titol.jpg" alt="Títol manuscrit del dietari"></figure>
 <p>Biografía de Concepcion Vilella y Gil Y de Ignacio Simón y Ponti</p></section>
-<section class="pagina prosa" data-page="arbre">
-  <h1>Arbre resum</h1>
-  <p>L’annex de l’arbre Simon–Vilella es copiarà del vault genealògic (fase 6). Mentrestant, vegeu <em>Qui és qui</em>.</p>
-</section>
-<section class="pagina prosa" data-page="mapa">
-  <h1>Mapa</h1>
-  <p>El mapa dels llocs del quadern és a la fase 6.</p>
-</section>
-
 <section class="pagina encarada-wrap" data-page="02-dreta">
   <p class="meta">Full 2 · dreta · Infància i orfenesa</p>
   <p class="meta">Comença la biografia: naixement a Lleida i llinatge dels Vilella-Gil.</p>
@@ -1546,6 +1544,7 @@ Lérida 4 de Marzo 1924.</div>
   </div>
 </main>
 </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

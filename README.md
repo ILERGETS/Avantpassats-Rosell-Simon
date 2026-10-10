@@ -17,6 +17,6 @@ Si detecteu una errada (un nom, una data, una lectura), escriviu a **Josep Lluí
 
 ## PDF
 
-Botó d’imprimir del llibre (A4 apaïsat). Mapa i arbre annex: més endavant.
+Botó d’imprimir del llibre (A4 apaïsat). Mapa al menú Context. Arbre Rosell (còpia v62): `annex/arbre-rosell-v62.pdf`.
 
 Repositori: [ILERGETS/Avantpassats-Rosell-Simon](https://github.com/ILERGETS/Avantpassats-Rosell-Simon). Pujar amb GitHub Desktop, des de l’ordinador.

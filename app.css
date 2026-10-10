@@ -105,6 +105,24 @@ html.js [data-page].on { display: block; }
 .navc { display: flex; justify-content: space-between; margin-top: 1.2rem; }
 .navc a { color: var(--accent); }
 .meta { font-size: 0.85rem; color: var(--muted); margin: 0 0 0.6rem; }
+.map-dietari {
+  height: 420px;
+  width: 100%;
+  margin: 1rem 0;
+  border: 1px solid var(--line);
+  background: var(--bar);
+  z-index: 0;
+}
+.punt-mapa {
+  font: inherit;
+  background: none;
+  border: 0;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+.llista-mapa p { margin: 0.35em 0; }
 .llista-cares { columns: 2; gap: 1.2rem; }
 .llista-cares a { display: block; color: var(--ink); }
 #nojs article { margin-bottom: 3rem; }
