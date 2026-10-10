@@ -1,0 +1,22 @@
+# El dietari de Concepció Vilella
+
+Llibre familiar a partir del **quadern manuscrit** de Concepció Vilella y Gil (Lleida, 1853–1924), escrit per a les filles.
+
+## Llegir-lo
+
+- **A la xarxa:** [https://ilergets.github.io/Avantpassats-Rosell-Simon/](https://ilergets.github.io/Avantpassats-Rosell-Simon/)
+- **Al disc:** obre `index.html` d’aquesta carpeta (calen també `app.css`, `app.js` i `img/`).
+
+Cada pàgina del quadern: foto d’una cara i tres lectures (**Resum** en català, **Fidel** i **Corregida** en castellà).
+
+## Família
+
+La web és pública si tens l’enllaç. Els cercadors reben `noindex`: no ha de sortir a Google. No hi ha fotos de persones vives.
+
+Si detecteu una errada (un nom, una data, una lectura), escriviu a **Josep Lluís Puyalto Granada**: puyalto@coac.net
+
+## PDF
+
+Botó d’imprimir del llibre (A4 apaïsat). Mapa i arbre annex: més endavant.
+
+Repositori: [ILERGETS/Avantpassats-Rosell-Simon](https://github.com/ILERGETS/Avantpassats-Rosell-Simon). Pujar amb GitHub Desktop, des de l’ordinador.

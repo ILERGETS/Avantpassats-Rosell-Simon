@@ -1,0 +1,125 @@
+:root {
+  --paper: #f3ead8;
+  --ink: #2c2416;
+  --muted: #6b5e48;
+  --accent: #7a3b2e;
+  --bar: #efe4cc;
+  --line: #d4c4a4;
+  --fs: 18px;
+}
+[data-theme="dark"] {
+  --paper: #1c1914;
+  --ink: #efe6d4;
+  --muted: #b5a88e;
+  --accent: #d9a08e;
+  --bar: #252019;
+  --line: #3d3428;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font: var(--fs)/1.5 Georgia, "Palatino Linotype", Palatino, serif;
+}
+#app { display: flex; min-height: 100%; }
+aside {
+  width: 250px; flex-shrink: 0;
+  background: var(--bar);
+  border-right: 1px solid var(--line);
+  padding: 1rem 0.9rem 2rem;
+  overflow-y: auto;
+}
+aside h1 { font-size: 1.05rem; margin: 0 0 0.2rem; line-height: 1.25; }
+aside .sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
+aside h2 {
+  font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); margin: 1.1rem 0 0.35rem;
+}
+aside a {
+  display: block; color: var(--ink); text-decoration: none;
+  padding: 0.18rem 0.3rem; border-radius: 3px; font-size: 0.92rem;
+}
+aside a:hover, aside a.act { background: var(--line); color: var(--accent); }
+aside .filtres button {
+  display: block; width: 100%; text-align: left;
+  background: none; border: 0; font: inherit; color: var(--ink);
+  padding: 0.15rem 0.3rem; cursor: pointer; border-radius: 3px;
+}
+aside .filtres button.act { background: var(--line); color: var(--accent); }
+main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+header.top {
+  display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;
+  padding: 0.45rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--bar);
+}
+header.top input {
+  flex: 1; min-width: 8rem; font: inherit; padding: 0.3rem 0.5rem;
+  border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+}
+header.top button {
+  font: inherit; background: var(--paper); color: var(--ink);
+  border: 1px solid var(--line); padding: 0.25rem 0.5rem; cursor: pointer;
+}
+html.js [data-page] { display: none; }
+html.js [data-page].on { display: block; }
+#vista { flex: 1; overflow: auto; padding: 1rem 1.2rem 2.5rem; }
+.pagina { max-width: 1100px; margin: 0 auto; }
+.pagina h1 { font-size: 1.6rem; }
+.pagina .prosa p { margin: 0.7em 0; }
+.facsimil {
+  margin: 1.4rem auto 0.35rem;
+  max-width: 38rem;
+}
+.facsimil img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.facsimil + p {
+  text-align: center;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0.35rem 0 1.6rem;
+}
+.encarada {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: start;
+}
+.encarada img {
+  width: 100%; height: auto; border: 1px solid var(--line);
+  background: #fff;
+}
+.modes { display: flex; gap: 0.35rem; margin-bottom: 0.6rem; }
+.modes button {
+  font: inherit; border: 1px solid var(--line); background: var(--bar);
+  color: var(--ink); padding: 0.2rem 0.55rem; cursor: pointer;
+}
+.modes button.act { background: var(--accent); color: #fff; border-color: var(--accent); }
+.cos { white-space: pre-wrap; }
+.cos.es { font-size: 0.98em; }
+.notes { font-size: 0.85rem; color: var(--muted); margin-top: 1rem; border-top: 1px solid var(--line); padding-top: 0.6rem; }
+.navc { display: flex; justify-content: space-between; margin-top: 1.2rem; }
+.navc a { color: var(--accent); }
+.meta { font-size: 0.85rem; color: var(--muted); margin: 0 0 0.6rem; }
+.llista-cares { columns: 2; gap: 1.2rem; }
+.llista-cares a { display: block; color: var(--ink); }
+#nojs article { margin-bottom: 3rem; }
+@media (max-width: 860px) {
+  #app { flex-direction: column; }
+  aside { width: 100%; max-height: 40vh; }
+  .encarada { grid-template-columns: 1fr; }
+  .llista-cares { columns: 1; }
+}
+@media print {
+  aside, header.top, .modes, .navc, .filtres { display: none !important; }
+  #app { display: block; }
+  .encarada { grid-template-columns: 1fr 1fr; break-inside: avoid; page-break-after: always; }
+  [data-mode] { display: none !important; }
+  [data-mode="resum"] { display: block !important; }
+  @page { size: A4 landscape; margin: 12mm; }
+}
+noscript #app { display: none; }
