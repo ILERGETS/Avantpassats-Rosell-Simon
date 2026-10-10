@@ -41,12 +41,23 @@ aside a {
   padding: 0.18rem 0.3rem; border-radius: 3px; font-size: 0.92rem;
 }
 aside a:hover, aside a.act { background: var(--line); color: var(--accent); }
-aside .filtres button {
-  display: block; width: 100%; text-align: left;
-  background: none; border: 0; font: inherit; color: var(--ink);
-  padding: 0.15rem 0.3rem; cursor: pointer; border-radius: 3px;
+aside details.nav-cap { margin: 0.12rem 0; }
+aside details.nav-cap summary {
+  cursor: pointer;
+  padding: 0.18rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.92rem;
+  list-style: none;
 }
-aside .filtres button.act { background: var(--line); color: var(--accent); }
+aside details.nav-cap summary::-webkit-details-marker { display: none; }
+aside details.nav-cap summary::before {
+  content: "▸ ";
+  color: var(--muted);
+  font-size: 0.78em;
+}
+aside details.nav-cap[open] summary::before { content: "▾ "; }
+aside details.nav-cap summary:hover { background: var(--line); color: var(--accent); }
+aside details.nav-cap a { padding-left: 1.15rem; font-size: 0.85rem; }
 main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 header.top {
   display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;
@@ -137,21 +148,88 @@ table.linia a { color: var(--accent); }
   padding: 0;
 }
 .llista-mapa p { margin: 0.35em 0; }
-.llista-cares { columns: 2; gap: 1.2rem; }
-.llista-cares a { display: block; color: var(--ink); }
+.idxhead { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.idxhead h1 { margin: 0; }
+#count { color: var(--muted); font-size: 0.9rem; }
+.filtre-label { font-size: 0.8rem; color: var(--muted); margin: 0.8rem 0 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 14px; }
+.chip {
+  border: 1px solid var(--line);
+  background: var(--bar);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: var(--ink);
+}
+.chip.on, .chip.act { background: var(--accent); color: #fff; border-color: var(--accent); }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(224px, 1fr));
+  gap: 14px;
+}
+.lc {
+  display: flex;
+  gap: 11px;
+  background: var(--bar);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  align-items: flex-start;
+}
+.lc:hover { border-color: var(--accent); }
+.lc img {
+  width: 52px; height: 68px; object-fit: cover;
+  border-radius: 5px; flex: 0 0 auto;
+  background: #fff; border: 1px solid var(--line);
+}
+.lc .n { display: block; font-weight: 700; color: var(--accent); font-size: 0.78rem; }
+.lc .t { display: block; font-size: 0.85rem; line-height: 1.25; margin: 2px 0 3px; }
+.lc .m { display: block; font-size: 0.73rem; color: var(--muted); }
+.accions-arbre { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1rem 0; }
+.accions-arbre a, .accions-arbre button {
+  font: inherit; font-size: 0.92rem;
+  background: var(--bar); color: var(--ink);
+  border: 1px solid var(--line); padding: 0.35rem 0.7rem;
+  cursor: pointer; border-radius: 6px; text-decoration: none;
+}
+.arbre-print {
+  margin: 1rem 0 2rem;
+  overflow: auto;
+  max-height: 75vh;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.arbre-print img {
+  width: auto;
+  height: min(70vh, 900px);
+  max-width: none;
+  display: block;
+}
 #nojs article { margin-bottom: 3rem; }
 @media (max-width: 860px) {
   #app { flex-direction: column; }
   aside { width: 100%; max-height: 40vh; }
   .encarada { grid-template-columns: 1fr; }
-  .llista-cares { columns: 1; }
 }
 @media print {
-  aside, header.top, .modes, .navc, .filtres { display: none !important; }
+  aside, header.top, .modes, .navc, .filtres, .chips, .accions-arbre { display: none !important; }
   #app { display: block; }
   .encarada { grid-template-columns: 1fr 1fr; break-inside: avoid; page-break-after: always; }
   [data-mode] { display: none !important; }
   [data-mode="resum"] { display: block !important; }
   @page { size: A4 landscape; margin: 12mm; }
+  html[data-print-arbre] [data-page] { display: none !important; }
+  html[data-print-arbre] [data-page="arbre"] { display: block !important; }
+  html[data-print-arbre] [data-page="arbre"] > *:not(.arbre-print) { display: none !important; }
+  html[data-print-arbre] .arbre-print {
+    margin: 0; overflow: visible; max-height: none; border: 0;
+  }
+  html[data-print-arbre] .arbre-print img {
+    width: 100%; height: auto; max-height: 100vh; object-fit: contain;
+  }
 }
 noscript #app { display: none; }

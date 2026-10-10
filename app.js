@@ -2,6 +2,37 @@
   document.documentElement.classList.add("js");
   var fs = 18;
   function $(id) { return document.getElementById(id); }
+  function filtreActiu() {
+    var on = document.querySelector(".chip.on, [data-filtre].on, [data-filtre].act");
+    return on ? (on.getAttribute("data-filtre") || "") : "";
+  }
+  function applyLlista() {
+    var cap = filtreActiu();
+    var q = ($("cerca") && $("cerca").value.trim().toLowerCase()) || "";
+    var n = 0, tot = 0;
+    document.querySelectorAll(".lc").forEach(function (a) {
+      tot += 1;
+      var okCap = !cap || a.getAttribute("data-cap") === cap;
+      var okQ = !q || (a.getAttribute("data-search") || "").indexOf(q) !== -1;
+      var ok = okCap && okQ;
+      a.style.display = ok ? "" : "none";
+      if (ok) n += 1;
+    });
+    document.querySelectorAll("aside a[data-cap]").forEach(function (a) {
+      var okCap = !cap || a.getAttribute("data-cap") === cap;
+      var okQ = !q || (a.getAttribute("data-search") || "").indexOf(q) !== -1;
+      a.style.display = okCap && okQ ? "" : "none";
+    });
+    document.querySelectorAll("aside details.nav-cap").forEach(function (d) {
+      var vis = [].slice.call(d.querySelectorAll("a[data-cap]")).some(function (a) {
+        return a.style.display !== "none";
+      });
+      d.style.display = vis ? "" : "none";
+      if (q || cap) d.open = vis && (!!q || d.getAttribute("data-cap") === cap);
+    });
+    var c = $("count");
+    if (c && tot) c.textContent = n + " de " + tot + " cares";
+  }
   function show(hash) {
     var id = (hash || location.hash || "#portada").replace(/^#/, "") || "portada";
     var pages = document.querySelectorAll("[data-page]");
@@ -18,6 +49,9 @@
     }
     document.querySelectorAll("aside a[href^='#']").forEach(function (a) {
       a.classList.toggle("act", a.getAttribute("href") === "#" + id);
+    });
+    document.querySelectorAll("aside details.nav-cap").forEach(function (d) {
+      if (d.querySelector("a.act")) d.open = true;
     });
     var vista = $("vista");
     if (vista) vista.scrollTop = 0;
@@ -56,6 +90,22 @@
       });
     });
   }
+  function printArbre(size) {
+    var st = document.getElementById("print-page-size");
+    if (!st) {
+      st = document.createElement("style");
+      st.id = "print-page-size";
+      document.head.appendChild(st);
+    }
+    st.textContent = "@page { size: " + size + " landscape; margin: 8mm; }";
+    document.documentElement.setAttribute("data-print-arbre", size);
+    window.print();
+  }
+  window.addEventListener("afterprint", function () {
+    document.documentElement.removeAttribute("data-print-arbre");
+    var st = document.getElementById("print-page-size");
+    if (st) st.textContent = "";
+  });
   document.addEventListener("click", function (e) {
     var b = e.target.closest("[data-setmode]");
     if (b) { e.preventDefault(); setMode(b.getAttribute("data-setmode")); }
@@ -66,6 +116,11 @@
       document.documentElement.setAttribute("data-theme", cur);
     }
     if (e.target.id === "btn-print") { window.print(); }
+    var pa = e.target.closest("[data-print-arbre]");
+    if (pa) {
+      e.preventDefault();
+      printArbre(pa.getAttribute("data-print-arbre"));
+    }
     var pm = e.target.closest(".punt-mapa");
     if (pm && mapObj) {
       var i = parseInt(pm.getAttribute("data-i"), 10);
@@ -78,23 +133,21 @@
     }
     var f = e.target.closest("[data-filtre]");
     if (f) {
-      var cap = f.getAttribute("data-filtre");
       document.querySelectorAll("[data-filtre]").forEach(function (x) {
+        x.classList.toggle("on", x === f);
         x.classList.toggle("act", x === f);
       });
-      document.querySelectorAll("aside a[data-cap]").forEach(function (a) {
-        a.style.display = (!cap || a.getAttribute("data-cap") === cap) ? "" : "none";
-      });
+      applyLlista();
+      if (location.hash.replace(/^#/, "") !== "index-quadern") {
+        location.hash = "index-quadern";
+      }
     }
   });
-  $("cerca").addEventListener("input", function () {
-    var q = this.value.trim().toLowerCase();
-    document.querySelectorAll("aside a[data-search]").forEach(function (a) {
-      var ok = !q || (a.getAttribute("data-search") || "").indexOf(q) !== -1;
-      a.style.display = ok ? "" : "none";
-    });
-  });
+  if ($("cerca")) {
+    $("cerca").addEventListener("input", function () { applyLlista(); });
+  }
   window.addEventListener("hashchange", function () { show(); });
   setMode("resum");
+  applyLlista();
   show();
 })();
