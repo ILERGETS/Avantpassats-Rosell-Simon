@@ -61,6 +61,12 @@
     var vista = $("vista");
     if (vista) vista.scrollTop = 0;
     if (id === "mapa") initMap();
+    setNav(false);
+  }
+  function setNav(on) {
+    document.documentElement.classList.toggle("nav-open", !!on);
+    var b = $("btn-menu");
+    if (b) b.setAttribute("aria-expanded", on ? "true" : "false");
   }
   var mapObj = null;
   function initMap() {
@@ -105,6 +111,12 @@
       document.documentElement.setAttribute("data-theme", cur);
     }
     if (e.target.id === "btn-print") { window.print(); }
+    if (e.target.id === "btn-menu" || e.target.closest("#btn-menu")) {
+      e.preventDefault();
+      setNav(!document.documentElement.classList.contains("nav-open"));
+    }
+    if (e.target.id === "scrim") { setNav(false); }
+    if (e.target.closest("aside a[href^='#']")) { setNav(false); }
     var pm = e.target.closest(".punt-mapa");
     if (pm && mapObj) {
       var i = parseInt(pm.getAttribute("data-i"), 10);
@@ -131,6 +143,9 @@
     $("cerca").addEventListener("input", function () { applyLlista(); });
   }
   window.addEventListener("hashchange", function () { show(); });
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 1024) setNav(false);
+  });
   setMode("resum");
   applyLlista();
   show();

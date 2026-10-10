@@ -12,8 +12,9 @@
 <noscript>
 <p style="padding:1rem">Aquest llibre funciona sense JavaScript: feu servir els enllaços. Amb JS: cerca, A±, tema i pestanyes resum/fidel/corregida.</p>
 </noscript>
+<div class="scrim" id="scrim"></div>
 <div id="app">
-<aside>
+<aside id="menu-llibre">
   <h1>El quadern de la Concepció Vilella Gil</h1>
   <p class="sub">1853–1924 · Lleida</p>
   <details class="nav-grup" open>
@@ -196,6 +197,7 @@ lérida 4 de marzo 1924.">Full 25 · esquerra</a></details>
 </aside>
 <main>
   <header class="top">
+    <button type="button" id="btn-menu" class="burger" aria-label="Menú" aria-expanded="false" aria-controls="menu-llibre">☰</button>
     <input id="cerca" type="search" placeholder="Cerca al quadern…" aria-label="Cerca">
     <button type="button" id="btn-menys" title="Lletra més petita">A−</button>
     <button type="button" id="btn-mes" title="Lletra més gran">A+</button>

@@ -78,6 +78,29 @@ header.top {
   padding: 0.45rem 0.8rem;
   border-bottom: 1px solid var(--line);
   background: var(--bar);
+  position: sticky; top: 0; z-index: 70;
+}
+.burger {
+  display: none;
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: 1.45rem;
+  line-height: 1;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 0.15rem 0.45rem 0.28rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.scrim {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 24, 16, 0.4);
+  z-index: 50;
+  border: 0;
+  padding: 0;
 }
 header.top input {
   flex: 1; min-width: 8rem; font: inherit; padding: 0.3rem 0.5rem;
@@ -227,13 +250,26 @@ table.linia a { color: var(--accent); }
   display: block;
 }
 #nojs article { margin-bottom: 3rem; }
-@media (max-width: 860px) {
-  #app { flex-direction: column; }
-  aside { width: 100%; max-height: 40vh; }
+@media (max-width: 1024px) {
+  .burger { display: inline-flex; align-items: center; justify-content: center; }
+  .scrim { display: none; }
+  html.nav-open .scrim { display: block; }
+  html.nav-open { overflow: hidden; }
+  aside {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: min(300px, 88vw);
+    max-height: none;
+    z-index: 60;
+    transform: translateX(-105%);
+    transition: transform 0.2s ease;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+  }
+  html.nav-open aside { transform: translateX(0); }
   .encarada { grid-template-columns: 1fr; }
 }
 @media print {
-  aside, header.top, .modes, .navc, .filtres, .chips, .accions-arbre { display: none !important; }
+  aside, header.top, .modes, .navc, .filtres, .chips, .accions-arbre, .burger, .scrim { display: none !important; }
   #app { display: block; }
   .encarada { grid-template-columns: 1fr 1fr; break-inside: avoid; page-break-after: always; }
   [data-mode] { display: none !important; }
