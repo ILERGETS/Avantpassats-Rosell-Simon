@@ -17,6 +17,6 @@ Si detecteu una errada (un nom, una data, una lectura), escriviu a **Josep Lluí
 
 ## PDF
 
-Apartat **Impressió** (botó 🖨): tria la llengua i descarrega l’arbre sencer, l’arbre A3, o el llibre complet (diàleg d’imprimir → Desa com a PDF). A mòbil i tauleta, el menú és el botó ☰ (com *Cartes de l’exili*). Arbre Rosell: `annex/arbre-rosell.pdf` (sencer) i `annex/arbre-rosell-a3.pdf` (DIN A3).
+Apartat **Impressió** (botó 🖨): tria la llengua i descarrega l’arbre sencer, l’arbre A3, o el llibre complet (PDF A4 vertical, `annex/quadern-{ca,es,en,bg}.pdf`). A mòbil i tauleta, el menú és el botó ☰ (com *Cartes de l’exili*). Arbre Rosell: `annex/arbre-rosell.pdf` (sencer) i `annex/arbre-rosell-a3.pdf` (DIN A3).
 
 Repositori: [ILERGETS/Avantpassats-Rosell-Simon](https://github.com/ILERGETS/Avantpassats-Rosell-Simon). Pujar amb GitHub Desktop, des de l’ordinador.

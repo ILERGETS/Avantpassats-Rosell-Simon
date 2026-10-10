@@ -8,10 +8,20 @@
   } catch (e) { I18N = {}; }
   var LANGS = I18N.langs || ["ca"];
   var lang = "ca";
+  var wantPdf = false;
   try {
-    var saved = localStorage.getItem("qv_lang");
-    if (saved && LANGS.indexOf(saved) !== -1) lang = saved;
-  } catch (e2) {}
+    var qs = new URLSearchParams(location.search);
+    wantPdf = qs.get("pdf") === "1";
+    var qlang = qs.get("lang");
+    if (wantPdf && qlang && LANGS.indexOf(qlang) !== -1) lang = qlang;
+  } catch (eQs) {}
+  if (!wantPdf) {
+    try {
+      var saved = localStorage.getItem("qv_lang");
+      if (saved && LANGS.indexOf(saved) !== -1) lang = saved;
+    } catch (e2) {}
+  }
+  if (wantPdf) document.documentElement.classList.add("print-llibre");
   function U() {
     return (I18N.ui && (I18N.ui[lang] || I18N.ui.ca)) || {};
   }
@@ -166,7 +176,7 @@
     });
     updatePeu(id);
     goTop();
-    if (id === "mapa") initMap();
+    if (id === "mapa" && !wantPdf) initMap();
     setNav(false);
   }
   function setNav(on) {
@@ -221,12 +231,9 @@
     if (e.target.id === "btn-print") {
       location.hash = "impressio";
     }
-    if (e.target.closest("#btn-pdf-llibre")) {
+    if (e.target.closest("#lnk-pdf-llibre")) {
       var lgImp = $("imp-lang") && $("imp-lang").value;
-      if (!lgImp) return;
-      setLang(lgImp);
-      document.documentElement.classList.add("print-llibre");
-      setTimeout(function () { window.print(); }, 80);
+      if (!lgImp) e.preventDefault();
     }
     if (e.target.id === "langbtn" || e.target.closest("#langbtn")) {
       e.preventDefault();
@@ -279,11 +286,19 @@
   if ($("cerca")) {
     $("cerca").addEventListener("input", function () { applyLlista(); });
   }
+  function syncPdfLlibre() {
+    var lg = $("imp-lang") && $("imp-lang").value;
+    var a = $("lnk-pdf-llibre");
+    var box = $("imp-opcions");
+    if (box) box.hidden = !lg;
+    if (a && lg) {
+      var fn = "quadern-" + lg + ".pdf";
+      a.href = "annex/" + fn;
+      a.setAttribute("download", fn);
+    }
+  }
   if ($("imp-lang")) {
-    $("imp-lang").addEventListener("change", function () {
-      var box = $("imp-opcions");
-      if (box) box.hidden = !$("imp-lang").value;
-    });
+    $("imp-lang").addEventListener("change", syncPdfLlibre);
   }
   window.addEventListener("afterprint", function () {
     document.documentElement.classList.remove("print-llibre");
