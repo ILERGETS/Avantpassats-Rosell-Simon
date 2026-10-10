@@ -251,7 +251,31 @@ table.linia a { color: var(--accent); }
 }
 #nojs article { margin-bottom: 3rem; }
 @media (max-width: 1024px) {
-  .burger { display: inline-flex; align-items: center; justify-content: center; }
+  header.top {
+    flex-wrap: nowrap;
+    gap: 0.28rem;
+    padding: 0.28rem 0.4rem;
+  }
+  header.top input {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 0;
+    padding: 0.22rem 0.4rem;
+    font-size: 16px;
+  }
+  header.top button {
+    flex: 0 0 auto;
+    padding: 0.18rem 0.32rem;
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
+  .burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    padding: 0.08rem 0.32rem 0.18rem;
+  }
   .scrim { display: none; }
   html.nav-open .scrim { display: block; }
   html.nav-open { overflow: hidden; }

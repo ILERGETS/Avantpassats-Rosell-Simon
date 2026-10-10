@@ -18,22 +18,8 @@
       a.style.display = ok ? "" : "none";
       if (ok) n += 1;
     });
-    document.querySelectorAll("aside a[data-cap]").forEach(function (a) {
-      var okCap = !cap || a.getAttribute("data-cap") === cap;
-      var okQ = !q || (a.getAttribute("data-search") || "").indexOf(q) !== -1;
-      a.style.display = okCap && okQ ? "" : "none";
-    });
-    document.querySelectorAll("aside details.nav-cap").forEach(function (d) {
-      var vis = [].slice.call(d.querySelectorAll("a[data-cap]")).some(function (a) {
-        return a.style.display !== "none";
-      });
-      d.style.display = vis ? "" : "none";
-      if (q || cap) d.open = vis && (!!q || d.getAttribute("data-cap") === cap);
-    });
-    if (q || cap) {
-      document.querySelectorAll("aside details.nav-grup").forEach(function (g) {
-        if (g.querySelector("a[data-cap]")) g.open = true;
-      });
+    if (q && location.hash.replace(/^#/, "") !== "index-quadern") {
+      location.hash = "index-quadern";
     }
     var c = $("count");
     if (c && tot) c.textContent = n + " de " + tot + " cares";
@@ -55,7 +41,7 @@
     document.querySelectorAll("aside a[href^='#']").forEach(function (a) {
       a.classList.toggle("act", a.getAttribute("href") === "#" + id);
     });
-    document.querySelectorAll("aside details.nav-cap, aside details.nav-grup").forEach(function (d) {
+    document.querySelectorAll("aside details.nav-grup").forEach(function (d) {
       if (d.querySelector("a.act")) d.open = true;
     });
     var vista = $("vista");
