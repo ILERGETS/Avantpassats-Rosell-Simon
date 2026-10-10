@@ -150,7 +150,8 @@
     "temps": {"ca": "Línia de temps", "es": "Línea de tiempo", "en": "Timeline", "bg": "Хронология"},
     "notes": {"ca": "Notes de lectura", "es": "Notas de lectura", "en": "Reading notes", "bg": "Бележки към четенето"},
     "mapa": {"ca": "Mapa", "es": "Mapa", "en": "Map", "bg": "Карта"},
-    "index-quadern": {"ca": "Índex de cares", "es": "Índice de caras", "en": "Index of leaves", "bg": "Показалец на страниците"},
+    "resum-quadern": {"ca": "Resum", "es": "Resumen", "en": "Summary", "bg": "Резюме"},
+    "index-quadern": {"ca": "Índex", "es": "Índice", "en": "Index", "bg": "Показалец"},
     "comiat": {"ca": "A tall de comiat", "es": "A modo de despedida", "en": "A word of farewell", "bg": "Вместо сбогом"}
   },
   "map_que": {

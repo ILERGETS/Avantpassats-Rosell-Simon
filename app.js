@@ -98,7 +98,7 @@
   var ORDRE_FRONT = [
     "portada", "sobre", "proleg", "agraiments", "fet",
     "context", "magi", "qui", "arbre", "temps", "notes", "mapa",
-    "index-quadern"
+    "resum-quadern", "index-quadern"
   ];
   function pageIds() {
     var cares = [];
