@@ -249,8 +249,9 @@
         if (lmClose) lmClose.classList.remove("on");
         var lbClose = $("langbtn");
         if (lbClose) lbClose.setAttribute("aria-expanded", "false");
-        if (!printLang) setPrintLang(lang);
-        else refreshPrintMenu();
+        // Cada obertura: primer la llengua; les opcions PDF només després d’escollir-la.
+        printLang = "";
+        refreshPrintMenu();
       }
     }
     var plang = e.target.closest("#print-langs [data-print-lang]");
