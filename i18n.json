@@ -174,6 +174,7 @@
     "impressio": {"ca": "Impressió", "es": "Impresión", "en": "Print", "bg": "Печат"},
     "context": {"ca": "Lleida i el món del quadern", "es": "Lleida y el mundo del cuaderno", "en": "Lleida and the world of the notebook", "bg": "Лерида и светът на тетрадката"},
     "magi": {"ca": "Magí Pontí i Ferrer", "es": "Magí Pontí i Ferrer", "en": "Magí Pontí i Ferrer", "bg": "Маги Понти и Ферер"},
+    "melilla": {"ca": "Melilla i Annual", "es": "Melilla y Annual", "en": "Melilla and Annual", "bg": "Мелила и Annual"},
     "qui": {"ca": "Qui és qui", "es": "Quién es quién", "en": "Who’s who", "bg": "Кой кой е"},
     "arbre": {"ca": "Arbre resum", "es": "Árbol resumido", "en": "Tree (summary)", "bg": "Родословно дърво (кратко)"},
     "temps": {"ca": "Línia de temps", "es": "Línea de tiempo", "en": "Timeline", "bg": "Хронология"},
@@ -201,7 +202,7 @@
     "Tortosa": {"ca": "Primera missa de Fernando Palmés, 1912.", "es": "Primera misa de Fernando Palmés, 1912.", "en": "Fernando Palmés’s first mass, 1912.", "bg": "Първа литургия на Фернандо Палмес, 1912."},
     "Observatori de l'Ebre": {"ca": "Visita amb Palmés (P. Cirera).", "es": "Visita con Palmés (P. Cirera).", "en": "Visit with Palmés (Fr Cirera).", "bg": "Посещение с Палмес (п. Сирера)."},
     "Saragossa": {"ca": "Artilleria del fill, 1921; El Pilar.", "es": "Artillería del hijo, 1921; El Pilar.", "en": "The son’s artillery, 1921; El Pilar.", "bg": "Артилерия на сина, 1921; Ел Пилар."},
-    "Melilla": {"ca": "Quinta / Annual, 1921.", "es": "Quinta / Annual, 1921.", "en": "Draft / Annual, 1921.", "bg": "Набор / Ануал, 1921."},
+    "Melilla": {"ca": "Quinta / Annual; el 14-X-1921 el fill ja hi és.", "es": "Quinta / Annual; el 14-X-1921 el hijo ya está allí.", "en": "Draft / Annual; by 14 Oct 1921 the son is already there.", "bg": "Набор / Annual; на 14-X-1921 синът вече е там."},
     "Lourdes": {"ca": "Promesa i vot; aigua a la mort d’Ignacio.", "es": "Promesa y voto; agua en la muerte de Ignacio.", "en": "Promise and vow; water at Ignacio’s death.", "bg": "Обет; вода при смъртта на Игнасио."},
     "Roma": {"ca": "Peregrinació d’Ignacio, 1876; Pius IX.", "es": "Peregrinación de Ignacio, 1876; Pío IX.", "en": "Ignacio’s pilgrimage, 1876; Pius IX.", "bg": "Поклонение на Игнасио, 1876; Пий IX."}
   },
