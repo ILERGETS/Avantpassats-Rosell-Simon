@@ -55,6 +55,30 @@
       }
     });
   }
+  var printLang = "";
+  var QV = typeof QVPrint !== "undefined" ? QVPrint : null;
+  function setPrintMenuOpen(on) {
+    var pm = $("printmenu");
+    var btn = $("btn-print");
+    if (pm) pm.classList.toggle("on", !!on);
+    if (btn) btn.setAttribute("aria-expanded", on ? "true" : "false");
+  }
+  function refreshPrintMenu() {
+    var opts = $("print-opts");
+    var choose = $("print-choose-lab");
+    var show = QV ? QV.shouldShowOpts(printLang) : !!printLang;
+    document.querySelectorAll("#print-langs [data-print-lang]").forEach(function (b) {
+      b.classList.toggle("on", b.getAttribute("data-print-lang") === printLang);
+    });
+    if (opts) opts.classList.toggle("on", show);
+    if (choose) choose.hidden = !show;
+    var menu = $("printmenu");
+    if (menu && U().print) menu.setAttribute("aria-label", U().print);
+  }
+  function setPrintLang(lg) {
+    printLang = QV ? QV.normalizeLang(lg, LANGS, lang) : (LANGS.indexOf(lg) !== -1 ? lg : lang);
+    refreshPrintMenu();
+  }
   function setLang(lg) {
     if (LANGS.indexOf(lg) === -1) lg = "ca";
     lang = lg;
@@ -92,6 +116,7 @@
     if (next) next.textContent = U().next || next.textContent;
     var np = $("nav-peu");
     if (np && U().nav_pages) np.setAttribute("aria-label", U().nav_pages);
+    refreshPrintMenu();
     applyLlista();
     updateMapLang();
   }
@@ -214,7 +239,36 @@
       var cur = document.documentElement.getAttribute("data-theme") === "dark" ? "" : "dark";
       document.documentElement.setAttribute("data-theme", cur);
     }
-    if (e.target.id === "btn-print") { window.print(); }
+    if (e.target.id === "btn-print" || e.target.closest("#btn-print")) {
+      e.preventDefault();
+      var pm0 = $("printmenu");
+      var opening = pm0 && !pm0.classList.contains("on");
+      setPrintMenuOpen(opening);
+      if (opening) {
+        var lmClose = $("langmenu");
+        if (lmClose) lmClose.classList.remove("on");
+        var lbClose = $("langbtn");
+        if (lbClose) lbClose.setAttribute("aria-expanded", "false");
+        if (!printLang) setPrintLang(lang);
+        else refreshPrintMenu();
+      }
+    }
+    var plang = e.target.closest("#print-langs [data-print-lang]");
+    if (plang) {
+      e.preventDefault();
+      setPrintLang(plang.getAttribute("data-print-lang"));
+    }
+    var plibre = e.target.closest('#print-opts [data-print="llibre"]');
+    if (plibre) {
+      e.preventDefault();
+      if (printLang) setLang(printLang);
+      setPrintMenuOpen(false);
+      window.setTimeout(function () { window.print(); }, 40);
+    }
+    var pdl = e.target.closest("#print-opts a[data-print]");
+    if (pdl) {
+      setPrintMenuOpen(false);
+    }
     if (e.target.id === "langbtn" || e.target.closest("#langbtn")) {
       e.preventDefault();
       var lm = $("langmenu");
@@ -223,6 +277,7 @@
         var lb0 = $("langbtn");
         if (lb0) lb0.setAttribute("aria-expanded", lm.classList.contains("on") ? "true" : "false");
       }
+      setPrintMenuOpen(false);
     }
     var lp = e.target.closest("#langmenu button[data-l]");
     if (lp) {
@@ -234,6 +289,9 @@
       if (lm2) lm2.classList.remove("on");
       var lb1 = $("langbtn");
       if (lb1) lb1.setAttribute("aria-expanded", "false");
+    }
+    if (!e.target.closest(".printsel")) {
+      setPrintMenuOpen(false);
     }
     if (e.target.id === "btn-menu" || e.target.closest("#btn-menu")) {
       e.preventDefault();
