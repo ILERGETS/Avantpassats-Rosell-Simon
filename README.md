@@ -17,6 +17,6 @@ Si detecteu una errada (un nom, una data, una lectura), escriviu a **Josep Lluí
 
 ## PDF
 
-Botó d’imprimir del llibre (A4 apaïsat). Índex del quadern amb miniatures i filtres per capítol. Menú: capítols plegats, les cares s’obren en clicar. Arbre Rosell (còpia v62): `annex/arbre-rosell-v62.pdf`, impressió A4 o A3.
+Botó d’imprimir del llibre (A4 apaïsat). Índex del quadern amb miniatures i filtres per capítol. Menú: grups i capítols plegats. Arbre Rosell A3 (còpia): `annex/arbre-rosell-a3.pdf`.
 
 Repositori: [ILERGETS/Avantpassats-Rosell-Simon](https://github.com/ILERGETS/Avantpassats-Rosell-Simon). Pujar amb GitHub Desktop, des de l’ordinador.

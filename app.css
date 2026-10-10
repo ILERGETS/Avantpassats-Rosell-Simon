@@ -36,6 +36,20 @@ aside h2 {
   font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--muted); margin: 1.1rem 0 0.35rem;
 }
+aside details.nav-grup { margin: 0.35rem 0 0; }
+aside details.nav-grup > summary {
+  font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); margin: 0.75rem 0 0.35rem;
+  cursor: pointer; list-style: none; padding: 0.15rem 0.2rem;
+  border-radius: 3px;
+}
+aside details.nav-grup > summary::-webkit-details-marker { display: none; }
+aside details.nav-grup > summary::before {
+  content: "▸ ";
+  font-size: 0.85em;
+}
+aside details.nav-grup[open] > summary::before { content: "▾ "; }
+aside details.nav-grup > summary:hover { color: var(--accent); background: var(--line); }
 aside a {
   display: block; color: var(--ink); text-decoration: none;
   padding: 0.18rem 0.3rem; border-radius: 3px; font-size: 0.92rem;
@@ -192,11 +206,12 @@ table.linia a { color: var(--accent); }
 .lc .t { display: block; font-size: 0.85rem; line-height: 1.25; margin: 2px 0 3px; }
 .lc .m { display: block; font-size: 0.73rem; color: var(--muted); }
 .accions-arbre { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1rem 0; }
-.accions-arbre a, .accions-arbre button {
+.accions-arbre a {
   font: inherit; font-size: 0.92rem;
   background: var(--bar); color: var(--ink);
   border: 1px solid var(--line); padding: 0.35rem 0.7rem;
   cursor: pointer; border-radius: 6px; text-decoration: none;
+  display: inline-block;
 }
 .arbre-print {
   margin: 1rem 0 2rem;
@@ -224,14 +239,5 @@ table.linia a { color: var(--accent); }
   [data-mode] { display: none !important; }
   [data-mode="resum"] { display: block !important; }
   @page { size: A4 landscape; margin: 12mm; }
-  html[data-print-arbre] [data-page] { display: none !important; }
-  html[data-print-arbre] [data-page="arbre"] { display: block !important; }
-  html[data-print-arbre] [data-page="arbre"] > *:not(.arbre-print) { display: none !important; }
-  html[data-print-arbre] .arbre-print {
-    margin: 0; overflow: visible; max-height: none; border: 0;
-  }
-  html[data-print-arbre] .arbre-print img {
-    width: 100%; height: auto; max-height: 100vh; object-fit: contain;
-  }
 }
 noscript #app { display: none; }

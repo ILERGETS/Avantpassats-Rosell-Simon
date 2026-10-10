@@ -30,6 +30,11 @@
       d.style.display = vis ? "" : "none";
       if (q || cap) d.open = vis && (!!q || d.getAttribute("data-cap") === cap);
     });
+    if (q || cap) {
+      document.querySelectorAll("aside details.nav-grup").forEach(function (g) {
+        if (g.querySelector("a[data-cap]")) g.open = true;
+      });
+    }
     var c = $("count");
     if (c && tot) c.textContent = n + " de " + tot + " cares";
   }
@@ -50,7 +55,7 @@
     document.querySelectorAll("aside a[href^='#']").forEach(function (a) {
       a.classList.toggle("act", a.getAttribute("href") === "#" + id);
     });
-    document.querySelectorAll("aside details.nav-cap").forEach(function (d) {
+    document.querySelectorAll("aside details.nav-cap, aside details.nav-grup").forEach(function (d) {
       if (d.querySelector("a.act")) d.open = true;
     });
     var vista = $("vista");
@@ -90,22 +95,6 @@
       });
     });
   }
-  function printArbre(size) {
-    var st = document.getElementById("print-page-size");
-    if (!st) {
-      st = document.createElement("style");
-      st.id = "print-page-size";
-      document.head.appendChild(st);
-    }
-    st.textContent = "@page { size: " + size + " landscape; margin: 8mm; }";
-    document.documentElement.setAttribute("data-print-arbre", size);
-    window.print();
-  }
-  window.addEventListener("afterprint", function () {
-    document.documentElement.removeAttribute("data-print-arbre");
-    var st = document.getElementById("print-page-size");
-    if (st) st.textContent = "";
-  });
   document.addEventListener("click", function (e) {
     var b = e.target.closest("[data-setmode]");
     if (b) { e.preventDefault(); setMode(b.getAttribute("data-setmode")); }
@@ -116,11 +105,6 @@
       document.documentElement.setAttribute("data-theme", cur);
     }
     if (e.target.id === "btn-print") { window.print(); }
-    var pa = e.target.closest("[data-print-arbre]");
-    if (pa) {
-      e.preventDefault();
-      printArbre(pa.getAttribute("data-print-arbre"));
-    }
     var pm = e.target.closest(".punt-mapa");
     if (pm && mapObj) {
       var i = parseInt(pm.getAttribute("data-i"), 10);
