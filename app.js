@@ -111,7 +111,7 @@
   }
   var ORDRE_FRONT = [
     "portada", "sobre", "proleg", "agraiments", "fet", "impressio",
-    "context", "magi", "qui", "arbre", "temps", "notes", "mapa",
+    "context", "magi", "melilla", "qui", "curiositats", "arbre", "temps", "notes", "mapa",
     "resum-quadern", "index-quadern"
   ];
   function pageIds() {

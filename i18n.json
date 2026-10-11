@@ -176,6 +176,7 @@
     "magi": {"ca": "Magí Pontí i Ferrer", "es": "Magí Pontí i Ferrer", "en": "Magí Pontí i Ferrer", "bg": "Маги Понти и Ферер"},
     "melilla": {"ca": "Melilla i Annual", "es": "Melilla y Annual", "en": "Melilla and Annual", "bg": "Мелила и Annual"},
     "qui": {"ca": "Qui és qui", "es": "Quién es quién", "en": "Who’s who", "bg": "Кой кой е"},
+    "curiositats": {"ca": "Curiositats de casa", "es": "Curiosidades de casa", "en": "Notes from home", "bg": "Бележки от дома"},
     "arbre": {"ca": "Arbre resum", "es": "Árbol resumido", "en": "Tree (summary)", "bg": "Родословно дърво (кратко)"},
     "temps": {"ca": "Línia de temps", "es": "Línea de tiempo", "en": "Timeline", "bg": "Хронология"},
     "notes": {"ca": "Notes de lectura", "es": "Notas de lectura", "en": "Reading notes", "bg": "Бележки към четенето"},
