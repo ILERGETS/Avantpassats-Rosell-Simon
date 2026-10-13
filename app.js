@@ -193,8 +193,9 @@
     if (!pts.length) return;
     if (!mapObj) {
       mapObj = L.map(el);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap"
+      L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+        maxZoom: 17,
+        attribution: "&copy; OpenStreetMap, SRTM &copy; OpenTopoMap (CC-BY-SA)"
       }).addTo(mapObj);
       el._marks = pts.map(function (p) {
         var q0 = (p.que_i18n && p.que_i18n[lang]) || p.que;
